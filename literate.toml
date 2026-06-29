@@ -1,5 +1,5 @@
 landing_page = "GasperBeaconChain"
-exclude = ["GasperBeaconChain.Core.All","GasperBeaconChain.Basic"]
+exclude = ["GasperBeaconChain.Core.All", "GasperBeaconChain.Basic"]
 order = [
   "GasperBeaconChain.Core.AtomicDef",
   "GasperBeaconChain.Core.Lemmas",
@@ -11,26 +11,22 @@ docstrings_as_text = true
 
 show_output = ["#eval", "#check", "#print", "#reduce", "#explode"]
 
-hide_commands = ["namespace", "set_option", "universe", "end"]
+hide_commands = ["namespace", "universe", "end"]
 
 extra_css = ["static/katex/katex.css", "static/custom-force-style.css"]
 extra_js  = ["static/katex/katex.js", "static/math.js", "static/render-plugins.js", "static/diagram-hover.js", "static/diagram-view.js", "static/custom-style.js"]
 
 
 [metadata]
-title = "GASPER の Lean4 形式化"
-description = "ビーコンチェーン合意の機械検証ドキュメント"
+title = "Formal Verification of Gasper in Lean 4"
+description = "Machine-checked proofs of Casper FFG accountable safety, plausible liveness, and the slashable bound for the Beacon Chain consensus protocol."
 
-# ── 常に light テーマで表示する(ダークモードにしない) ──────────────────
-# Verso 組込みの literate.css は @media (prefers-color-scheme: dark) で以下の
-# 34 個の --verso-* 変数をダーク値へ上書きする。ここで同じ変数を light 値
-# (literate.css の通常 :root と同値)に戻すことで、ダーク OS でも light 表示を
-# 維持する。Verso 公式の口なので、自前 CSS で @media(dark) を再宣言するより
-# 宣言的・設定同居で保守しやすい。
-# キー名は変数名から「--verso-」を除き、ハイフンを「_」に置換したもの。
-# selected_color の light 既定は literate.css の var() フォールバック #def。
-# (注)将来 literate.css がダーク変数を追加した場合はここにも追記が必要
-#       = literate.css への結合点。
+# Force light theme on all platforms.
+# Verso's built-in literate.css overrides --verso-* variables under
+# @media (prefers-color-scheme: dark). We reset them here to the light
+# values so that the site always renders in light mode, regardless of OS
+# preference. Key names are the variable names with "--verso-" removed
+# and hyphens replaced by underscores.
 [theme.dark]
 text_color = "#333"
 structure_color = "#333"
