@@ -1,7 +1,7 @@
 import GasperBeaconChain.Core.Theories.AccountableSafety
 import GasperBeaconChain.Core.Lemmas.Weight
 import GasperBeaconChain.Core.Lemmas.SetTheoryProps
-import Mathlib.Tactic.Explode
+import GasperBeaconChain.Core.DetailExplode
 
 universe u v
 
@@ -180,11 +180,7 @@ theorem wt_meet_bound_fUnion
       (Nat.le_of_eq
         ((congrArg (wt stake (s1' ∩ s2') + wt stake ·) hIeq).trans
           (Nat.add_comm (wt stake (s1' ∩ s2')) (wt stake (s1 ∩ s2))))))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode wt_meet_bound_fUnion
+#detail_explode wt_meet_bound_fUnion
 
 
 /--
@@ -245,11 +241,7 @@ theorem wt_meet_subbound_fUnion
         ((Finset.mem_inter.mp
           (Finset.mem_inter.mp (show x ∈ s1 ∩ (s1' ∩ s2') from hxA)).2).2)
   (wt_inc_leq stake hsub).trans (Nat.le_of_eq (wt_fUnion_of_disjointMF stake hdisMF))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode wt_meet_subbound_fUnion
+#detail_explode wt_meet_subbound_fUnion
 
 
 /--
@@ -288,11 +280,7 @@ theorem wt_meet_tri_bound_fDiff
   (wt_inc_leq stake (fDiff_subset_triangle s0 s1 s2)).trans
     (Nat.le_of_eq ((wt_fUnion stake (fDiff s0 s2) (fDiff s1 s0)).trans
       (congrArg (wt stake (fDiff s0 s2) + wt stake ·) hfdf)))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode wt_meet_tri_bound_fDiff
+#detail_explode wt_meet_tri_bound_fDiff
 
 
 /--
@@ -353,11 +341,7 @@ theorem wt_quorum_union_bound_fUnion
   hAdd.le.trans
     ((Nat.le_of_eq (Nat.add_comm (wt stake (fUnion qL qR)) (wt stake (qL ∩ qR)))).trans
       (Nat.add_le_add_left hUle _))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode wt_quorum_union_bound_fUnion
+#detail_explode wt_quorum_union_bound_fUnion
 
 
 /--
@@ -422,11 +406,7 @@ theorem quorum_intersection_weight_lower
     (threshold_decomposition τ (wt stake vR))
     (le_trans (Nat.add_le_add hqLwt hqRwt)
       (wt_quorum_union_bound_fUnion stake hqLsub hqRsub))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode quorum_intersection_weight_lower
+#detail_explode quorum_intersection_weight_lower
 
 
 /--
@@ -491,11 +471,7 @@ theorem validator_intersection_lower_bound
       ((Nat.le_of_eq ((congrArg (wt stake vR - wt stake ·) (inter_commF vR vL).symm).trans
         (wt_fDiff stake vR vL).symm)).trans
         (wt_meet_tri_bound_fDiff stake v0 vR vL)))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode validator_intersection_lower_bound
+#detail_explode validator_intersection_lower_bound
 
 
 variable {Hash : Type v}
@@ -579,11 +555,7 @@ theorem slashable_bound
           (Nat.sub_le_sub_right
             (validator_intersection_lower_bound stake (vset b0) (vset bL) (vset bR)) _) _)
         (quorum_intersection_weight_lower τ stake hqLsub hqRsub hqLq2.2 hqRq2.2)⟩
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode slashable_bound
+#detail_explode slashable_bound
 
 
 end GasperBeaconChain.Core

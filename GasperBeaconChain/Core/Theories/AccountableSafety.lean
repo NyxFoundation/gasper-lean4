@@ -1,7 +1,7 @@
 import GasperBeaconChain.Core.Lemmas.AccountableSafety
 import GasperBeaconChain.Core.Lemmas.StrongInductionLtn
 import GasperBeaconChain.Core.Lemmas.ListExt
-import Mathlib.Tactic.Explode
+import GasperBeaconChain.Core.DetailExplode
 
 universe u v
 
@@ -210,11 +210,7 @@ theorem finalization_fork_means_same_finalization_fork_one
       (finalized_means_one_finalized τ stake vset parent genesis st b1 b1_h).mpr hk1,
       (finalized_means_one_finalized τ stake vset parent genesis st b2 b2_h).mpr hk2,
       hn1, hn2⟩⟩
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode finalization_fork_means_same_finalization_fork_one
+#detail_explode finalization_fork_means_same_finalization_fork_one
 
 
 /--
@@ -264,11 +260,7 @@ theorem no_k_finalized_justified_same_height
   no_two_justified_same_height τ stake vset parent genesis st
     hj (k_finalized_means_justified τ stake vset parent genesis st hf)
     hno hneq
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode no_k_finalized_justified_same_height
+#detail_explode no_k_finalized_justified_same_height
 
 
 /--
@@ -319,11 +311,7 @@ theorem k_equal_height_case
     (k_finalized_means_justified τ stake vset parent genesis st hf1)
     (k_finalized_means_justified τ stake vset parent genesis st hf2)
     hneq
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode k_equal_height_case
+#detail_explode k_equal_height_case
 
 
 /--
@@ -387,11 +375,7 @@ theorem k_slash_surround_full_containment
         final_h, final_h + k,
         mem_link_supporters.mp hvO, mem_link_supporters.mp hvI,
         h_surround_start, h_full⟩⟩
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode k_slash_surround_full_containment
+#detail_explode k_slash_surround_full_containment
 
 
 /--
@@ -490,11 +474,7 @@ theorem k_slash_surround_case_general
         else
           two_justified_same_height_slashed
             τ stake vset parent genesis st hjust_t hjust_mid htm
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode k_slash_surround_case_general
+#detail_explode k_slash_surround_case_general
 
 
 /--
@@ -583,11 +563,7 @@ theorem k_non_equal_height_case_ind
               hh1 hconf1
               (Nat.lt_of_le_of_ne (Nat.le_of_not_lt hlt) (fun h => heq h.symm)))))
     b1_h b1 hb1j hb2f hconf hh
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode k_non_equal_height_case_ind
+#detail_explode k_non_equal_height_case_ind
 
 
 /--
@@ -634,11 +610,7 @@ theorem k_non_equal_height_case
   k_non_equal_height_case_ind τ stake vset parent genesis st
     (k_finalized_means_justified τ stake vset parent genesis st hb1f)
     hb2f hconf hh
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode k_non_equal_height_case
+#detail_explode k_non_equal_height_case
 
 
 /--
@@ -704,11 +676,7 @@ theorem k_safety'
   else
     k_non_equal_height_case τ stake vset parent genesis st
       hb2f hb1f hconf2 (Nat.lt_of_le_of_ne (Nat.le_of_not_lt hgt) heq)
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode k_safety'
+#detail_explode k_safety'
 
 
 /--
@@ -746,11 +714,7 @@ theorem k_accountable_safety
   match hfork with
   | ⟨_, _, _, _, hb1f, hb2f, hc1, hc2⟩ =>
     k_safety' τ stake vset parent genesis st hb1f hb2f hc1 hc2
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode k_accountable_safety
+#detail_explode k_accountable_safety
 
 
 /--
@@ -805,11 +769,7 @@ theorem accountable_safety
   k_accountable_safety τ stake vset parent genesis st
     ((finalization_fork_means_same_finalization_fork_one
       τ stake vset parent genesis st).mp hfork)
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode accountable_safety
+#detail_explode accountable_safety
 
 
 end GasperBeaconChain.Core

@@ -1,5 +1,5 @@
 import GasperBeaconChain.Core.Lemmas.PlausibleLiveness
-import Mathlib.Tactic.Explode
+import GasperBeaconChain.Core.DetailExplode
 
 
 universe u v
@@ -94,69 +94,41 @@ need to share a target or source height.
 /-- Transport $`a < b` along $`a = c` to get $`c < b`. -/
 private theorem lt_of_eq_left {a b c : Nat} (ha : a = c) (hlt : a < b) : c < b :=
   match ha with | rfl => hlt
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode lt_of_eq_left
+#detail_explode lt_of_eq_left
 
 /-- Transport $`a < b` along $`b = c` to get $`a < c`. -/
 private theorem lt_of_eq_right {a b c : Nat} (hb : b = c) (hlt : a < b) : a < c :=
   match hb with | rfl => hlt
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode lt_of_eq_right
+#detail_explode lt_of_eq_right
 
 /-- From $`a = b` derive $`b \le a`. -/
 private theorem le_of_eq {a b : Nat} (h : a = b) : b ≤ a :=
   match h with | rfl => Nat.le_refl _
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode le_of_eq
+#detail_explode le_of_eq
 
 /-- From $`th = H + 1` and $`th \le H` derive $`H + 1 \le H` (absurd). -/
 private theorem le_of_height_eq_add_one
     {th H : Nat} (hth : th = H + 1) (hle : th ≤ H) : H + 1 ≤ H :=
   match hth with | rfl => hle
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode le_of_height_eq_add_one
+#detail_explode le_of_height_eq_add_one
 
 /-- From $`th = H + 2` and $`th \le H` derive $`H + 2 \le H` (absurd). -/
 private theorem le_of_height_eq_add_two
     {th H : Nat} (hth : th = H + 2) (hle : th ≤ H) : H + 2 ≤ H :=
   match hth with | rfl => hle
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode le_of_height_eq_add_two
+#detail_explode le_of_height_eq_add_two
 
 /-- From $`a = c` and $`b = c` derive $`a = b`. -/
 private theorem eq_of_eq_right
     {α : Type*} {a b c : α} (ha : a = c) (hb : b = c) : a = b :=
   match ha with | rfl => match hb with | rfl => rfl
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode eq_of_eq_right
+#detail_explode eq_of_eq_right
 
 /-- From $`x = y` and $`x = z` derive $`y = z`. -/
 private theorem eq_of_eq_left
     {x y z : Nat} (hy : x = y) (hz : x = z) : y = z :=
   match hy with | rfl => hz
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode eq_of_eq_left
+#detail_explode eq_of_eq_left
 
 
 /--
@@ -239,11 +211,7 @@ theorem no_new_double_vote_two_link_extension
         False.elim ((add_two_ne_add_one H) (eq_of_eq_left hthA hthB))
     | Or.inr (Or.inr ⟨_, _, htbB, _, _⟩) =>
         False.elim (hneq (eq_of_eq_right htaA htbB))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode no_new_double_vote_two_link_extension
+#detail_explode no_new_double_vote_two_link_extension
 
 
 variable [Fintype Validator]
@@ -365,11 +333,7 @@ theorem no_new_surround_vote_two_link_extension
     | Or.inr (Or.inr ⟨_, _, _, _, hthI⟩) =>
         False.elim (Nat.lt_irrefl _
           (lt_of_eq_left hthI (lt_of_eq_right hthO hlt_tgt)))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode no_new_surround_vote_two_link_extension
+#detail_explode no_new_surround_vote_two_link_extension
 
 
 /--
@@ -432,11 +396,7 @@ theorem no_new_slashed_two_link_extension
     (fun hdbl => Or.inl (no_new_double_vote_two_link_extension hBound hdbl))
     (fun hsurr => Or.inr (no_new_surround_vote_two_link_extension
       τ stake vset parent genesis hBound hJustBound hHighest hGood hq1 hq2 hs1_le hsurr))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode no_new_slashed_two_link_extension
+#detail_explode no_new_slashed_two_link_extension
 
 
 
@@ -618,11 +578,7 @@ theorem plausible_liveness_construct_extension
       nf nc (highest_target st + 1) (highest_target st + 1 + 1) :=
     supermajority_link_of_quorum_votes τ stake vset hqc hv2_sub hwf'
   ⟨_, huce, hNoNew, nf, nc, highest_target st + 1, hjnf, hpar, hsm2⟩
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode plausible_liveness_construct_extension
+#detail_explode plausible_liveness_construct_extension
 
 
 /--
@@ -680,11 +636,7 @@ theorem plausible_liveness_from_coq_blocks_exist
   plausible_liveness_construct_extension
     τ stake vset parent genesis st qctx htwothirds hunslashed hgood hwf_st
     (fun b b_h hh => blocks_exist_high_over_of_coq (hheight b b_h hh))
-set_option pp.proofs true in
-set_option pp.notation false in
-set_option pp.fieldNotation false in
-set_option pp.proofs.withType true in
-#explode plausible_liveness_from_coq_blocks_exist
+#detail_explode plausible_liveness_from_coq_blocks_exist
 
 
 end GasperBeaconChain.Core

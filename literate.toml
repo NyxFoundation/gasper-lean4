@@ -9,9 +9,9 @@ order = [
 show_imports = false
 docstrings_as_text = true
 
-show_output = ["#eval", "#check", "#print", "#reduce", "#explode", "set_option"]
+show_output = ["#eval", "#check", "#print", "#reduce", "#explode", "#detail_explode"]
 
-hide_commands = ["namespace", "universe", "end"]
+hide_commands = ["namespace", "universe", "set_option", "end"]
 
 extra_css = ["static/katex/katex.css", "static/custom-force-style.css"]
 extra_js  = ["static/katex/katex.js", "static/math.js", "static/render-plugins.js", "static/diagram-hover.js", "static/diagram-view.js", "static/custom-style.js"]
