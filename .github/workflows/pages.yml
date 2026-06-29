@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -21,35 +21,25 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # elan/lake セットアップ + .lake キャッシュ + Mathlib キャッシュ取得。
-      # build: false で lean-action のデフォルト `lake build` をスキップし、
-      # 後続ステップで :literate → :literateHtml の順に明示的にビルドする。
       - uses: leanprover/lean-action@v1
         with:
           build: false
+          test: false
 
-      # 1. ソースビルド(.olean キャッシュ)
-      - name: Build Lean sources
-        run: lake build
-
-      # 2. literate ファセット(elaboration + #mermaid_explode JSON 生成)
-      - name: Build literate facets
-        run: lake build :literate
-
-      # 3. HTML 生成(~4s。:literate がキャッシュ済みなので高速)
-      - name: Build literate HTML
-        run: lake build :literateHtml
+      - name: Build literate site
+        id: build
+        run: echo "path=$(lake query :literateHtml)" >> "$GITHUB_OUTPUT"
 
       - name: Prepare site
         run: |
-          cp -r static/katex/fonts .lake/build/literate-html/
-          touch .lake/build/literate-html/.nojekyll
+          cp -r static/katex/fonts "${{ steps.build.outputs.path }}/"
+          touch "${{ steps.build.outputs.path }}/.nojekyll"
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: .lake/build/literate-html
+          path: ${{ steps.build.outputs.path }}
 
   deploy:
     needs: build

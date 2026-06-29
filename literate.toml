@@ -1,5 +1,5 @@
 landing_page = "GasperBeaconChain"
-exclude = ["GasperBeaconChain.Core.All"]
+exclude = ["GasperBeaconChain.Core.All","GasperBeaconChain.Basic"]
 order = [
   "GasperBeaconChain.Core.AtomicDef",
   "GasperBeaconChain.Core.Lemmas",
