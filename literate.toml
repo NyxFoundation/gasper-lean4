@@ -9,7 +9,7 @@ order = [
 show_imports = false
 docstrings_as_text = true
 
-show_output = ["#eval", "#check", "#print", "#reduce", "#explode"]
+show_output = ["#eval", "#check", "#print", "#reduce", "#explode", "set_option"]
 
 hide_commands = ["namespace", "universe", "end"]
 
