@@ -1,5 +1,5 @@
 landing_page = "GasperBeaconChain"
-exclude = ["GasperBeaconChain.Core.All", "GasperBeaconChain.Basic"]
+exclude = ["GasperBeaconChain.Core.All", "GasperBeaconChain.Core.DetailExplode", "GasperBeaconChain.Basic"]
 order = [
   "GasperBeaconChain.Core.AtomicDef",
   "GasperBeaconChain.Core.Lemmas",
@@ -23,67 +23,67 @@ description = "Lean 4 formalization of Gasper: safety, liveness, and slashable b
 
 # ── Per-module titles ─────────────────────────────────────────────────
 [modules."GasperBeaconChain.Core.AtomicDef.Validator"]
-title = "Validator context"
+title = "Validator: Validator context"
 
 [modules."GasperBeaconChain.Core.AtomicDef.HashTree"]
-title = "Block tree"
+title = "HashTree: Block tree"
 
 [modules."GasperBeaconChain.Core.AtomicDef.State"]
-title = "Votes and states"
+title = "State: Votes and states"
 
 [modules."GasperBeaconChain.Core.AtomicDef.NatExt"]
-title = "Natural-number extensions for arithmetic and thresholds"
+title = "NatExt: Natural-number extensions for arithmetic and thresholds"
 
 [modules."GasperBeaconChain.Core.AtomicDef.Weight"]
-title = "Weight of validator sets"
+title = "Weight: Weight of validator sets"
 
 [modules."GasperBeaconChain.Core.AtomicDef.Slashing"]
-title = "Slashing conditions"
+title = "Slashing: Slashing conditions"
 
 [modules."GasperBeaconChain.Core.AtomicDef.Quorums"]
-title = "Quorums"
+title = "Quorums: Quorums"
 
 [modules."GasperBeaconChain.Core.AtomicDef.Justification"]
-title = "Justification and finalization"
+title = "Justification: Justification and finalization"
 
 [modules."GasperBeaconChain.Core.AtomicDef.PlausibleLiveness"]
-title = "Plausible liveness: definitions"
+title = "PlausibleLiveness: Plausible liveness definitions"
 
 [modules."GasperBeaconChain.Core.Lemmas.ListExt"]
-title = "List indexing"
+title = "ListExt: List indexing"
 
 [modules."GasperBeaconChain.Core.Lemmas.HashTree"]
-title = "Structural lemmas for ancestry"
+title = "HashTree: Structural lemmas for ancestry"
 
 [modules."GasperBeaconChain.Core.Lemmas.SetTheoryProps"]
-title = "Disjoint union and difference"
+title = "SetTheoryProps: Disjoint union and difference"
 
 [modules."GasperBeaconChain.Core.Lemmas.Weight"]
-title = "Weight monotonicity and inclusion-exclusion"
+title = "Weight: Weight monotonicity and inclusion-exclusion"
 
 [modules."GasperBeaconChain.Core.Lemmas.Quorums"]
-title = "Quorum lemmas"
+title = "Quorums: Quorum lemmas"
 
 [modules."GasperBeaconChain.Core.Lemmas.Justification"]
-title = "Justification lemmas"
+title = "Justification: Justification lemmas"
 
 [modules."GasperBeaconChain.Core.Lemmas.StrongInductionLtn"]
-title = "Strong induction principles"
+title = "StrongInductionLtn: Strong induction principles"
 
 [modules."GasperBeaconChain.Core.Lemmas.AccountableSafety"]
-title = "Same-height slashing"
+title = "AccountableSafety: Same-height slashing"
 
 [modules."GasperBeaconChain.Core.Lemmas.PlausibleLiveness"]
-title = "Plausible liveness: lemmas"
+title = "PlausibleLiveness: Plausible liveness lemmas"
 
 [modules."GasperBeaconChain.Core.Theories.AccountableSafety"]
-title = "Accountable safety"
+title = "AccountableSafety: Accountable safety"
 
 [modules."GasperBeaconChain.Core.Theories.PlausibleLiveness"]
-title = "Plausible liveness"
+title = "PlausibleLiveness: Plausible liveness"
 
 [modules."GasperBeaconChain.Core.Theories.SlashableBound"]
-title = "Slashable bound"
+title = "SlashableBound: Slashable bound"
 
 # ── Child module ordering within each namespace ─────────────────────
 [order_children]
