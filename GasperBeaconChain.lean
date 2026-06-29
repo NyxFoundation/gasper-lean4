@@ -7,10 +7,12 @@ Lean 4 formalization of the core safety and liveness properties of
 Casper FFG, the finality gadget underlying the Ethereum Beacon Chain.
 
 This development establishes three results from
-*Combining GHOST and Casper* (Buterin et al., 2020),
-ported and extended from the
+*Combining GHOST and Casper* (Buterin et al., 2020).
+It is a Lean 4 port and extension of the
 [Coq formalization](https://github.com/runtimeverification/beacon-chain-verification)
-by Musab A. Alturki (Runtime Verification / KAUST, 2020).
+by the Beacon Chain Verification Team at
+[Runtime Verification, Inc.](https://runtimeverification.com/)
+(UIUC/NCSA Open Source License).
 
 ## Accountable safety
 
