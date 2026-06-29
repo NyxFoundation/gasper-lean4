@@ -1,24 +1,24 @@
 import Mathlib.Tactic.Explode
 
 /-!
-# `#detail_explode` command
+# {lit}`#detail_explode` command
 
-A wrapper around `#explode` that sets pretty-printer options for
+A wrapper around {lit}`#explode` that sets pretty-printer options for
 maximum detail in the Fitch table output:
 
-* `pp.proofs true` — display proof terms
-* `pp.notation false` — use raw application syntax
-* `pp.fieldNotation false` — use explicit projections
-* `pp.proofs.withType true` — annotate proof terms with types
+* {lit}`pp.proofs true` — display proof terms
+* {lit}`pp.notation false` — use raw application syntax
+* {lit}`pp.fieldNotation false` — use explicit projections
+* {lit}`pp.proofs.withType true` — annotate proof terms with types
 
 This exists so that Verso's literate renderer can match the command
-by its leading keyword `#detail_explode` in `show_output`, rather
-than matching `set_option` (which would be the leading keyword of
-`set_option ... in #explode`).
+by its leading keyword {lit}`#detail_explode` in {lit}`show_output`,
+rather than matching {lit}`set_option` (which would be the leading
+keyword of {lit}`set_option ... in #explode`).
 -/
 
 open Lean Elab Command in
-elab "#detail_explode " name:ident : command =>
+elab "#detail_explode " name:ident : command => do
   elabCommand (← `(
     set_option pp.proofs true in
     set_option pp.notation false in
