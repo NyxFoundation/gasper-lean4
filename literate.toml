@@ -19,8 +19,103 @@ extra_js  = ["static/katex/katex.js", "static/math.js", "static/render-plugins.j
 
 [metadata]
 title = "Formal Verification of Gasper in Lean 4"
-description = "Machine-checked proofs of Casper FFG accountable safety, plausible liveness, and the slashable bound for the Beacon Chain consensus protocol."
+description = "Lean 4 formalization of Gasper: safety, liveness, and slashable bounds for the Beacon Chain."
 
+# ── Per-module titles ─────────────────────────────────────────────────
+[modules."GasperBeaconChain.Core.AtomicDef.Validator"]
+title = "Validator context"
+
+[modules."GasperBeaconChain.Core.AtomicDef.HashTree"]
+title = "Block tree"
+
+[modules."GasperBeaconChain.Core.AtomicDef.State"]
+title = "Votes and states"
+
+[modules."GasperBeaconChain.Core.AtomicDef.NatExt"]
+title = "Natural-number extensions for arithmetic and thresholds"
+
+[modules."GasperBeaconChain.Core.AtomicDef.Weight"]
+title = "Weight of validator sets"
+
+[modules."GasperBeaconChain.Core.AtomicDef.Slashing"]
+title = "Slashing conditions"
+
+[modules."GasperBeaconChain.Core.AtomicDef.Quorums"]
+title = "Quorums"
+
+[modules."GasperBeaconChain.Core.AtomicDef.Justification"]
+title = "Justification and finalization"
+
+[modules."GasperBeaconChain.Core.AtomicDef.PlausibleLiveness"]
+title = "Plausible liveness: definitions"
+
+[modules."GasperBeaconChain.Core.Lemmas.ListExt"]
+title = "List indexing"
+
+[modules."GasperBeaconChain.Core.Lemmas.HashTree"]
+title = "Structural lemmas for ancestry"
+
+[modules."GasperBeaconChain.Core.Lemmas.SetTheoryProps"]
+title = "Disjoint union and difference"
+
+[modules."GasperBeaconChain.Core.Lemmas.Weight"]
+title = "Weight monotonicity and inclusion-exclusion"
+
+[modules."GasperBeaconChain.Core.Lemmas.Quorums"]
+title = "Quorum lemmas"
+
+[modules."GasperBeaconChain.Core.Lemmas.Justification"]
+title = "Justification lemmas"
+
+[modules."GasperBeaconChain.Core.Lemmas.StrongInductionLtn"]
+title = "Strong induction principles"
+
+[modules."GasperBeaconChain.Core.Lemmas.AccountableSafety"]
+title = "Same-height slashing"
+
+[modules."GasperBeaconChain.Core.Lemmas.PlausibleLiveness"]
+title = "Plausible liveness: lemmas"
+
+[modules."GasperBeaconChain.Core.Theories.AccountableSafety"]
+title = "Accountable safety"
+
+[modules."GasperBeaconChain.Core.Theories.PlausibleLiveness"]
+title = "Plausible liveness"
+
+[modules."GasperBeaconChain.Core.Theories.SlashableBound"]
+title = "Slashable bound"
+
+# ── Child module ordering within each namespace ─────────────────────
+[order_children]
+"GasperBeaconChain.Core.AtomicDef" = [
+  "GasperBeaconChain.Core.AtomicDef.Validator",
+  "GasperBeaconChain.Core.AtomicDef.HashTree",
+  "GasperBeaconChain.Core.AtomicDef.State",
+  "GasperBeaconChain.Core.AtomicDef.Weight",
+  "GasperBeaconChain.Core.AtomicDef.NatExt",
+  "GasperBeaconChain.Core.AtomicDef.Slashing",
+  "GasperBeaconChain.Core.AtomicDef.Quorums",
+  "GasperBeaconChain.Core.AtomicDef.Justification",
+  "GasperBeaconChain.Core.AtomicDef.PlausibleLiveness"
+]
+"GasperBeaconChain.Core.Lemmas" = [
+  "GasperBeaconChain.Core.Lemmas.ListExt",
+  "GasperBeaconChain.Core.Lemmas.HashTree",
+  "GasperBeaconChain.Core.Lemmas.SetTheoryProps",
+  "GasperBeaconChain.Core.Lemmas.Weight",
+  "GasperBeaconChain.Core.Lemmas.Quorums",
+  "GasperBeaconChain.Core.Lemmas.StrongInductionLtn",
+  "GasperBeaconChain.Core.Lemmas.Justification",
+  "GasperBeaconChain.Core.Lemmas.AccountableSafety",
+  "GasperBeaconChain.Core.Lemmas.PlausibleLiveness"
+]
+"GasperBeaconChain.Core.Theories" = [
+  "GasperBeaconChain.Core.Theories.AccountableSafety",
+  "GasperBeaconChain.Core.Theories.PlausibleLiveness",
+  "GasperBeaconChain.Core.Theories.SlashableBound"
+]
+
+# ── Force light theme on all platforms ───────────────────────────────
 # Force light theme on all platforms.
 # Verso's built-in literate.css overrides --verso-* variables under
 # @media (prefers-color-scheme: dark). We reset them here to the light
