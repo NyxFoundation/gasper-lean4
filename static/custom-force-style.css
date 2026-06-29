@@ -1,0 +1,239 @@
+/* ──────────────────────────────────────────────────────────
+   常に light テーマで表示する(ダークモードにしない)
+   ──────────────────────────────────────────────────────────
+   配色 34 変数(--verso-*)のダーク打ち消しは literate.toml の [theme.dark] へ
+   移行済み(Verso 公式の口・宣言的)。CSS 側に残すのは color-scheme のみ。
+
+   color-scheme: light は、UA が描く chrome(スクロールバー/フォーム部品等)も
+   light に固定するモダンな宣言。著者 CSS の @media(dark) は止めないが、配色
+   変数は [theme.dark] で打ち消し済みなので併用で十分。
+
+   補足: Verso のハイライト/tippy/ホバーの配色は highlightingStyle 内で light 値に
+   ハードコードされ(ダーク派生なし)、OS に依らず light で描画される。以前あった
+   @media(dark) によるそれら個別色の上書きは「ダーク OS のときだけ効いて light OS と
+   不一致になる不完全な上書き」だったため撤去した(Verso 既定に委ねて両 OS で一貫)。 */
+:root {
+  color-scheme: light;
+}
+
+/* ── tippy ポップアップ/ホバー/tactic-state を dark OS でも light に保つ ──
+   重要: literate.css は @media(prefers-color-scheme: dark) で、これら個別要素を
+   --verso-* 変数ではなく「ハードコードのダーク色」(#2a2a4a / #e0e0e0 等、
+   literate.css 104-171 行)で塗る。変数ではないため [theme.dark] では打ち消せず、
+   同じ @media(dark) 内で light 値へ戻す必要がある(= 必須。撤去すると dark OS で
+   ポップアップ/ホバーだけ暗くなる)。literate.css の対応規則と 1:1。 */
+@media (prefers-color-scheme: dark) {
+  .tippy-box[data-theme~="lean"],
+  .tippy-box[data-theme~="error"],
+  .tippy-box[data-theme~="warning"],
+  .tippy-box[data-theme~="info"] {
+    background-color: #fff;
+    color: #333;
+    border-color: #e1e4e8;
+  }
+  .tippy-box[data-theme~="lean"] > .tippy-arrow::before,
+  .tippy-box[data-theme~="error"] > .tippy-arrow::before,
+  .tippy-box[data-theme~="warning"] > .tippy-arrow::before,
+  .tippy-box[data-theme~="info"] > .tippy-arrow::before {
+    border-color: #fff;
+  }
+  .tippy-box[data-theme~="tactic"] {
+    background-color: #fff;
+    color: #333;
+    border-color: #e1e4e8;
+  }
+  .tippy-box[data-theme~="tactic"] > .tippy-arrow::before,
+  .tippy-box[data-theme~="message"] > .tippy-arrow::before {
+    border-color: #fff;
+  }
+  .hl.lean .token.binding-hl,
+  .hl.lean .literal.string:hover,
+  .hl.lean .token.typed:hover {
+    background-color: #e3f2fd;
+  }
+  .hl.lean .tactic:has(.tactic-toggle:not(:checked)) > label:hover {
+    background-color: #e3f2fd;
+  }
+  .hl.lean.popup {
+    background-color: #fff;
+    color: #333;
+  }
+  .hl.lean .hover-info {
+    color: #333;
+  }
+  .hl.lean .hover-info code {
+    color: #333;
+  }
+  .hl.lean .hover-info .sep {
+    border-top-color: #e1e4e8;
+  }
+  .hl.lean .hover-info.messages > code.error,
+  .hl.lean .hover-info.messages > code.warning,
+  .hl.lean .hover-info.messages > code.information {
+    background-color: #f6f8fa;
+  }
+  .hl.lean .tactic-state,
+  .hl.lean.popup .tactic-state {
+    background-color: #fff;
+    color: #333;
+    border-color: #e1e4e8;
+  }
+}
+
+/* ── 数式要素からコード装飾を除去 ── */
+code.math.inline,
+code.math.display {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  white-space: normal !important;
+  color: inherit !important;
+}
+code.math.display {
+  display: block !important;
+  text-align: center !important;
+  margin: 1em 0 !important;
+  overflow-x: auto !important;
+}
+
+/* ──────────────────────────────────────────────────────────
+   #explode の Fitch 表だけを整形する
+   ──────────────────────────────────────────────────────────
+   目印クラス `.explode-output` は static/custom-style.js が
+   「`│` を含む `.lean-output` の <pre>」= #explode 出力だけに付与する。
+   したがってこのルールが当たるのは #explode の表とその子要素のみ。通常の
+   コードブロック(<code class="hl lean block">)・数式(<code class="math …">)・
+   他のコマンド出力(#check/#eval/#print)には構造的に一切波及しない。
+   (`.lean-output` 全体や `.code-box` を直接狙う広いセレクタは置かない。)
+
+   - 無折返し + 横スクロールで桁を保持(literate.css の pre-wrap を打ち消す)。
+   - 子要素(.verso-message .text 等が pre-wrap を明示するため)にも pre を
+     強制し、行の途中で折り返さないようにする。
+   - 継続改行の除去は JS が DOM を保持したまま行うので、型のホバーと
+     ハイライトは残る。 */
+.explode-output {
+  white-space: pre !important;                         /* 折返し無効・桁保持 */
+  overflow-x: auto;                                    /* 長行は横スクロール */
+  font-family: var(--verso-code-font-family,
+                   "Monaco", "Menlo", "Ubuntu Mono", monospace);
+}
+.explode-output * {
+  white-space: pre !important;
+}
+
+/* ── 図(mermaid)内の Lean 識別子ラベル ──
+   diagram-hover.js が、ページのコードトークンと名前一致したラベルへ
+   .lean-diagram-ref を付与する(コード中と同じホバー/定義リンクを転写)。
+   対話可能であることを、コードリンクと同じ点線下線で示す。 */
+.lean-diagram-ref {
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+
+/* ── 図ビューア(diagram-view.js)— zoom / pan / reset(fit) / fullscreen ──
+   描画済み図(mermaid / rawsvg)を toolbar 付きの操作可能ビューへ包む。変形は
+   .diagram-stage への CSS transform(translate+scale, 原点 0 0)。max-height で
+   高さを抑え、超過分はパン/ズームで辿る。ページは常に light 固定なので配色は
+   light 値のみで両 OS 一貫(literate.css のダーク規則は当要素に当たらない)。 */
+.diagram-viewer {
+  position: relative;
+  overflow: hidden;
+  /* 通常表示でも広く使えるよう高めに取る(全画面に頼らず読める)。下限も設けて、
+     縦の低い図(explode の depth 帯)でもビューアが潰れず操作余地を残す。 */
+  height: 80vh;
+  min-height: 420px;
+  max-height: 90vh;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  background: #fff;
+  margin: 1em 0;
+}
+.diagram-viewer:fullscreen {
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.diagram-stage {
+  transform-origin: 0 0;
+  width: max-content;       /* 図の自然幅で測れるように(fit 計算の基準) */
+  cursor: grab;
+}
+.diagram-viewer.is-grabbing .diagram-stage {
+  cursor: grabbing;
+  user-select: none;        /* パン中のラベル選択を抑止 */
+}
+.diagram-stage > .mermaid,
+.diagram-stage > .rawsvg-block {
+  margin: 0;
+}
+.diagram-toolbar {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  gap: 4px;
+  z-index: 5;
+  opacity: 0.35;            /* 普段は控えめ、ホバー/フォーカスで明瞭化 */
+  transition: opacity 0.15s ease;
+}
+.diagram-viewer:hover .diagram-toolbar,
+.diagram-viewer:focus-within .diagram-toolbar {
+  opacity: 1;
+}
+.diagram-btn {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  line-height: 1;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #f6f8fa;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+.diagram-btn:hover { background: #e9ecef; }
+.diagram-btn:active { background: #dde1e6; }
+.diagram-viewer:focus-visible { outline: 2px solid #0066cc; outline-offset: 2px; }
+.diagram-btn:focus-visible { outline: 2px solid #0066cc; outline-offset: 1px; }
+
+/* ── #mermaid_explode の Fitch-depth 帯/文脈箱 ──
+   MermaidRef は plain flowchart で「depth 帯 ⊃ context 箱」を出し、各 depth 箱へ
+   `class depthN depthlane`、各 context 箱へ `class ctxC ctxbox` を付ける。帯/箱の
+   塗り(fill/stroke)は Lean 側の `classDef depthlane`/`classDef ctxbox` で確定する
+   ので CSS では指定しない。
+   注意: 以前ここに `.cluster.depthlane > .cluster-label { text-anchor:start }` 等で
+   見出しを左寄せ・太字にする規則を置いたが、mermaid の cluster-label の実 DOM
+   (foreignObject/text)とは噛み合わず、実描画で見出しが本来位置から飛ぶ崩れを
+   起こした。geometry/ラベル配置は ELK と mermaid に委ね、CSS で後付けしない
+   (= [[reference_swimlane_nesting_hang]] の「幾何を CSS で後付けすると崩れる」)。
+   将来 cluster-label の実構造を実描画で確認できたら、効くと確証できる規則だけを
+   足す。 */
+
+/* ── #mermaid_explode ノードの judgment hover(diagram-hover.js)──
+   各ノードラベル末尾へ MermaidRef が入れる不可視マーカー。グローバルセレクタで常に
+   display:none(mermaid のラベル採寸時も寄与ゼロ)。可視部は要約のまま、judgment 全体
+   (前置詞除去・mmTrunc 800 済)は hover で leantype ツールチップに表示する。 */
+.lean-explode-full { display: none; }
+.lean-explode-node { cursor: help; }
+.tippy-box[data-theme~="leantype"] {
+  background: #fff;
+  color: #24292e;
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(27, 31, 35, 0.15);
+  font-family: var(--verso-code-font-family,
+                   "Monaco", "Menlo", "Ubuntu Mono", monospace);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.tippy-box[data-theme~="leantype"] .tippy-content { white-space: pre-wrap; }
+.tippy-box[data-theme~="leantype"] > .tippy-arrow::before { border-top-color: #fff; }

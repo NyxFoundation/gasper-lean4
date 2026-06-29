@@ -1,0 +1,68 @@
+landing_page = "GasperBeaconChain"
+exclude = ["GasperBeaconChain.Core.All"]
+order = [
+  "GasperBeaconChain.Core.AtomicDef",
+  "GasperBeaconChain.Core.Lemmas",
+  "GasperBeaconChain.Core.Theories"
+]
+
+show_imports = false
+docstrings_as_text = true
+
+show_output = ["#eval", "#check", "#print", "#reduce", "#explode"]
+
+hide_commands = ["namespace", "set_option", "universe", "end"]
+
+extra_css = ["static/katex/katex.css", "static/custom-force-style.css"]
+extra_js  = ["static/katex/katex.js", "static/math.js", "static/render-plugins.js", "static/diagram-hover.js", "static/diagram-view.js", "static/custom-style.js"]
+
+
+[metadata]
+title = "GASPER の Lean4 形式化"
+description = "ビーコンチェーン合意の機械検証ドキュメント"
+
+# ── 常に light テーマで表示する(ダークモードにしない) ──────────────────
+# Verso 組込みの literate.css は @media (prefers-color-scheme: dark) で以下の
+# 34 個の --verso-* 変数をダーク値へ上書きする。ここで同じ変数を light 値
+# (literate.css の通常 :root と同値)に戻すことで、ダーク OS でも light 表示を
+# 維持する。Verso 公式の口なので、自前 CSS で @media(dark) を再宣言するより
+# 宣言的・設定同居で保守しやすい。
+# キー名は変数名から「--verso-」を除き、ハイフンを「_」に置換したもの。
+# selected_color の light 既定は literate.css の var() フォールバック #def。
+# (注)将来 literate.css がダーク変数を追加した場合はここにも追記が必要
+#       = literate.css への結合点。
+[theme.dark]
+text_color = "#333"
+structure_color = "#333"
+background_color = "#ffffff"
+surface_color = "#f8f9fa"
+border_color = "#e9ecef"
+link_color = "#0066cc"
+link_visited_color = "#551a8b"
+link_hover_bg = "#e3f2fd"
+muted_color = "#6c757d"
+current_bg = "#0066cc"
+current_fg = "white"
+breadcrumb_color = "#495057"
+code_box_background_color = "#f6f8fa"
+code_box_border_color = "#e1e4e8"
+blockquote_border_color = "#dfe2e5"
+blockquote_color = "#6a737d"
+inline_code_bg = "#f0f2f4"
+docstring_border_color = "#ddd"
+imports_summary_color = "#586069"
+output_color = "#555"
+copy_button_bg = "#e9ecef"
+copy_button_border = "#d1d5db"
+copy_button_color = "#586069"
+copy_button_hover_bg = "#d1d5db"
+copy_button_copied_color = "#22863a"
+hamburger_bg = "#fff"
+hamburger_border = "#dee2e6"
+hamburger_bar_color = "#333"
+warning_color = "#fff3cd"
+error_color = "#cc0000"
+warning_indicator_color = "#b8860b"
+error_indicator_color = "#dc3545"
+info_indicator_color = "#0066cc"
+selected_color = "#def"

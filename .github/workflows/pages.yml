@@ -1,0 +1,62 @@
+name: Deploy Verso Literate to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+
+      # elan/lake セットアップ + .lake キャッシュ + Mathlib キャッシュ取得。
+      # build: false で lean-action のデフォルト `lake build` をスキップし、
+      # 後続ステップで :literate → :literateHtml の順に明示的にビルドする。
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+
+      # 1. ソースビルド(.olean キャッシュ)
+      - name: Build Lean sources
+        run: lake build
+
+      # 2. literate ファセット(elaboration + #mermaid_explode JSON 生成)
+      - name: Build literate facets
+        run: lake build :literate
+
+      # 3. HTML 生成(~4s。:literate がキャッシュ済みなので高速)
+      - name: Build literate HTML
+        run: lake build :literateHtml
+
+      - name: Prepare site
+        run: |
+          cp -r static/katex/fonts .lake/build/literate-html/
+          touch .lake/build/literate-html/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .lake/build/literate-html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
