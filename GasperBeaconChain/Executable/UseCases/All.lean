@@ -4,7 +4,6 @@ import GasperBeaconChain.Executable.UseCases.Finality
 import GasperBeaconChain.Executable.UseCases.AccountableSafety
 import GasperBeaconChain.Executable.UseCases.SlashableBound
 import GasperBeaconChain.Executable.UseCases.Liveness
--- Size-parametric committee (`Fin N`, choice-free `finFintypeCF`) on the §8 deep tree:
 import GasperBeaconChain.Executable.UseCases.Committee
 import GasperBeaconChain.Executable.UseCases.ModelN
 import GasperBeaconChain.Executable.UseCases.SurroundFork
