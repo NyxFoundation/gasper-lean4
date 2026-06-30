@@ -1,4 +1,4 @@
-.PHONY: install clean_noise_text_from_specific_file up audit md_export md_export_ex verso-facet
+.PHONY: install clean_noise_text_from_specific_file up audit md_export md_export_ex verso-facet comments_clean
 
 install:
 	lake update
@@ -157,3 +157,9 @@ verso-pages:
 	cp -r .lake/build/literate-html docs
 	touch docs/.nojekyll
 	@echo "=========== docs/ ready for GitHub Pages ==========="
+
+# usage: python3 scripts/remove_lean_comments.py <Lean-directory-or-file>
+# USAGE: make comments_clean F=./Test/
+comments_clean:
+	python3 ./Workbench/scripts/remove_lean_comments.py $(F)  > "$(LEAN_AUDIT_PATH)remove_lean_comments.log" 
+

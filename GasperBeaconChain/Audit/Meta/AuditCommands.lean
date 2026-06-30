@@ -3,32 +3,11 @@ import Lean.Util.CollectAxioms
 import Lean.DeclarationRange
 import GasperBeaconChain.Audit.Meta.AuditCoreScope
 
-/-!
-# `#mr_audit_axioms`: per-module structured axiom audit
-
-Emits a **per-module report** where every declaration is listed with:
-- Source file, line number, declaration kind
-- Full axiom dependency set
-- One-hop sources: which constants in the type/value introduce each axiom
-
-Error (`sorryAx`) and warn (`Classical.choice`/native compute) declarations
-are also emitted individually as `logError`/`logWarning` for IDE/CI visibility.
-
-## Native computation axiom detection (v4.29+)
-
-Since Lean v4.29 (#12217 / RFC #12216), `native_decide` and `bv_decide` no
-longer produce `Lean.trustCompiler`. Instead, each invocation generates a
-per-invocation axiom with `._native.native_decide.` or `._native.bv_decide.`
-in the name. This audit detects both:
-- `Lean.trustCompiler` (legacy / `ofReduceBool` / `ofReduceNat`)
-- Any axiom whose name contains `._native.` (v4.29+ per-invocation axioms)
--/
 
 namespace GasperBeaconChain.Audit.Meta
 
 open Lean Elab Command
 
--- § 1. Cache
 
 private abbrev AxiomCache := NameMap (Array Name)
 
@@ -40,7 +19,6 @@ private def cachedCollect (cache : AxiomCache) (n : Name) :
     let ax ← liftCoreM (collectAxioms n)
     return (ax, cache.insert n ax)
 
--- § 2. Helpers
 
 private def declModuleName? (env : Environment) (n : Name) : Option Name :=
   match env.getModuleIdxFor? n with
@@ -67,37 +45,24 @@ private def declLine? (ranges? : Option DeclarationRanges) : Option Nat :=
 private def pct (n total : Nat) : String :=
   if total == 0 then "—" else s!"{(n * 1000 / total + 5) / 10}%"
 
--- § 3. Native computation axiom detection (v4.29+ #12217)
 
-/-- Detect per-invocation native computation axioms.
-Since v4.29, `native_decide` generates `foo._native.native_decide.ax_1`
-and `bv_decide` generates `foo._native.bv_decide.ax_1` instead of
-`Lean.trustCompiler`. -/
 private def isNativeComputeAxiom (n : Name) : Bool :=
   match (toString n).splitOn "._native." with
   | [_] => false
   | _   => true
 
-/-- True if the axiom array contains any native computation dependency
-(either legacy `Lean.trustCompiler` or v4.29+ per-invocation `._native.*`). -/
 private def hasNativeCompute (ax : Array Name) : Bool :=
   ax.contains ``Lean.trustCompiler || ax.any isNativeComputeAxiom
 
-/-- Normalize axiom name for summary grouping.
-Per-invocation native axioms (`foo._native.native_decide.ax_1`) are grouped
-under the synthetic name `_native_compute` so the summary shows a single
-aggregate count instead of one entry per invocation. -/
 private def normalizeAxiomName (n : Name) : Name :=
   if isNativeComputeAxiom n then `_native_compute
   else if n == ``Lean.trustCompiler then `_native_compute
   else n
 
-/-- Human-readable display name for axioms in the summary. -/
 private def axiomDisplayName (n : Name) : String :=
   if n == `_native_compute then "native compute (trustCompiler / ._native.*)"
   else toString n
 
--- § 4. Severity
 
 private inductive Severity where
   | error | warn | info | clean
@@ -112,7 +77,6 @@ private def classifySeverity (ax : Array Name) : Severity :=
 private def severityMark : Severity → String
   | .error => "✗" | .warn => "⚠" | .info => "·" | .clean => "✓"
 
--- § 5. One-hop scanning
 
 private abbrev HopEntry := Name × Array Name × Array Name
 
@@ -141,7 +105,6 @@ private def scanOneHop (env : Environment) (cache : AxiomCache)
       result := result.push (a, tSrc, vSrc)
     return (result, cache)
 
--- § 6. Entry
 
 private structure AuditEntry where
   name     : Name
@@ -152,7 +115,6 @@ private structure AuditEntry where
   module?  : Option Name
   oneHop   : Array HopEntry
 
--- § 7. Aggregation (with axiom name normalization)
 
 private def countPerAxiom (entries : Array AuditEntry) : Array (Name × Nat) := Id.run do
   let mut counts : Array (Name × Nat) := #[]
@@ -184,7 +146,6 @@ private def aggregateSources (entries : Array AuditEntry) :
   return result.qsort fun a b =>
     a.2.foldl (fun acc p => acc + p.2) 0 > b.2.foldl (fun acc p => acc + p.2) 0
 
--- § 8. Format declaration
 
 private def fmtDeclDetail (e : AuditEntry) : String := Id.run do
   let mark := severityMark e.severity
@@ -204,7 +165,6 @@ private def fmtDeclDetail (e : AuditEntry) : String := Id.run do
       s := s ++ s!"\n    ← {a}: {String.intercalate "; " parts.toList}"
   return s
 
--- § 9. Format module
 
 private def fmtModuleReport (modName : Name) (entries : Array AuditEntry) : String := Id.run do
   let path := moduleToPath modName
@@ -231,15 +191,10 @@ private def fmtModuleReport (modName : Name) (entries : Array AuditEntry) : Stri
       s := s ++ s!"\n  ✓ {e.name} ({lineStr}) [{e.kind}]"
   return s
 
--- § 10. Known axioms (including native compute group)
 
-/-- Known axiom categories for the summary profile.
-`_native_compute` is the normalized group for `Lean.trustCompiler` and
-all `._native.*` per-invocation axioms. -/
 private def knownAxioms : Array Name :=
   #[``sorryAx, `_native_compute, ``Classical.choice, ``propext, ``Quot.sound, ``funext]
 
--- § 11. Command
 
 elab "#mr_audit_axioms" : command => do
   let env ← getEnv
@@ -260,20 +215,17 @@ elab "#mr_audit_axioms" : command => do
       line? := declLine? ranges?, module? := declModuleName? env n,
       oneHop := hops }
 
-  -- Individual logError/logWarning for critical declarations
   for e in allEntries do
     if e.severity == .error then
       logError m!"[Audit][error] {e.name} ↦ {e.axioms}"
     if e.severity == .warn then
       logWarning m!"[Audit][warn] {e.name} ↦ {e.axioms}"
 
-  -- Collect unique module names
   let mut modList : Array Name := #[]
   for e in allEntries do
     let m := e.module?.getD `_unknown
     unless modList.contains m do modList := modList.push m
 
-  -- Sort modules: heaviest first
   let sortedMods := modList.qsort fun a b => Id.run do
     let aE := allEntries.filter fun e => e.module?.getD `_unknown == a
     let bE := allEntries.filter fun e => e.module?.getD `_unknown == b
@@ -283,7 +235,6 @@ elab "#mr_audit_axioms" : command => do
       | .error => 10000 | .warn => 100 | .info => 1 | .clean => 0) 0
     return aw > bw
 
-  -- Emit per-module reports
   for mn in sortedMods do
     let modEntries := allEntries.filter fun e => e.module?.getD `_unknown == mn
     let modEntries := modEntries.qsort fun a b =>
@@ -295,7 +246,6 @@ elab "#mr_audit_axioms" : command => do
         | _, _ => Name.cmp a.name b.name == Ordering.lt
     logInfo m!"{fmtModuleReport mn modEntries}"
 
-  -- Project-wide summary
   let total := names.size
   let errorE := allEntries.filter (·.severity == .error)
   let warnE  := allEntries.filter (·.severity == .warn)

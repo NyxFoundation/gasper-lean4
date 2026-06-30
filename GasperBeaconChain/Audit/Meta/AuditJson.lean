@@ -3,52 +3,24 @@ import Lean.Util.CollectAxioms
 import Lean.Data.Json
 import GasperBeaconChain.Audit.Meta.AuditCoreScope
 
-/-!
-# `#mr_audit_json`: machine-readable (JSON) axiom-audit pipeline
-
-A *data-extraction* sibling of `#mr_audit_axioms` (which emits a human report).  This command
-walks the same audited scope (`Core.*` ∪ `Executable.*`), collects each declaration's axiom
-set with `collectAxioms`, and serialises the **axiom profile** as a single `Lean.Json` value
-— the structured datum that downstream consumers (a ProofWidgets visualization, CI gate, or
-dashboard) parse, rather than scraping the text report.
-
-The emitted object records, for the project's standing invariant (`Classical.choice = 0`):
-
-```json
-{ "project": "GasperBeaconChain",
-  "totalDeclarations": N, "modules": M,
-  "axiomProfile": { "sorryAx": …, "nativeCompute": …, "Classical.choice": …,
-                    "propext": …, "Quot.sound": …, "funext": … },
-  "severity":     { "error": …, "warn": …, "info": …, "clean": … },
-  "health":       { "choiceFree": true, "sorryFree": true, "nativeFree": true,
-                    "funextFree": true, "axiomDependent": …, "axiomFree": … } }
-```
-
-It is built with the real `collectAxioms`, so the JSON is a faithful, re-derivable trace of
-the same computation `make audit` certifies — `#mr_audit_json` is the pipeline's data tap.
--/
 
 namespace GasperBeaconChain.Audit.Meta
 
 open Lean Elab Command
 
-/-- Per-invocation native-compute axiom (`foo._native.native_decide.ax_1`, v4.29+). -/
 private def isNativeComputeAxiomJ (n : Name) : Bool :=
   match (toString n).splitOn "._native." with
   | [_] => false
   | _   => true
 
-/-- Any native-compute dependency (legacy `Lean.trustCompiler` or `._native.*`). -/
 private def hasNativeComputeJ (ax : Array Name) : Bool :=
   ax.contains ``Lean.trustCompiler || ax.any isNativeComputeAxiomJ
 
-/-- The module a declaration lives in (for counting distinct modules). -/
 private def declModuleNameJ? (env : Environment) (n : Name) : Option Name :=
   match env.getModuleIdxFor? n with
   | some idx => env.header.moduleNames[idx]?
   | none => none
 
-/-- The accumulated audit tallies, folded over the audited scope. -/
 private structure Tally where
   total      : Nat := 0
   sorryC     : Nat := 0
@@ -63,7 +35,6 @@ private structure Tally where
   cleanC     : Nat := 0
   deriving Inhabited
 
-/-- Fold one declaration's axiom set into the running tally. -/
 private def Tally.add (t : Tally) (ax : Array Name) : Tally :=
   let hasSorry  := ax.contains ``sorryAx
   let hasNative := hasNativeComputeJ ax
@@ -81,7 +52,6 @@ private def Tally.add (t : Tally) (ax : Array Name) : Tally :=
       (if !ax.isEmpty && !hasSorry && !hasChoice && !hasNative then 1 else 0)
     cleanC   := t.cleanC + (if ax.isEmpty then 1 else 0) }
 
-/-- Assemble the audit `Json` from the final tally and module count. -/
 private def Tally.toJson (t : Tally) (modules : Nat) : Json :=
   Json.mkObj
     [ ("project", Json.str "GasperBeaconChain"),
@@ -107,7 +77,6 @@ private def Tally.toJson (t : Tally) (modules : Nat) : Json :=
           ("axiomDependent", Json.num (t.errorC + t.warnC + t.infoC)),
           ("axiomFree", Json.num t.cleanC) ]) ]
 
-/-- Emit the structured JSON axiom profile for the audited scope. -/
 elab "#mr_audit_json" : command => do
   let env ← getEnv
   let names := sortedAuditedDeclNames env

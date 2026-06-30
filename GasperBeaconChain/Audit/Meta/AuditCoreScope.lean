@@ -1,25 +1,10 @@
 import Lean
 
-/-!
-# Audited scope enumeration for `GasperBeaconChain`
-
-`sortedAuditedDeclNames`: all declarations under `GasperBeaconChain.Core.*`
-**and** `GasperBeaconChain.Executable.*`, filtered only by
-`Name.isInternalDetail` (compiler internals). Auto-generated recursors,
-constructors, `.below`, etc. are included.
-
-The `Executable` (computational) layer is held to the same axiom hygiene as
-`Core` (the logical layer): both must stay free of `Classical.choice`,
-`sorryAx`, and native-compute axioms. Including `Executable` here makes that a
-standing guarantee of `#mr_audit_axioms` (hence of `make audit`).
--/
 
 namespace GasperBeaconChain.Audit.Meta
 
 open Lean
 
-/-- A declaration in the audited project scope: the logical `Core` layer or the
-computational `Executable` layer. -/
 def isAuditedDecl (env : Environment) (n : Name) : Bool :=
   ((`GasperBeaconChain.Core).isPrefixOf n
     || (`GasperBeaconChain.Executable).isPrefixOf n) &&

@@ -6,29 +6,9 @@ namespace GasperBeaconChain.Executable
 
 open GasperBeaconChain.Core
 
-/-!
-# Executable layer: deciding `justified` by height recursion (the fixpoint core)
-
-`Core.justified` is an inductive predicate. Its `justified_link` constructor
-requires `s_h < t_h`, so any justification chain has strictly increasing
-heights. Hence `justified st b h` is decided by **well-founded recursion on the
-height `h`**: the source of a link to `(b, h)` has height `s_h < h`, already
-decided by the recursion.
-
-Computational assumptions: `[Fintype Hash]` (to enumerate the source block) and
-`[DecidableRel parent]` (to decide `nth_ancestor`). `supermajority_link` is
-already decidable in Core.
-
-All proofs are explicit/constructive (no `simp`); decision procedures are built
-from named combinators (`decidable_of_iff`, `And.decidable`,
-`Fintype.decidableExistsFintype`) and the reflect bridge is the explicit
-`decide`-correctness equation.
--/
 
 
--- § A. Decidable `nth_ancestor` (structural recursion on the step count)
 
-/-- Zero-step ancestry is just equality. -/
 theorem nth_ancestor_zero_iff {Hash : Type v} (parent : HashParent Hash) (s t : Hash) :
     nth_ancestor parent 0 s t ↔ s = t := by
   constructor
@@ -36,7 +16,6 @@ theorem nth_ancestor_zero_iff {Hash : Type v} (parent : HashParent Hash) (s t : 
   · rintro rfl
     exact nth_ancestor.nth_ancestor_0 s
 
-/-- A `(n+1)`-step ancestry factors through an intermediate parent step. -/
 theorem nth_ancestor_succ_iff {Hash : Type v} (parent : HashParent Hash)
     (n : Nat) (s t : Hash) :
     nth_ancestor parent (n + 1) s t ↔ ∃ m : Hash, nth_ancestor parent n s m ∧ parent m t := by
@@ -45,9 +24,6 @@ theorem nth_ancestor_succ_iff {Hash : Type v} (parent : HashParent Hash)
   · rintro ⟨m, hsm, hmt⟩
     exact nth_ancestor.nth_ancestor_nth hsm hmt
 
-/-- `nth_ancestor` is decidable given an enumerable, decidable block graph.
-Structural recursion on the step count `n`; the intermediate block is enumerated
-over `Fintype Hash`. -/
 def decNthAncestor {Hash : Type v} (parent : HashParent Hash)
     [DecidableEq Hash] [Fintype Hash] [DecidableRel parent] :
     (n : Nat) → (s t : Hash) → Decidable (nth_ancestor parent n s t)
@@ -58,10 +34,7 @@ def decNthAncestor {Hash : Type v} (parent : HashParent Hash)
       (nth_ancestor_succ_iff parent n s t).symm
 
 
--- § B. Decidable `justification_link`
 
-/-- `justification_link` is decidable: a conjunction of a height comparison, a
-decidable `nth_ancestor`, and the Core-decidable `supermajority_link`. -/
 def decJustificationLink {Validator : Type u} {Hash : Type v}
     [DecidableEq Validator] [DecidableEq Hash] [Fintype Validator] [Fintype Hash]
     (τ : Threshold) (stake : Validator → Nat) (vset : Hash → Finset Validator)
@@ -74,11 +47,7 @@ def decJustificationLink {Validator : Type u} {Hash : Type v}
   infer_instance
 
 
--- § C. Decidable `justified` by recursion on height
 
-/-- One-step unfolding of `justified`, with the source height witnessed by a
-`Fin h` (forced by `s_h < h` inside `justification_link`). This is the recursion
-equation used to decide `justified` by strong recursion on `h`. -/
 theorem justified_iff_bounded {Validator : Type u} {Hash : Type v}
     [DecidableEq Validator] [DecidableEq Hash] [Fintype Validator]
     (τ : Threshold) (stake : Validator → Nat) (vset : Hash → Finset Validator)
@@ -99,14 +68,6 @@ theorem justified_iff_bounded {Validator : Type u} {Hash : Type v}
     · exact justified.justified_genesis
     · exact justified.justified_link hsj hlink
 
-/-- Course-of-values helper: decides `justified b h` for every height `h < H`,
-by **structural recursion on the bound `H`**, forced via `termination_by
-structural H`. This compiles through `Nat.rec`/`brecOn` rather than
-`WellFounded.fix`, so it depends on **no `Classical.choice`** (the `Acc` /
-`WellFounded` machinery of well-founded recursion is avoided entirely) and stays
-computable. At bound `H' + 1`, the source of a link into height `h ≤ H'` has
-height `s_h.val < h ≤ H'`, i.e. it falls under the structurally smaller bound
-`H'`. This is the explicit height-indexed fixpoint iteration. -/
 def decAllBelow {Validator : Type u} {Hash : Type v}
     [DecidableEq Validator] [DecidableEq Hash] [Fintype Validator] [Fintype Hash]
     (τ : Threshold) (stake : Validator → Nat) (vset : Hash → Finset Validator)
@@ -127,8 +88,6 @@ def decAllBelow {Validator : Type u} {Hash : Type v}
     decidable_of_iff _ (justified_iff_bounded τ stake vset parent genesis st b h).symm
 termination_by structural H
 
-/-- `justified` is decidable: run the height-bounded fixpoint iteration at bound
-`h + 1`. Computable and `Classical.choice`-free (structural recursion only). -/
 def decJustified {Validator : Type u} {Hash : Type v}
     [DecidableEq Validator] [DecidableEq Hash] [Fintype Validator] [Fintype Hash]
     (τ : Threshold) (stake : Validator → Nat) (vset : Hash → Finset Validator)
@@ -145,7 +104,6 @@ instance instDecidableJustified {Validator : Type u} {Hash : Type v}
     Decidable (justified τ stake vset parent genesis st b h) :=
   decJustified τ stake vset parent genesis st h b
 
-/-- Boolean (executable) form of `justified`. -/
 def justifiedB {Validator : Type u} {Hash : Type v}
     [DecidableEq Validator] [DecidableEq Hash] [Fintype Validator] [Fintype Hash]
     (τ : Threshold) (stake : Validator → Nat) (vset : Hash → Finset Validator)
@@ -153,8 +111,6 @@ def justifiedB {Validator : Type u} {Hash : Type v}
     (genesis : Hash) (st : State Validator Hash) (b : Hash) (h : Nat) : Bool :=
   decide (justified τ stake vset parent genesis st b h)
 
-/-- Reflect bridge: the executable `justifiedB` agrees with the Core `justified`
-(explicit `decide`-correctness). -/
 theorem justifiedB_iff {Validator : Type u} {Hash : Type v}
     [DecidableEq Validator] [DecidableEq Hash] [Fintype Validator] [Fintype Hash]
     (τ : Threshold) (stake : Validator → Nat) (vset : Hash → Finset Validator)
