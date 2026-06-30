@@ -24,7 +24,7 @@ incompatible histories — then every validator in the intersection of the two s
 The result generalises Casper FFG Theorem 1 (and Gasper Theorem 5.2) in two directions:
 from 1-finalization to arbitrary *k*-finalization, and from static to dynamic validator sets.
 
-$$\text{finalization\_fork}(\sigma) \;\Longrightarrow\; \text{q\_intersection\_slashed}(\sigma)$$
+$$\text{finalization-fork}(\sigma) \;\Longrightarrow\; \text{q-intersection-slashed}(\sigma)$$
 
 ### Plausible Liveness
 
@@ -32,7 +32,7 @@ Regardless of past events, it is always possible to extend the protocol state an
 block without introducing new slashing — provided the underlying blockchain keeps producing blocks
 and at least ⅔ of the stake is honest.
 
-$$\exists\,\sigma',\quad \text{unslashed\_can\_extend}(\sigma,\sigma') \;\wedge\; \text{no\_new\_slashed}(\sigma,\sigma') \;\wedge\; \text{finalized}(\sigma')$$
+$$\exists\,\sigma',\quad \text{unslashed-can-extend}(\sigma,\sigma') \;\wedge\; \text{no-new-slashed}(\sigma,\sigma') \;\wedge\; \text{finalized}(\sigma')$$
 
 ### Slashable Bound
 
