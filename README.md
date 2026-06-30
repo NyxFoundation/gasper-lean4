@@ -72,6 +72,9 @@ Mathlib's `Finset` infrastructure.
 
 ```
 GasperBeaconChain/
+├── Audit/           — axiom auditing and build verification tooling;
+│   ├── Automated/     automated build audit (axiom-set checks run on every build)
+│   └── Meta/          meta-commands: axiom reporting, JSON export, scope checks
 ├── Core/
 │   ├── AtomicDef/   — validators, block trees, votes, slashing conditions,
 │   │                  quorums, justification, k-finalization, liveness hypotheses
