@@ -36,9 +36,10 @@ to fit the Lean 4 kernel's type theory.
 
 ## Accountable safety
 
-Casper FFG Theorem 1 / Gasper Theorem 5.2, generalised
-from $`1`-finalization to arbitrary $`k`-finalization and
-from static to dynamic validator sets.
+The accountable-safety property of Casper FFG,
+generalised from $`1`-finalization to arbitrary
+$`k`-finalization and from static to dynamic validator
+sets.
 
 The proof has two complementary halves:
 
@@ -57,7 +58,7 @@ $$`\operatorname{finalization\_fork}(\sigma)
    \operatorname{q\_intersection\_slashed}(\sigma)`
 
 * *Quantitative half*
-  ({lit}`slashable_bound`, Gasper Theorem 8.3): the
+  ({lit}`slashable_bound`): the
   weight of that quorum intersection is lower-bounded
   by a churn-adjusted expression, derived via
   inclusion–exclusion on the validator-set weights and
@@ -76,7 +77,7 @@ validator set $`V_0`.
 
 ## Plausible liveness
 
-Casper FFG Theorem 2 / Gasper Theorem 6.1.
+The plausible-liveness property of Casper FFG.
 Regardless of any previous events, it is always possible
 to extend the protocol state and finalize a new block
 without introducing new slashing — provided the
@@ -97,7 +98,7 @@ $$`\exists\,\sigma',\;\;
 
 ## Structure
 
-* **AtomicDef** — Core definitions that mirror the Coq
+* **AtomicDef** — Core definitions adapted from the Coq
   model: validators and stake, block trees and ancestry,
   votes and protocol states, slashing conditions (S1, S2),
   quorums and thresholds, justification, finalization,
@@ -120,6 +121,6 @@ $$`\exists\,\sigma',\;\;
 
 This formalization covers Casper FFG finality only.
 It does not address the LMD GHOST fork-choice rule,
-probabilistic liveness (Gasper §7), or the concrete
+probabilistic liveness, or the concrete
 Beacon Chain specification.
 -/
