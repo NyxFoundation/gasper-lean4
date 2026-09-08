@@ -85,7 +85,7 @@ the quorum property from the smaller to the larger set.
 * the well-formedness of $`\sigma` is *not* needed — only that of
   $`\sigma'`, since it is the *grown* supporter set whose eligibility
   must be checked;
-* nothing about the height pair $`(h_s, h_t)` or the block-tree
+* nothing about the height pair $`(h_s, h_t)` or the checkpoint-tree
   relation between $`s` and $`t` is used: this lemma concerns *only*
   the weight/eligibility of the supporters, treating the link's
   graph data as opaque.
@@ -137,7 +137,7 @@ $`\operatorname{justified}(\sigma', s, h_s)` for the source;
 the three conjuncts of the justification link are carried across
 as follows: the height guard $`h_s < h_t` and the ancestry
 $`s \xrightarrow{h_t - h_s} t` are state-independent (they depend
-only on the block tree), and the supermajority link is transferred
+only on the checkpoint tree), and the supermajority link is transferred
 by {lit}`supermajority_weaken`.
 
 # Assumptions

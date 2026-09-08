@@ -747,7 +747,7 @@ apply {lit}`k_accountable_safety`.
 # Assumptions
 
 Only the fork hypothesis {lit}`hfork` — no {lit}`good_votes`,
-no {lit}`QuorumContext`, no block-tree axioms beyond those already
+no {lit}`QuorumContext`, no checkpoint-tree axioms beyond those already
 encoded in the justification derivations that the fork carries.
 
 # Non-assumptions

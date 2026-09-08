@@ -126,7 +126,7 @@ $`\mathit{nf} \to \mathit{nc}`.
 
 # Role in the development
 
-This is the block-tree witness factory for the plausible-liveness
+This is the checkpoint-tree witness factory for the plausible-liveness
 construction: given the highest justified block at height
 $`\mathit{base\_h}` and the state's highest target height $`H`,
 it produces the new finalized block $`\mathit{nf}` and its child
@@ -808,7 +808,7 @@ $`b_h > h_t`, contradicting the maximality of $`h_t`.
 # Non-assumptions
 
 * $`b` is *not* assumed to be the target of any link, nor related to
-  $`t` in the block tree — the conclusion $`b = t` is *derived*, not
+  $`t` in the checkpoint tree — the conclusion $`b = t` is *derived*, not
   hypothesized;
 * no upper bound on $`b_h` beyond $`\ge h_t` is needed; the proof
   rules out $`b_h > h_t` directly from maximality.

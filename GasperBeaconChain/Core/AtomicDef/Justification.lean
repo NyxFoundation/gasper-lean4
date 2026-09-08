@@ -33,7 +33,12 @@ $`\frac{2}{3}`-quorum (see {lit}`Quorums.lean`), the link is a
 
 A {lit}`justification_link` adds two structural conditions to a
 supermajority link: **forward direction** ($`h_s < h_t`) and
-**tree ancestry** ($`s \xrightarrow{h_t - h_s} t`).
+**checkpoint-tree ancestry** ($`s \xrightarrow{h_t - h_s} t`). The
+tree is Gasper's checkpoint tree ({lit}`HashTree.lean`), whose nodes
+are epoch boundary pairs and whose edges span one attestation epoch;
+the graded condition is therefore "the source checkpoint lies on the
+target's checkpoint chain" (see the docstring of
+{lit}`justification_link` and {lit}`Lemmas/Grading.lean`).
 
 ## Justification (inductive)
 
@@ -203,17 +208,51 @@ $$`\operatorname{justification\_link}(\sigma, s, t, h_s, h_t) \;\;\coloneqq\;\; 
 
 The three conjuncts ensure: (1) the link points strictly forward
 in height ($`h_s < h_t`); (2) $`t` is reachable from $`s` by
-*exactly* $`h_t - h_s` parent edges
+*exactly* $`h_t - h_s` parent edges of the checkpoint tree
 ($`s \xrightarrow{h_t - h_s} t`, the graded ancestry of
 {name}`nth_ancestor`), so the checkpoint-height gap coincides with
 the tree distance; (3) the link carries $`\frac{2}{3}`-quorum
 support ({name}`supermajority_link`). The grading in (2) is
 essential: an ungraded "$`t` is some descendant of $`s`" would
 leave the path length unconstrained, whereas pinning it to
-$`h_t - h_s` is what lets justification heights track tree depth.
-Since (1) gives $`h_s < h_t`, the difference $`h_t - h_s` is a
-genuine positive step count, never collapsed by truncated
-subtraction.
+$`h_t - h_s` is what lets justification heights track tree depth
+({lit}`justified_depth`). Since (1) gives $`h_s < h_t`, the
+difference $`h_t - h_s` is a genuine positive step count, never
+collapsed by truncated subtraction.
+
+# Reading the ancestry condition
+
+The parent relation is that of Gasper's **checkpoint tree**
+({lit}`HashTree.lean`): a node is an epoch boundary pair $`(B, j)`,
+one parent edge spans one attestation epoch, and heights are epochs,
+i.e. depths in the tree. Read against a *slot-level block tree* the
+condition "exactly $`h_t - h_s` block parents" would be wrong —
+consecutive checkpoints are separated by arbitrarily many blocks, or
+by none in an empty epoch, where the same block is both checkpoints.
+Read on the checkpoint tree it is exactly Gasper's condition: under
+the grading of the tree by the epoch ({lit}`height_graded`) the
+graded condition is *equivalent* to plain ancestry "$`s` lies on the
+checkpoint chain of $`t`" — this is
+{lit}`justification_link_iff_ancestor` in {lit}`Lemmas/Grading.lean`
+— and on the concrete checkpoint tree built from slotted blocks it is
+literally
+$`\operatorname{block}(s) = \operatorname{EBB}(\operatorname{block}(t),\, \operatorname{epoch}(s))`
+({lit}`cp_justification_link_iff` in
+{lit}`Refinement/CheckpointTree.lean`). Empty epochs are represented
+by distinct nodes with the same block ({lit}`cp_empty_epoch`;
+executable example {lit}`Executable/UseCases/EmptyEpoch.lean`).
+
+# Relation to Gasper Definition 4.6
+
+Gasper's raw set $`J(G)` of justified pairs is generated from
+supermajority links alone; it does not require the source to lie on
+the target's checkpoint chain. The ancestry conjunct here is a
+deliberate strengthening, inherited from the Coq model: it is
+justification as computed along a chain from the attestations valid
+for that chain (an attestation's source is a checkpoint on the chain
+of its target), which is the notion the safety argument is about.
+Every justification link of this model is a supermajority link, so
+the justified pairs of this model form a subset of $`J(G)`.
 
 # Non-assumptions
 
@@ -238,7 +277,7 @@ def justification_link
   supermajority_link τ stake vset st s t s_h t_h
 
 /--
-**Inductive justification.** A block $`b` at height $`h` is
+**Inductive justification.** A checkpoint $`b` at height $`h` is
 justified in state $`\sigma` if it is reachable from genesis via a
 finite chain of justification links. Two constructors:
 
@@ -246,6 +285,9 @@ $$`\dfrac{\vphantom{X}}{\mathsf{genesis} \;\text{justified at}\; 0}\;\textsf{gen
 
 The heights along any justification chain are strictly increasing
 (since each link satisfies $`h_s < h_t`), so every chain is finite.
+Moreover the height certified for $`b` is its depth in the
+checkpoint tree: $`g \xrightarrow{h} b` ({lit}`justified_depth`,
+{lit}`Lemmas/Grading.lean`).
 -/
 inductive justified
     [DecidableEq Validator]
@@ -268,8 +310,8 @@ inductive justified
     justified τ stake vset parent genesis st t t_h
 
 /--
-**Finalization.** A block $`b` at height $`h` is finalized when it
-is justified and there exists a direct child $`c` (i.e.
+**Finalization.** A checkpoint $`b` at height $`h` is finalized when
+it is justified and there exists a direct child $`c` (i.e.
 $`b \to c`, a single parent edge) for which there is a
 supermajority link from $`(b, h)` to $`(c, h + 1)`:
 
@@ -306,12 +348,12 @@ def finalized
 
 /--
 **$`k`-finalization**, the depth-$`k` generalization of
-{name}`finalized` (Gasper's $`k`-finalization). A block $`b` at
-height $`b_h` is $`k`-finalized when some chain of $`k + 1` blocks
+{name}`finalized` (Gasper's $`k`-finalization). A checkpoint $`b` at
+height $`b_h` is $`k`-finalized when some chain of $`k + 1` checkpoints
 $`ls = (ls_0, \dots, ls_k)` starts at $`ls_0 = b`, has each $`ls_n`
 justified at height $`b_h + n` and reached from $`b` in exactly
 $`n` parent steps, and carries a supermajority link from $`b` to
-its last block $`ls_k` spanning the full height gap $`k`:
+its last checkpoint $`ls_k` spanning the full height gap $`k`:
 
 $$`\operatorname{k\_finalized}(\sigma, b, b_h, k) \;\;\coloneqq\;\; \begin{gathered} 1 \le k \;\;\wedge\;\; \exists\, ls,\;\; |ls| = k + 1 \;\wedge\; ls_0 = b \\ \wedge\;\; \bigl(\forall n \le k,\;\; \operatorname{justified}(\sigma, ls_n, b_h + n) \;\wedge\; b \xrightarrow{n} ls_n\bigr) \\ \wedge\;\; \operatorname{supermajority\_link}(\sigma, b, ls_k, b_h, b_h + k) \end{gathered}`
 

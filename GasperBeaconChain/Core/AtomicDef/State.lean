@@ -64,21 +64,45 @@ A **Casper FFG vote** — the atomic element of a protocol state.
 A vote pairs an attesting validator $`v` with a source checkpoint
 $`(s, h_s)` and a target checkpoint $`(t, h_t)`, where
 $`\mathsf{Validator}` and $`\mathsf{Hash}` are the validator and
-block-identifier types respectively:
+checkpoint-identifier types respectively:
 
 $$`(v,\; s,\; t,\; h_s,\; h_t) \;\in\; \mathsf{Validator} \times \mathsf{Hash} \times \mathsf{Hash} \times \mathbb{N} \times \mathbb{N}`
 
 The five fields correspond to:
 
 * {lit}`validator` — $`v`, the attesting validator,
-* {lit}`source` — $`s`, the source block identifier,
-* {lit}`target` — $`t`, the target block identifier,
+* {lit}`source` — $`s`, the source checkpoint identifier,
+* {lit}`target` — $`t`, the target checkpoint identifier,
 * {lit}`sourceHeight` — $`h_s`, the source height,
 * {lit}`targetHeight` — $`h_t`, the target height.
 
 The presence or absence of a vote in a state $`\sigma` is queried
 via {lit}`vote_msg` and forms the basis of quorum and slashing
 predicates in subsequent files.
+
+# Checkpoints and heights
+
+The identifiers $`s, t` name nodes of the **checkpoint tree**
+({lit}`HashTree.lean`): epoch boundary pairs $`(B, j)`, not bare
+block roots. The heights $`h_s, h_t` are the **attestation epochs**
+of the two checkpoints, which under the checkpoint-tree reading are
+their depths in the tree. The eth2 counterpart of a vote is an
+attestation's FFG vote $`(\mathsf{source}, \mathsf{target})` with
+$`\mathsf{Checkpoint} = (\mathsf{epoch}, \mathsf{root})`; the
+height fields here play the role of the two {lit}`epoch` components.
+
+Since a checkpoint identifier already determines its epoch, the
+height fields are *redundant* with the identifiers on a well-formed
+chain. They are carried explicitly, as in the Coq model, because
+slashing conditions ({lit}`Slashing.lean`) are stated on heights.
+The model does **not** require a vote's heights to agree with the
+tree: a state may contain votes with inconsistent heights. This is
+deliberate — the state space is a superset of the protocol-reachable
+one, so the safety theorems, which quantify over all states, are only
+strengthened, and an adversary gains nothing: along justification
+chains the heights are forced to be the true depths anyway
+({lit}`justified_depth`, {lit}`justified_height_eq` in
+{lit}`Lemmas/Grading.lean`).
 -/
 structure Vote (Validator : Type u) (Hash : Type v) where
   validator : Validator
@@ -152,14 +176,14 @@ def vote_val
     (vote : Vote Validator Hash) : Validator :=
   vote.validator
 
-/-- Projection of the source block. -/
+/-- Projection of the source checkpoint. -/
 def vote_source
     {Validator : Type u}
     {Hash : Type v}
     (vote : Vote Validator Hash) : Hash :=
   vote.source
 
-/-- Projection of the target block. -/
+/-- Projection of the target checkpoint. -/
 def vote_target
     {Validator : Type u}
     {Hash : Type v}

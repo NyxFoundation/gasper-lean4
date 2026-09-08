@@ -99,10 +99,11 @@ $$`\exists\,\sigma',\;\;
 ## Structure
 
 * **AtomicDef** — Core definitions adapted from the Coq
-  model: validators and stake, block trees and ancestry,
+  model: validators and stake, checkpoint trees and ancestry,
   votes and protocol states, slashing conditions (S1, S2),
   quorums and thresholds, justification, finalization,
-  $`k`-finalization, and the plausible-liveness hypotheses.
+  $`k`-finalization, the plausible-liveness hypotheses, and
+  the height grading of the checkpoint tree.
 * **Lemmas** — Structural lemmas connecting the definitions
   to the theorems: ancestry closure and conflict
   propagation, disjoint-union set algebra,
@@ -111,16 +112,43 @@ $$`\exists\,\sigma',\;\;
   finalized–$`k`-finalized bridge, strong induction on
   height gaps, the same-height slashing construction,
   state extension with vote classification, and
-  maximal-link / highest-block existence.
+  maximal-link / highest-block existence, and the grading
+  lemmas showing that justification heights are checkpoint
+  depths.
 * **Theories** — The main theorems: accountable safety,
   plausible liveness, and the slashable bound. Each
   theorem is accompanied by a {lit}`#detail_explode`
   invocation that renders its Fitch-style proof tree.
+* **Refinement** — A concrete checkpoint tree built from
+  slotted blocks through epoch boundary blocks
+  ({lit}`ebb`), shown to be an instance of the abstract
+  tree ({lit}`cp_context`), graded by the epoch
+  ({lit}`cp_graded`), representing empty epochs
+  ({lit}`cp_empty_epoch`), and on which a justification
+  link is exactly Gasper's "source on the target's
+  checkpoint chain" ({lit}`cp_justification_link_iff`).
+
+## Model interpretation
+
+The tree on which everything is stated is Gasper's
+**checkpoint tree**: its nodes are epoch boundary pairs
+$`(B, j)`, one parent edge spans one attestation epoch,
+and vote heights are attestation epochs, i.e. depths in
+the tree. The same block root may occur as several
+nodes (empty epochs). This is the reading fixed by the
+Coq original ("a 'block' refers to a 'checkpoint block'
+throughout") and it is what makes the graded ancestry
+condition of {lit}`justification_link` faithful to the
+paper; see {lit}`HashTree.lean` and
+{lit}`Lemmas/Grading.lean`.
 
 ## Scope
 
 This formalization covers Casper FFG finality only.
 It does not address the LMD GHOST fork-choice rule,
 probabilistic liveness, or the concrete
-Beacon Chain specification.
+Beacon Chain specification (committee selection and
+the beacon state transition are not modelled; the
+refinement layer stops at the structural correspondence
+of the checkpoint tree).
 -/

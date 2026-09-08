@@ -68,6 +68,68 @@ Mathlib's `Finset` infrastructure.
 
 ---
 
+## Model interpretation: the checkpoint tree
+
+The tree on which every definition and theorem is stated is Gasper's **checkpoint tree**,
+not the slot-level block tree:
+
+- a node of the type `Hash` is an *epoch boundary pair* $(B, j)$ — a block together with an
+  attestation epoch (eth2's `Checkpoint = (epoch, root)`);
+- one parent edge spans one attestation epoch, so the tree is graded by the epoch and the vote
+  heights $h_s, h_t$ are attestation epochs, i.e. depths in the tree;
+- the same block root may occur as several distinct nodes (empty epochs).
+
+This is the reading fixed by the Coq original (`HashTree.v`: *"a 'block' refers to a
+'checkpoint block' throughout"*), which the first version of this port left undocumented. It is
+now stated in the docstrings of `HashTree.lean`, `State.lean` and `Justification.lean`, and —
+more importantly — it is **machine-checked** rather than asserted:
+
+| Gasper notion | Counterpart in the model | Status | Backing |
+|---|---|---|---|
+| epoch boundary pair $(B, j)$ | node of `Hash`; concretely `Checkpoint = ⟨block, epoch⟩` | formalized | `cp_context` (the concrete tree is a `HashTreeContext`) |
+| attestation epoch | heights `s_h`, `t_h` = depth in the tree | formalized | `cp_graded`, `justified_depth`, `justified_height_eq` |
+| "source is on the target's checkpoint chain" | graded ancestry `nth_ancestor parent (t_h - s_h) s t` in `justification_link` | formalized | `justification_link_iff_ancestor` (abstract), `cp_link_correspondence`, `cp_justification_link_iff` (concrete) |
+| epoch boundary block $\mathrm{EBB}(B, j)$ | `ebb` on a `SlottedChainContext` | formalized | `ebb_slot_le`, `ebb_on_chain`, `on_chain_ebb_of_le`, `ebb_zero`, `ebb_tower` |
+| empty epoch (same block as consecutive checkpoints) | distinct nodes with the same `block` | formalized | `cp_empty_epoch`; executable example `Executable/UseCases/EmptyEpoch.lean` |
+| $J(G)$ of Definition 4.6 without the chain condition | — | documented only | see limitations below |
+
+Reading guide:
+
+- `Core/AtomicDef/Grading.lean` — the hypothesis `height_graded` (genesis at height 0, each
+  parent edge adds 1).
+- `Core/Lemmas/Grading.lean` — under that hypothesis the graded condition of
+  `justification_link` is equivalent to plain checkpoint ancestry
+  (`justification_link_iff_ancestor`), and justified heights are forced to be true depths
+  (`justified_height_eq`); `justified_depth` shows the latter even without the hypothesis.
+- `Core/Refinement/SlottedChain.lean`, `Core/Refinement/CheckpointTree.lean` — a concrete
+  checkpoint tree built from slotted blocks: `Checkpoint`, `cp_parent`, `cp_valid`, the
+  refinement `cp_context`, the grading `cp_graded`, empty epochs `cp_empty_epoch`, depth
+  `cp_depth`, and the correspondence `cp_ancestor_iff_on_chain` / `cp_link_correspondence`.
+- `Executable/UseCases/EmptyEpoch.lean` — a three-block chain with an empty epoch in which the
+  checkpoint $(B, 2)$ is justified through the link from $(B, 1)$, both as a proof term over
+  the concrete tree and by `decide` / `#eval` on a finite encoding.
+
+**Honest limitations.**
+
+- `justification_link` requires the source to be an ancestor of the target in the checkpoint
+  tree. Gasper's raw set $J(G)$ (Definition 4.6) is generated from supermajority links alone
+  and imposes no such condition. The ancestry conjunct is a deliberate strengthening inherited
+  from the Coq model: it is justification as computed along a chain from the attestations valid
+  for that chain. The justified pairs of this model form a subset of $J(G)$; a model variant
+  without the ancestry conjunct is not verified here.
+- The beacon state transition (committee selection, `process_justification_and_finalization`)
+  is not formalized. The refinement layer stops at the structural correspondence of the
+  checkpoint tree: nodes, parent edges, grading, and the ancestry condition.
+- The height fields of a `Vote` are redundant with checkpoint identifiers and are not
+  constrained by the model: states may contain votes with inconsistent heights. This is an
+  over-approximation of the reachable states (it can only strengthen the safety theorems);
+  along justification chains consistency is forced anyway (`justified_height_eq`).
+- `SlottedChainContext` assumes only that slots strictly decrease along parent edges, that
+  genesis is at slot 0, and that genesis is the only root. Reachability of every block from
+  genesis is derived (`genesis_on_chain`), and $C > 0$ is not needed.
+
+---
+
 ## Structure
 
 ```
@@ -76,11 +138,15 @@ GasperBeaconChain/
 │   ├── Automated/     automated build audit (axiom-set checks run on every build)
 │   └── Meta/          meta-commands: axiom reporting, JSON export, scope checks
 ├── Core/
-│   ├── AtomicDef/   — validators, block trees, votes, slashing conditions,
-│   │                  quorums, justification, k-finalization, liveness hypotheses
+│   ├── AtomicDef/   — validators, checkpoint trees, votes, slashing conditions,
+│   │                  quorums, justification, k-finalization, liveness hypotheses,
+│   │                  height grading of the checkpoint tree
 │   ├── Lemmas/      — ancestry closure, set algebra, weight monotonicity,
-│   │                  quorum up-closure, strong induction, slashing constructions
-│   └── Theories/    — AccountableSafety, PlausibleLiveness, SlashableBound
+│   │                  quorum up-closure, strong induction, slashing constructions,
+│   │                  grading lemmas (justification heights are depths)
+│   ├── Theories/    — AccountableSafety, PlausibleLiveness, SlashableBound
+│   └── Refinement/  — concrete (block, epoch) checkpoint tree built from slotted
+│                      blocks via epoch boundary blocks; refinement into the abstract tree
 ├── Executable/      — Boolean decision-procedure wrappers for all key predicates;
 │   └── UseCases/      concrete runnable examples (fork scenarios, slashing detection)
 └── Visualizations/  — interactive diagrams (justification ladders, Venn overlaps, …)

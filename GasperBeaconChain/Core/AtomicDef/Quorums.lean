@@ -15,7 +15,8 @@ supermajority requirements of Casper FFG, together with the
 
 ## Validator sets
 
-Each block $`b` is associated with a validator set
+Each checkpoint $`b` (a node of the checkpoint tree, see
+{lit}`HashTree.lean`) is associated with a validator set
 $`V(b) \subseteq \mathsf{Validator}`, represented by a total function
 {lit}`vset : Hash → Finset Validator`. Coq uses a partial finite map
 $`\mathsf{vset} : \mathsf{Hash} \rightharpoonup \mathcal{P}(\mathsf{Validator})`
@@ -34,7 +35,7 @@ $`\operatorname{quorum\_2}(vs, b)`.
 ## Quorum predicates
 
 A subset $`q \subseteq V(b)` is a **$`\frac{1}{3}`-quorum** (resp.
-**$`\frac{2}{3}`-quorum**) relative to block $`b` when its weight
+**$`\frac{2}{3}`-quorum**) relative to checkpoint $`b` when its weight
 meets the corresponding threshold:
 
 $$`\operatorname{quorum}_k(q, b) \;\;\coloneqq\;\; q \subseteq V(b) \;\;\wedge\;\; f_k\bigl(\operatorname{wt}(V(b))\bigr) \le \operatorname{wt}(q)`
@@ -63,7 +64,7 @@ variable {Validator : Type u}
 variable {Hash : Type v}
 
 /--
-A **$`\frac{1}{3}`-quorum** relative to block $`b`: a subset of the
+A **$`\frac{1}{3}`-quorum** relative to checkpoint $`b`: a subset of the
 validator set $`V(b)` whose total stake reaches the one-third
 threshold $`f_{1/3}(\operatorname{wt}(V(b)))` for that set.
 
@@ -83,7 +84,7 @@ def quorum_1
   τ.one_third (wt stake (vset b)) ≤ wt stake vs
 
 /--
-A **$`\frac{2}{3}`-quorum** relative to block $`b`: a subset of the
+A **$`\frac{2}{3}`-quorum** relative to checkpoint $`b`: a subset of the
 validator set $`V(b)` whose total stake reaches the two-thirds
 threshold $`f_{2/3}(\operatorname{wt}(V(b)))` for that set.
 
@@ -125,9 +126,9 @@ instance quorum_2_decidable
   inferInstanceAs (Decidable (_ ∧ _))
 
 /--
-The **accountable-safety conclusion**. There exist two blocks
+The **accountable-safety conclusion**. There exist two checkpoints
 $`b_L, b_R` — possibly distinct, and (since $`\mathsf{vset}` is
-assigned per block) possibly with different validator sets
+assigned per checkpoint) possibly with different validator sets
 $`V(b_L), V(b_R)` — together with two $`\frac{2}{3}`-quorums
 $`q_L \subseteq V(b_L)`, $`q_R \subseteq V(b_R)` such that every
 validator in their intersection is {name}`slashed`:
@@ -139,9 +140,9 @@ $`q_R \subseteq V(b_R)` are already entailed by {name}`quorum_2`
 but are kept here to match the Coq definition.
 
 Allowing $`V(b_L) \ne V(b_R)` is what lets one statement serve the
-dynamic-validator-set setting, where the two finalized blocks may
-be governed by different validator sets; when the validator set is
-held fixed across blocks the two coincide.
+dynamic-validator-set setting, where the two finalized checkpoints
+may be governed by different validator sets; when the validator set
+is held fixed across checkpoints the two coincide.
 -/
 def q_intersection_slashed
     [DecidableEq Validator]

@@ -3,7 +3,7 @@
 **対象リポジトリ**: gasper-lean4
 **起案日**: 2026-08-14
 **起点**: Ethereum 財団コンセンサス専門家によるレビュー指摘(justification の計算方法が Gasper の実際と一致しない疑い)
-**ステータス**: 計画(未着手)
+**ステータス**: 実施完了(2026-09-09、§10 実施記録を参照)
 
 ---
 
@@ -479,3 +479,144 @@ CI (lean_action_ci / pages) # プッシュ後の二重確認
 
 合計 5.5–7 人日。P1+P2+P5' を先に出荷し、レビュアーには「文書修正+抽象同値定理」で
 一次回答、P3+P4 完了後に「refinement による完全な裏付け」を追補する二段構えとする。
+
+---
+
+## 付録 A(Phase 0 成果物)— 用語棚卸し
+
+`grep -rn -i "block" GasperBeaconChain --include="*.lean"` の全 289 件を分類した。
+方針: **識別子は一切リネームしない**(`blocks_exist_high_over`, `block1_justified` 等は対象外)。
+プローズ中の「block」は、それが *チェックポイント木のノード* を指す箇所のみ
+「checkpoint」に読み替え、Gasper 論文のスロット単位のブロックを指す箇所はそのまま残す。
+
+| 区分 | ファイル | 該当 | 処置 |
+|---|---|---|---|
+| **A. 定義の意味論(最優先)** | `Core/AtomicDef/HashTree.lean` | モジュール doc「Block tree」「block identifiers」、`HashParent`/`hash_parent_irreflexive`/`hash_at_most_one_parent`/`HashTreeContext`/`hash_ancestor`/`nth_ancestor` の各 doc(計 21 件) | 全面改訂: checkpoint tree 意味論、Coq 原典注記の復元、空エポックとの整合を明記 |
+| A | `Core/AtomicDef/State.lean` | `Vote` doc「source block identifier」「target block identifier」、projection doc「source block」「target block」(5 件) | checkpoint 識別子 + 高さ = attestation epoch の冗長性を明記 |
+| A | `Core/AtomicDef/Justification.lean` | `justification_link` doc「tree ancestry」「checkpoint-height gap coincides with the tree distance」、`justified`/`finalized`/`k_finalized` doc「A block $`b`」(6 件) | graded 条件 ⟺ checkpoint chain 上の祖先条件(`justification_link_iff_ancestor`)を参照 |
+| A | `Core/AtomicDef/Quorums.lean` | 「Each block $`b` is associated with a validator set」他(8 件) | 「checkpoint」に読み替え(vset はチェックポイントごと) |
+| A | `Core/AtomicDef/PlausibleLiveness.lean` | `forward_link_votes` doc「in the block tree」(1 件) | 「checkpoint tree」に読み替え。§ Block existence(`blocks_exist_high_over`)は識別子由来のため据え置き、注記のみ追加 |
+| **B. 補題層の説明文** | `Core/Lemmas/HashTree.lean` | モジュール doc、各補題見出し「Every block is its own ancestor」等(11 件) | 「block」→「checkpoint」(見出し含む) |
+| B | `Core/Lemmas/Justification.lean` | 「block-tree relation」(88 行)、「depend only on the block tree」(140 行) | 「checkpoint-tree」に読み替え |
+| B | `Core/Lemmas/AccountableSafety.lean:121` | 「in the block tree」 | 同上 |
+| B | `Core/Lemmas/PlausibleLiveness.lean:129,811` | 「block-tree witness factory」「in the block tree」 | 同上 |
+| B | `Core/Theories/AccountableSafety.lean:750` | 「no block-tree axioms」 | 同上 |
+| B | `Core/Theories/PlausibleLiveness.lean:435` | 「in the block tree」 | 同上 |
+| B | `Core/Theories/SlashableBound.lean:47` | 「no block tree」 | 同上 |
+| **C. 一般語としての block(据え置き)** | `Lemmas/Weight.lean`, `Lemmas/SetTheoryProps.lean` | 「three-block decomposition」「additivity block」 | 集合分割の意味。対象外 |
+| C | `Visualizations/Theme.lean:75` | CSS `display: block` | 対象外 |
+| C | `Executable/UseCases/*.lean`, `Visualizations/KFinalization.lean` | `block1_justified` 等の識別子、`"finalizes block 1"` 等の具体例表示 | 識別子・具体例のため据え置き |
+| **D. 設定・README** | `literate.toml:29` | `title = "HashTree: Block tree"` | 「HashTree: Checkpoint tree」 |
+| D | `README.md:79` | 「block trees」 | 「checkpoint trees」+ 新節 |
+| D | `GasperBeaconChain.lean` | 「block trees and ancestry」(Structure 節) | 「checkpoint trees」 |
+
+## 付録 B(Phase 0 成果物)— `ebb_tower` の紙上証明
+
+### 設定
+
+`SlottedChainContext` の仮定(実装時に最小化した最終形):
+
+* `bparent : Block → Option Block`, `slot : Block → Nat`, `bgenesis : Block`, `C : Nat`
+* `slot_genesis : slot bgenesis = 0`
+* `slot_lt : bparent b = some p → slot p < slot b`
+* `root_unique : bparent b = none → b = bgenesis`
+
+(計画 §4.3 の `hC : 0 < C`, `bparent_genesis`, `reaches_genesis` は、いずれの補題の証明にも
+不要であることが判明したため **フィールドから削除**し、後二者は定理として導出する:
+`bparent_genesis` は `slot_lt` + `slot_genesis` から、`reaches_genesis`(= `genesis_on_chain`)は
+チェーン帰納法から得られる。)
+
+`ebb` は燃料付き構造的再帰で定義する(well-founded 再帰は kernel で簡約されず `decide` が
+使えないため。Phase 4 の実行可能性のための設計判断):
+
+```
+ebbAux j 0       b = b
+ebbAux j (n+1)   b = if slot b ≤ j·C then b
+                     else match bparent b with | some p => ebbAux j n p | none => b
+ebb b j          = ebbAux j (slot b) b
+```
+
+### 補助命題
+
+* **(P1) 燃料非依存性**: `slot b ≤ n` かつ `slot b ≤ m` ならば `ebbAux j n b = ebbAux j m b`。
+  n に関する帰納法(b, m を一般化)。n = 0 なら slot b = 0 ≤ j·C で両辺 b。n+1 のとき、
+  slot b ≤ j·C なら両辺 b。さもなくば bparent b = some p(none なら root_unique より
+  b = genesis, slot b = 0 ≤ j·C で矛盾)。m = 0 は slot b ≤ 0 で同様に矛盾、m = m'+1 なら
+  両辺とも p に降りて帰納法の仮定(slot p < slot b より slot p ≤ n, slot p ≤ m')。
+* **(P2) 展開則**: `slot b ≤ j·C → ebb b j = b`;
+  `¬ slot b ≤ j·C → bparent b = some p → ebb b j = ebb p j`(P1 で燃料を slot b + 1 に
+  取り替えて一段展開し、再び P1 で slot p に戻す)。
+* **(P3) チェーン帰納法**: `(∀ b, (∀ p, bparent b = some p → P p) → P b) → ∀ b, P b`。
+  「slot b ≤ n → P b」を n の帰納法で示す(slot_lt で一段ごとに n が減る)。
+
+### `ebb_tower` の証明
+
+**主張**: `j₁ ≤ j₂ → ebb (ebb b j₂) j₁ = ebb b j₁`。
+
+P3 により b に関するチェーン帰納法。
+
+* **Case slot b ≤ j₂·C**: P2 より `ebb b j₂ = b`。左辺 = `ebb b j₁` = 右辺。
+* **Case slot b > j₂·C**: `j₁ ≤ j₂` より `j₁·C ≤ j₂·C`、従って `slot b > j₁·C`。
+  root_unique により bparent b = some p が存在(none なら b = genesis で slot b = 0 ≤ j₂·C、矛盾)。
+  P2 を二回適用して `ebb b j₂ = ebb p j₂`, `ebb b j₁ = ebb p j₁`。
+  左辺 = `ebb (ebb p j₂) j₁` = (帰納法の仮定 at p) `ebb p j₁` = 右辺。∎
+
+### 系(R5 で使う形)
+
+* `ebb_slot_le : slot (ebb b j) ≤ j·C`(同じチェーン帰納法。none 分岐は上と同様に到達不能)。
+* `ebb_self_iff : ebb b j = b ↔ slot b ≤ j·C`(→ は ebb_slot_le、← は P2)。
+* `ebb_zero : ebb b 0 = bgenesis`(slot (ebb b 0) ≤ 0 なので親を持てず、root_unique)。
+* `ebb_idem : ebb (ebb b j) j = ebb b j`(tower の j₁ = j₂)。
+
+---
+
+## 10. 実施記録(2026-09-09)
+
+### 成果物
+
+| フェーズ | 成果物 | 状態 |
+|---|---|---|
+| P0 | 付録 A(用語棚卸し)、付録 B(`ebb_tower` 紙上証明) | 完了 |
+| P1 | `HashTree.lean` / `State.lean` / `Justification.lean` / `Quorums.lean` / `PlausibleLiveness.lean`(AtomicDef)、`Lemmas/{HashTree,Justification,AccountableSafety,PlausibleLiveness}.lean`、`Theories/*.lean`、`GasperBeaconChain.lean`、`literate.toml` の docstring / 表題改訂 | 完了 |
+| P2 | `Core/AtomicDef/Grading.lean`(`height_graded`)、`Core/Lemmas/Grading.lean`(G1 `height_le_of_ancestor`、G2 `height_eq_of_nth_ancestor`、G3 `nth_ancestor_of_ancestor`、G4 `justification_link_iff_ancestor`、G5 `justified_height_eq`、追加: `nth_ancestor_trans`、`justified_depth`) | 完了 |
+| P3 | `Core/Refinement/SlottedChain.lean`(`SlottedChainContext`、`on_chain`、`chain_induction`、`ebb`、`ebb_slot_le`、`ebb_on_chain`、`on_chain_ebb_of_le`、`ebb_self_iff`、`ebb_zero`、`ebb_tower`、`ebb_idem`、`genesis_on_chain`、`bparent_genesis`)、`Core/Refinement/CheckpointTree.lean`(R1 `cp_context`、R2 `cp_graded`、R3 `cp_empty_epoch`、R4 `cp_depth`、R5 `cp_ancestor_iff_on_chain` / `cp_link_correspondence`、合成定理 `cp_justification_link_iff`、`cp_justified_height_eq`) | 完了 |
+| P4 | `Executable/UseCases/EmptyEpoch.lean`(`#eval` 6 件 + `decide +kernel` 2 件 + 項レベル証明 `cp_12_justified` 等) | 完了 |
+| P5 | README 新節「Model interpretation: the checkpoint tree」(対応表 + Honest limitations)、`planning/reviewer-reply.md`(返信ドラフト最終版) | 完了(返信の送付は人手) |
+
+### 受け入れ基準の検証
+
+| AC | 検証方法 | 結果 |
+|---|---|---|
+| AC1 | `grep -rn -i "block tree\|block-tree"` — 残存は意図的対比(`Justification.lean` / `Lemmas/Grading.lean` の "slot-level block tree"、README の "not the slot-level block tree")のみ | ✓ |
+| AC2 | `lake build` 通過、`make audit` で G4 / G5 は propext・Quot.sound のみ | ✓ |
+| AC3 | R1–R5 が `sorry` なしで証明済み(`CheckpointTree.lean`) | ✓ |
+| AC4 | `#eval JE (1, 2) 2 = true`、`cp_12_justified_decide`(`decide +kernel`)、`cp_22_not_justified` | ✓ |
+| AC5 | 既存 `.lean` の差分をコメント除去後に比較するスクリプトで検証: 全ファイル「docstring のみ」、`Core/All.lean` / `Executable/UseCases/All.lean` は import 追記のみ | ✓ |
+| AC6 | `make audit`: 730 宣言、sorryAx / Classical.choice / native compute いずれも不使用、propext 528・Quot.sound 426(いずれも Finset / State 経由) | ✓ |
+| AC7 | `planning/reviewer-reply.md` の各主張に定理名を付記 | ✓ |
+
+### 計画からの逸脱(記録)
+
+1. **`SlottedChainContext` の仮定を最小化**(§6 リスク 8 の方針どおり): `hC : 0 < C`、
+   `bparent_genesis`、`reaches_genesis` はどの補題にも不要だったため削除。後二者は定理として導出
+   (`bparent_genesis`、`genesis_on_chain`)。残った仮定は `slot_genesis`、`slot_lt`、`root_unique`。
+2. **`ebb` を燃料付き構造的再帰で定義**(付録 B): well-founded 再帰は kernel で簡約されず
+   `decide` が使えないため。正しさは `ebbAux_fuel_irrel` で燃料非依存性を示してから
+   展開則(`ebb_of_le` / `ebb_of_gt`)とチェーン帰納法(`chain_induction`)のみで証明。
+3. **R5 の定式化**: 主定理は `cp_ancestor_iff_on_chain`(右辺を `on_checkpoint_chain` にまとめ、
+   `epoch` 上界を右辺に吸収)。計画どおりの形(`hle` を仮定に持つ)は `cp_link_correspondence` として
+   併置。→ 方向は `cp_valid c₁` のみ、← 方向は `cp_valid c₂` のみを使う(各方向を別補題として公開)。
+4. **追加定理**: `justified_depth`(grading 仮定なしで「justified な (b, h) は genesis から
+   ちょうど h 歩」)。G5 はこれと G2 の合成として証明。`on_chain_ebb_of_le`(`ebb` が
+   「slot ≤ jC を満たす chain(B) 上の最新ブロック」であることの最大性)。
+5. **UseCase の `decide`**: 12 ノード × 高さ 2 の `justifiedB` は既定の `decide`(Meta 簡約)では
+   `maxRecDepth` / heartbeat 上限に達するため `decide +kernel` を使用(kernel 簡約のみ、
+   追加公理なし — 監査で確認)。項レベルの証明(`cp_12_justified` 等)は `Checkpoint (Fin 3)` 上で
+   `cp_parent` を直接用いており、有限エンコーディング `CP = Fin 3 × Fin 4` は `#eval` / `decide` 用。
+6. **`{name}` 参照**: 新規宣言は既存ファイルより下流にあるため、既存ファイルからの参照は `{lit}`
+   (Verso の解決対象外)。新規ファイル内では上流宣言に `{name}` を使用。
+
+### 未実施(スコープ外、§7 のとおり)
+
+- レビュアーへの返信送付(ドラフトは `planning/reviewer-reply.md`)。
+- リモートへの push と CI 確認(ローカルで `lake build` / `make audit` / Verso ビルドを通過)。

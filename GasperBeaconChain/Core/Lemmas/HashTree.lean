@@ -11,6 +11,9 @@ This file collects the closure properties of the two ancestry
 relations defined in {lit}`AtomicDef/HashTree.lean`:
 the ungraded {name}`hash_ancestor` ($`\xrightarrow{*}`) and
 the distance-indexed {name}`nth_ancestor` ($`\xrightarrow{n}`).
+The relations live on the checkpoint tree, so "block" below means a
+checkpoint node; the interaction between the two relations under the
+epoch grading is in {lit}`Grading.lean`.
 
 ## Closure properties of $`\xrightarrow{*}`
 
@@ -66,13 +69,13 @@ variable {Hash : Type u}
 variable {parent : HashParent Hash}
 
 /--
-# Every block is its own ancestor
+# Every checkpoint is its own ancestor
 
 Reflexivity of the ancestry relation $`\xrightarrow{*}`:
 
 $$`\forall\, h,\; h \xrightarrow{*} h`
 
-Every block is its own ancestor — the zero-length path. This is
+Every checkpoint is its own ancestor — the zero-length path. This is
 the {lit}`refl` constructor of {name}`hash_ancestor`, exposed as a
 lemma. It is the base case for any ancestry argument: in
 particular, it supplies the starting path in
@@ -154,7 +157,7 @@ theorem hash_ancestor_stepR
   hash_ancestor.step ha hp
 
 /--
-# Non-ancestors are distinct blocks
+# Non-ancestors are distinct checkpoints
 
 Non-ancestry implies distinctness:
 
@@ -290,7 +293,7 @@ $$`a \xrightarrow{n+1} c \;\implies\; \exists\, b,\; a \xrightarrow{n} b \;\wedg
 
 The proof matches on the {lit}`nth_ancestor_nth` constructor, which
 is the only one producing $`\mathrm{succ}\,n`, and extracts the
-intermediate block $`b` together with the two halves of the chain.
+intermediate checkpoint $`b` together with the two halves of the chain.
 Used in {lit}`blocks_exist_extract_new_final_pair_from_bound` to
 peel the last parent edge off a block-existence witness.
 -/

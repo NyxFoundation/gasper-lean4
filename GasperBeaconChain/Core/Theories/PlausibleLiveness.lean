@@ -432,7 +432,7 @@ Let $`H = \operatorname{highest\_target}(\sigma)`.
 2. {lit}`blocks_exist_extract_new_final_pair` extracts two blocks
    $`\mathit{nf}, \mathit{nc}` with
    $`jm \xrightarrow{H + 1 - jmh} \mathit{nf}` and
-   $`\mathit{nf} \to \mathit{nc}` in the block tree.
+   $`\mathit{nf} \to \mathit{nc}` in the checkpoint tree.
 3. {lit}`two_thirds_good` supplies two fresh
    $`\frac{2}{3}`-quorums $`q_f \subseteq V(\mathit{nf})` and
    $`q_c \subseteq V(\mathit{nc})`, each consisting of unslashed

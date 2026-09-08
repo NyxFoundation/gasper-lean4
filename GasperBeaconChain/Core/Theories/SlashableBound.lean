@@ -44,7 +44,7 @@ $`V_0` and a branch set $`V`:
 The proof builds in two independent pipelines that merge in
 {lit}`slashable_bound`:
 
-1. **Quorum overlap** (purely weight-algebraic, no block tree):
+1. **Quorum overlap** (purely weight-algebraic, no checkpoint tree):
 
    {lit}`wt_meet_bound_fUnion` $`\to`
    {lit}`wt_meet_subbound_fUnion` $`\to`

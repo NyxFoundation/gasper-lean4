@@ -1,4 +1,4 @@
-ℹ [756/783] Replayed GasperBeaconChain.Core.Theories.AccountableSafety
+ℹ [758/788] Replayed GasperBeaconChain.Core.Theories.AccountableSafety
 info: GasperBeaconChain/Core/Theories/AccountableSafety.lean:213:0: finalization_fork_means_same_finalization_fork_one : ∀ {Validator : Type u} {Hash : Type v}
   [inst : DecidableEq Validator] [inst_1 : DecidableEq Hash] [inst_2 : Fintype Validator] (τ : Threshold)
   (stake : Validator → Nat) (vset : Hash → Finset Validator) (parent : HashParent Hash) (genesis : Hash)
@@ -1207,7 +1207,7 @@ info: GasperBeaconChain/Core/Theories/AccountableSafety.lean:772:0: accountable_
   [inst_2 : Fintype Validator] (τ : Threshold) (stake : Validator → Nat) (vset : Hash → Finset Validator)
   (parent : HashParent Hash) (genesis : Hash) (st : State Validator Hash),
   finalization_fork τ stake vset parent genesis st → q_intersection_slashed τ stake vset st
-ℹ [757/783] Replayed GasperBeaconChain.Core.Theories.SlashableBound
+ℹ [759/788] Replayed GasperBeaconChain.Core.Theories.SlashableBound
 info: GasperBeaconChain/Core/Theories/SlashableBound.lean:183:0: wt_meet_bound_fUnion : ∀ {Validator : Type u} [inst : DecidableEq Validator] (stake : Validator → Nat)
   (s1 s2 s1' s2' : Finset Validator),
   Subset s1 s1' →
@@ -1965,7 +1965,7 @@ info: GasperBeaconChain/Core/Theories/SlashableBound.lean:558:0: slashable_bound
                             (Threshold.one_third τ (wt stake (vset bL))))
                           (Threshold.one_third τ (wt stake (vset bR))))
                         (wt stake (Inter.inter qL qR))))
-ℹ [758/783] Replayed GasperBeaconChain.Core.Theories.PlausibleLiveness
+ℹ [760/788] Replayed GasperBeaconChain.Core.Theories.PlausibleLiveness
 info: GasperBeaconChain/Core/Theories/PlausibleLiveness.lean:97:0: lt_of_eq_left : ∀ {a b c : Nat}, Eq a c → LT.lt a b → LT.lt c b
 
 0│           │ a                                              ├ Nat
@@ -3505,44 +3505,17 @@ info: GasperBeaconChain/Core/Theories/PlausibleLiveness.lean:639:0: plausible_li
                           And (justified τ stake vset parent genesis st' nf nh)
                             (And (parent nf nc)
                               (supermajority_link τ stake vset st' nf nc nh (HAdd.hAdd nh (1 : Nat))))))
-✔ [766/783] Built GasperBeaconChain.Executable.UseCases.Committee (11s)
-ℹ [767/783] Built GasperBeaconChain.Executable.UseCases.Liveness (11s)
-info: GasperBeaconChain/Executable/UseCases/Liveness.lean:92:0: false
-info: GasperBeaconChain/Executable/UseCases/Liveness.lean:93:0: true
-info: GasperBeaconChain/Executable/UseCases/Liveness.lean:94:0: false
-info: GasperBeaconChain/Executable/UseCases/Liveness.lean:95:0: true
-✔ [768/783] Built GasperBeaconChain.Executable.UseCases.ModelN (1.5s)
-ℹ [769/783] Built GasperBeaconChain.Executable.UseCases.SlashingDetection (38s)
-info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:18:0: true
-info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:19:0: true
-info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:20:0: false
-info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:21:0: false
-info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:23:0: [(0 : Fin (99 : ℕ)), (1 : Fin (99 : ℕ))]
-ℹ [770/783] Built GasperBeaconChain.Executable.UseCases.AccountableSafety (38s)
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:22:0: true
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:23:0: false
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:24:0: (33 : ℕ)
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:25:0: true
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:26:0: true
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:27:0: false
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:28:0: true
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:29:0: (33 : ℕ)
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:30:0: (33 : ℕ)
-info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:31:0: (66 : ℕ)
-ℹ [771/783] Built GasperBeaconChain.Executable.UseCases.Finality (114s)
-info: GasperBeaconChain/Executable/UseCases/Finality.lean:22:0: true
-info: GasperBeaconChain/Executable/UseCases/Finality.lean:23:0: true
-info: GasperBeaconChain/Executable/UseCases/Finality.lean:24:0: true
-info: GasperBeaconChain/Executable/UseCases/Finality.lean:25:0: true
-info: GasperBeaconChain/Executable/UseCases/Finality.lean:26:0: false
-info: GasperBeaconChain/Executable/UseCases/Finality.lean:27:0: false
-ℹ [772/783] Built GasperBeaconChain.Executable.UseCases.FinalizationK2 (169s)
-info: GasperBeaconChain/Executable/UseCases/FinalizationK2.lean:80:0: true
-info: GasperBeaconChain/Executable/UseCases/FinalizationK2.lean:81:0: true
-info: GasperBeaconChain/Executable/UseCases/FinalizationK2.lean:82:0: true
-ℹ [773/783] Built GasperBeaconChain.Executable.UseCases.LivenessN (169s)
-info: GasperBeaconChain/Executable/UseCases/LivenessN.lean:102:0: (0 : ℕ)
-⚠ [774/783] Built GasperBeaconChain.Executable.UseCases.DynamicBound (169s)
+✔ [764/788] Built GasperBeaconChain.Audit.Meta.AuditCoreScope (5.0s)
+✔ [765/788] Built GasperBeaconChain.Executable.Slashing (5.6s)
+✔ [766/788] Built GasperBeaconChain.Executable.UseCases.Committee (5.6s)
+✔ [767/788] Built GasperBeaconChain.Executable.Justification (5.7s)
+✔ [768/788] Built GasperBeaconChain.Executable.Quorums (1.4s)
+✔ [769/788] Built GasperBeaconChain.Executable.PlausibleLiveness (1.4s)
+✔ [770/788] Built GasperBeaconChain.Audit.Meta.AuditCommands (1.8s)
+✔ [771/788] Built GasperBeaconChain.Executable.AccountableSafety (1.3s)
+✔ [772/788] Built GasperBeaconChain.Executable.UseCases.ModelN (1.5s)
+✔ [773/788] Built GasperBeaconChain.Executable.UseCases.Model (3.5s)
+⚠ [774/788] Built GasperBeaconChain.Executable.UseCases.DynamicBound (2.5s)
 warning: GasperBeaconChain/Executable/UseCases/DynamicBound.lean:33:6: Variable name `i` is not explicitly referenced.
 
 The binding can be removed (if unused) or named `_` (if used implicitly).
@@ -3554,24 +3527,51 @@ info: GasperBeaconChain/Executable/UseCases/DynamicBound.lean:65:0: (0 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/DynamicBound.lean:67:0: (32 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/DynamicBound.lean:75:0: (40 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/DynamicBound.lean:76:0: (68 : ℕ)
-ℹ [775/783] Built GasperBeaconChain.Executable.UseCases.SurroundFork (170s)
+ℹ [775/788] Built GasperBeaconChain.Executable.UseCases.LivenessN (2.7s)
+info: GasperBeaconChain/Executable/UseCases/LivenessN.lean:102:0: (0 : ℕ)
+ℹ [776/788] Built GasperBeaconChain.Executable.UseCases.FinalizationK2 (3.2s)
+info: GasperBeaconChain/Executable/UseCases/FinalizationK2.lean:80:0: true
+info: GasperBeaconChain/Executable/UseCases/FinalizationK2.lean:81:0: true
+info: GasperBeaconChain/Executable/UseCases/FinalizationK2.lean:82:0: true
+ℹ [777/788] Built GasperBeaconChain.Executable.UseCases.Liveness (2.6s)
+info: GasperBeaconChain/Executable/UseCases/Liveness.lean:92:0: false
+info: GasperBeaconChain/Executable/UseCases/Liveness.lean:93:0: true
+info: GasperBeaconChain/Executable/UseCases/Liveness.lean:94:0: false
+info: GasperBeaconChain/Executable/UseCases/Liveness.lean:95:0: true
+ℹ [778/788] Built GasperBeaconChain.Executable.UseCases.SurroundFork (4.7s)
 info: GasperBeaconChain/Executable/UseCases/SurroundFork.lean:72:0: true
 info: GasperBeaconChain/Executable/UseCases/SurroundFork.lean:73:0: true
 info: GasperBeaconChain/Executable/UseCases/SurroundFork.lean:75:0: true
 info: GasperBeaconChain/Executable/UseCases/SurroundFork.lean:76:0: true
 info: GasperBeaconChain/Executable/UseCases/SurroundFork.lean:77:0: false
-ℹ [776/783] Built GasperBeaconChain.Executable.UseCases.JustifiedFork (171s)
+ℹ [779/788] Built GasperBeaconChain.Executable.UseCases.JustifiedFork (5.5s)
 info: GasperBeaconChain/Executable/UseCases/JustifiedFork.lean:45:0: true
 info: GasperBeaconChain/Executable/UseCases/JustifiedFork.lean:46:0: (74 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/JustifiedFork.lean:47:0: true
 info: GasperBeaconChain/Executable/UseCases/JustifiedFork.lean:48:0: true
-ℹ [777/783] Built GasperBeaconChain.Executable.UseCases.QuorumOverlap (172s)
+ℹ [780/788] Built GasperBeaconChain.Executable.UseCases.QuorumOverlap (6.4s)
 info: GasperBeaconChain/Executable/UseCases/QuorumOverlap.lean:115:0: (40 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/QuorumOverlap.lean:116:0: (40 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/QuorumOverlap.lean:117:0: true
 info: GasperBeaconChain/Executable/UseCases/QuorumOverlap.lean:118:0: true
-✔ [778/783] Built GasperBeaconChain.Audit.Meta.AuditCoreScope (196s)
-ℹ [779/783] Built GasperBeaconChain.Executable.UseCases.SlashableBound (157s)
+ℹ [781/788] Built GasperBeaconChain.Executable.UseCases.SlashingDetection (4.2s)
+info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:18:0: true
+info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:19:0: true
+info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:20:0: false
+info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:21:0: false
+info: GasperBeaconChain/Executable/UseCases/SlashingDetection.lean:23:0: [(0 : Fin (99 : ℕ)), (1 : Fin (99 : ℕ))]
+ℹ [782/788] Built GasperBeaconChain.Executable.UseCases.AccountableSafety (10s)
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:22:0: true
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:23:0: false
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:24:0: (33 : ℕ)
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:25:0: true
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:26:0: true
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:27:0: false
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:28:0: true
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:29:0: (33 : ℕ)
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:30:0: (33 : ℕ)
+info: GasperBeaconChain/Executable/UseCases/AccountableSafety.lean:31:0: (66 : ℕ)
+ℹ [783/788] Built GasperBeaconChain.Executable.UseCases.SlashableBound (1.5s)
 info: GasperBeaconChain/Executable/UseCases/SlashableBound.lean:17:0: (99 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/SlashableBound.lean:18:0: (90 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/SlashableBound.lean:19:0: (0 : ℕ)
@@ -3580,10 +3580,176 @@ info: GasperBeaconChain/Executable/UseCases/SlashableBound.lean:22:0: (27 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/SlashableBound.lean:26:0: (33 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/SlashableBound.lean:28:0: (90 : ℕ)
 info: GasperBeaconChain/Executable/UseCases/SlashableBound.lean:29:0: (57 : ℕ)
-✔ [780/783] Built GasperBeaconChain.Executable.UseCases.All (1.2s)
-✔ [781/783] Built GasperBeaconChain.Executable.All (1.2s)
-✔ [782/783] Built GasperBeaconChain.Audit.Meta.AuditCommands (2.7s)
-ℹ [783/783] Built GasperBeaconChain.Audit.Automated.DefaultBuildAudit (2.7s)
+ℹ [784/788] Built GasperBeaconChain.Executable.UseCases.Finality (23s)
+info: GasperBeaconChain/Executable/UseCases/Finality.lean:22:0: true
+info: GasperBeaconChain/Executable/UseCases/Finality.lean:23:0: true
+info: GasperBeaconChain/Executable/UseCases/Finality.lean:24:0: true
+info: GasperBeaconChain/Executable/UseCases/Finality.lean:25:0: true
+info: GasperBeaconChain/Executable/UseCases/Finality.lean:26:0: false
+info: GasperBeaconChain/Executable/UseCases/Finality.lean:27:0: false
+ℹ [785/788] Built GasperBeaconChain.Executable.UseCases.EmptyEpoch (52s)
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:75:0: (1 : Fin (3 : ℕ))
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:76:0: (1 : Fin (3 : ℕ))
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:77:0: (2 : Fin (3 : ℕ))
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:78:0: (0 : Fin (3 : ℕ))
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:201:0: true
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:202:0: true
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:203:0: true
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:204:0: true
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:205:0: false
+info: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean:206:0: false
+✔ [786/788] Built GasperBeaconChain.Executable.UseCases.All (3.5s)
+✔ [787/788] Built GasperBeaconChain.Executable.All (1.3s)
+ℹ [788/788] Built GasperBeaconChain.Audit.Automated.DefaultBuildAudit (4.1s)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/EmptyEpoch.lean
+  GasperBeaconChain.Executable.UseCases.EmptyEpoch
+  43 declarations (40 dep, 3 clean)
+
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot (line 56) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.bparent (line 58) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot_lt (line 60) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.bparent, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.broot_unique (line 62) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.bparent, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx (line 64) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.bparent, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1, GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx._proof_1, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot_lt, GasperBeaconChain.Executable.UseCases.EmptyEpoch.broot_unique (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.ebb_2_1 (line 80) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.ebb_2_2 (line 81) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.ebb_2_3 (line 82) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_11_valid (line 86) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_valid (line 87) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_22_invalid (line 88) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.parent_00_11 (line 90) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.parent_11_12 (line 92) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type); GasperBeaconChain.Core.cp_empty_epoch, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_11_valid (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.parent_12_23 (line 96) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_11_ne_12 (line 98) [theorem]
+    ↦ #[propext]
+    ← propext: Nat.instNeZeroSucc (type)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.depth_12 (line 100) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, Nat.instNeZeroSucc (type); GasperBeaconChain.Core.cp_depth, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_valid (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP (line 106) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.instFintypeV (value)
+    ← Quot.sound: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.instFintypeV (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (line 108) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.fUnion, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1 (value)
+    ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.fUnion, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.wf_stEmpty (line 114) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.votes_from_target_vset_property, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); Finset, Finset.instSetLike, GasperBeaconChain.Core.link_supporters, Finset.mem_univ (value)
+    ← Quot.sound: GasperBeaconChain.Core.votes_from_target_vset_property, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); Finset, Finset.instSetLike, GasperBeaconChain.Core.link_supporters, Finset.mem_univ (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.q2_qF_CP (line 117) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.quorum_2, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.qF (type); Finset, Finset.instHasSubset, GasperBeaconChain.Core.wt, Finset.subset_univ, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.vset, Nat.instNeZeroSucc, GasperBeaconChain.Executable.UseCases.q2_qF (value)
+    ← Quot.sound: GasperBeaconChain.Core.quorum_2, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.qF (type); Finset, Finset.instHasSubset, GasperBeaconChain.Core.wt, Finset.subset_univ, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.vset, GasperBeaconChain.Executable.UseCases.q2_qF (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_00_11 (line 120) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset, Finset.instHasSubset, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF, Nat.instNeZeroSucc, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); Finset.instSetLike, GasperBeaconChain.Core.mem_fUnion_left, GasperBeaconChain.Core.fUnion, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1 (value)
+    ← Quot.sound: Finset, Finset.instHasSubset, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); Finset.instSetLike, GasperBeaconChain.Core.mem_fUnion_left, GasperBeaconChain.Core.fUnion (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_11_12 (line 122) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset, Finset.instHasSubset, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF, Nat.instNeZeroSucc, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); Finset.instSetLike, GasperBeaconChain.Core.mem_fUnion_left, GasperBeaconChain.Core.fUnion, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1, GasperBeaconChain.Core.mem_fUnion_right (value)
+    ← Quot.sound: Finset, Finset.instHasSubset, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); Finset.instSetLike, GasperBeaconChain.Core.mem_fUnion_left, GasperBeaconChain.Core.fUnion, GasperBeaconChain.Core.mem_fUnion_right (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_12_23 (line 124) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset, Finset.instHasSubset, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF, Nat.instNeZeroSucc, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); Finset.instSetLike, GasperBeaconChain.Core.mem_fUnion_right, GasperBeaconChain.Core.fUnion, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1 (value)
+    ← Quot.sound: Finset, Finset.instHasSubset, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); Finset.instSetLike, GasperBeaconChain.Core.mem_fUnion_right, GasperBeaconChain.Core.fUnion (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_00_11 (line 127) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty, Nat.instNeZeroSucc (type); GasperBeaconChain.Core.supermajority_link_of_quorum_votes, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.q2_qF_CP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_00_11, GasperBeaconChain.Executable.UseCases.EmptyEpoch.wf_stEmpty (value)
+    ← Quot.sound: GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); GasperBeaconChain.Core.supermajority_link_of_quorum_votes, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.q2_qF_CP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_00_11, GasperBeaconChain.Executable.UseCases.EmptyEpoch.wf_stEmpty (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_11_12 (line 129) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty, Nat.instNeZeroSucc (type); GasperBeaconChain.Core.supermajority_link_of_quorum_votes, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.q2_qF_CP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_11_12, GasperBeaconChain.Executable.UseCases.EmptyEpoch.wf_stEmpty (value)
+    ← Quot.sound: GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); GasperBeaconChain.Core.supermajority_link_of_quorum_votes, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.q2_qF_CP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_11_12, GasperBeaconChain.Executable.UseCases.EmptyEpoch.wf_stEmpty (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_12_23 (line 131) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty, Nat.instNeZeroSucc (type); GasperBeaconChain.Core.supermajority_link_of_quorum_votes, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.q2_qF_CP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_12_23, GasperBeaconChain.Executable.UseCases.EmptyEpoch.wf_stEmpty (value)
+    ← Quot.sound: GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); GasperBeaconChain.Core.supermajority_link_of_quorum_votes, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.q2_qF_CP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sub_12_23, GasperBeaconChain.Executable.UseCases.EmptyEpoch.wf_stEmpty (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_11_justified (line 134) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty, Nat.instNeZeroSucc (type); GasperBeaconChain.Core.justified.justified_link, GasperBeaconChain.Core.justified.justified_genesis, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.parent_00_11, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_00_11 (value)
+    ← Quot.sound: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); GasperBeaconChain.Core.justified.justified_link, GasperBeaconChain.Core.justified.justified_genesis, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_00_11 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_justified (line 141) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty, Nat.instNeZeroSucc (type); GasperBeaconChain.Core.justified.justified_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_11_justified, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.parent_11_12, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_11_12 (value)
+    ← Quot.sound: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); GasperBeaconChain.Core.justified.justified_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_11_justified, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_11_12 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_23_justified (line 152) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty, Nat.instNeZeroSucc (type); GasperBeaconChain.Core.justified.justified_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_justified, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.parent_12_23, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_12_23 (value)
+    ← Quot.sound: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); GasperBeaconChain.Core.justified.justified_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_justified, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_12_23 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.link_11_12_chain (line 159) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Nat.instNeZeroSucc, GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.cp_justification_link_iff, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_11_valid, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_valid, GasperBeaconChain.Executable.UseCases.EmptyEpoch.parent_11_12, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_11_12 (value)
+    ← Quot.sound: GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty (type); GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.cp_justification_link_iff, GasperBeaconChain.Executable.UseCases.EmptyEpoch.sm_11_12 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.height_12 (line 168) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Nat.instNeZeroSucc (type); GasperBeaconChain.Core.cp_justified_height_eq, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_justified (value)
+    ← Quot.sound: GasperBeaconChain.Core.cp_justified_height_eq, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmpty, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_justified (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.parentCP (line 179) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.ctx (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.instDecidableRelCPParentCP (line 181) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.parentCP (type); GasperBeaconChain.Executable.UseCases.EmptyEpoch.instDecidableRelCPParentCP._aux_1 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.genesisCP (line 183) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1, GasperBeaconChain.Executable.UseCases.EmptyEpoch.genesisCP._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetF (line 185) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.instFintypeV (value)
+    ← Quot.sound: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.instFintypeV (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP (line 187) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP._proof_1, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP._proof_2 (value)
+    ← Quot.sound: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP._proof_1, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP._proof_2 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmptyF (line 192) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.fUnion, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.bslot._proof_1, GasperBeaconChain.Executable.UseCases.EmptyEpoch.genesisCP._proof_1 (value)
+    ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.fUnion, GasperBeaconChain.Core.votes_for_link, GasperBeaconChain.Executable.UseCases.qF (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.JE (line 198) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Executable.justifiedB, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.parentCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instDecidableRelCPParentCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.genesisCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmptyF (value)
+    ← Quot.sound: GasperBeaconChain.Executable.justifiedB, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmptyF (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_justified_decide (line 208) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.parentCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.genesisCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmptyF, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.justifiedB, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instDecidableRelCPParentCP, GasperBeaconChain.Executable.justifiedB_iff, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_justified_decide._proof_1_1 (value)
+    ← Quot.sound: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmptyF (type); GasperBeaconChain.Executable.justifiedB, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP, GasperBeaconChain.Executable.justifiedB_iff, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_12_justified_decide._proof_1_1 (value)
+  · GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_22_not_justified (line 212) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.parentCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.genesisCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmptyF, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.justifiedB, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instDecidableRelCPParentCP, GasperBeaconChain.Executable.justifiedB_iff, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_22_not_justified._proof_1_1 (value)
+    ← Quot.sound: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.EmptyEpoch.vsetF, GasperBeaconChain.Executable.UseCases.EmptyEpoch.stEmptyF (type); GasperBeaconChain.Executable.justifiedB, GasperBeaconChain.Executable.UseCases.EmptyEpoch.instFintypeCP, GasperBeaconChain.Executable.justifiedB_iff, GasperBeaconChain.Executable.UseCases.EmptyEpoch.cp_22_not_justified._proof_1_1 (value)
+  Clean (3):
+  ✓ GasperBeaconChain.Executable.UseCases.EmptyEpoch.B (line 54) [def]
+  ✓ GasperBeaconChain.Executable.UseCases.EmptyEpoch.CP (line 174) [def]
+  ✓ GasperBeaconChain.Executable.UseCases.EmptyEpoch.toCP (line 177) [def]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/ModelN.lean
   GasperBeaconChain.Executable.UseCases.ModelN
   41 declarations (38 dep, 3 clean)
@@ -4081,43 +4247,43 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
   GasperBeaconChain.Core.AtomicDef.Justification
   21 declarations (21 dep)
 
-  · GasperBeaconChain.Core.link_supporters (line 63) [def]
+  · GasperBeaconChain.Core.link_supporters (line 68) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, GasperBeaconChain.Core.State, Finset (type); Finset.filter, GasperBeaconChain.Core.vote_msg, GasperBeaconChain.Core.vote_msg_decidable, Finset.univ (value)
     ← Quot.sound: Fintype, GasperBeaconChain.Core.State, Finset (type); Finset.filter, GasperBeaconChain.Core.vote_msg, GasperBeaconChain.Core.vote_msg_decidable, Finset.univ (value)
-  · GasperBeaconChain.Core.mem_link_supporters (line 81) [theorem]
+  · GasperBeaconChain.Core.mem_link_supporters (line 86) [theorem]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, GasperBeaconChain.Core.State, Finset, Finset.instSetLike, GasperBeaconChain.Core.link_supporters, GasperBeaconChain.Core.vote_msg (type); Finset.filter, GasperBeaconChain.Core.vote_msg_decidable, Finset.univ, Finset.mem_filter, Finset.mem_univ (value)
     ← Quot.sound: Fintype, GasperBeaconChain.Core.State, Finset, Finset.instSetLike, GasperBeaconChain.Core.link_supporters, GasperBeaconChain.Core.vote_msg (type); Finset.filter, GasperBeaconChain.Core.vote_msg_decidable, Finset.univ, Finset.mem_filter, Finset.mem_univ (value)
-  · GasperBeaconChain.Core.votes_from_target_vset_property (line 101) [def]
+  · GasperBeaconChain.Core.votes_from_target_vset_property (line 106) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); Finset.instSetLike, GasperBeaconChain.Core.link_supporters (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); Finset.instSetLike, GasperBeaconChain.Core.link_supporters (value)
-  · GasperBeaconChain.Core.supermajority_link (line 124) [def]
+  · GasperBeaconChain.Core.supermajority_link (line 129) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.quorum_2, GasperBeaconChain.Core.link_supporters (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.quorum_2, GasperBeaconChain.Core.link_supporters (value)
-  · GasperBeaconChain.Core.supermajority_link_def (line 166) [theorem]
+  · GasperBeaconChain.Core.supermajority_link_def (line 171) [theorem]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Core.quorum_2, GasperBeaconChain.Core.link_supporters (type)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.supermajority_link, GasperBeaconChain.Core.quorum_2, GasperBeaconChain.Core.link_supporters (type)
-  · GasperBeaconChain.Core.supermajority_link_decidable (line 184) [def]
+  · GasperBeaconChain.Core.supermajority_link_decidable (line 189) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.supermajority_link_decidable._aux_1 (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.supermajority_link_decidable._aux_1 (value)
-  · GasperBeaconChain.Core.justification_link (line 197) [def]
+  · GasperBeaconChain.Core.justification_link (line 202) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.supermajority_link (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.supermajority_link (value)
-  · GasperBeaconChain.Core.justified (line 240) [inductive]
+  · GasperBeaconChain.Core.justified (line 279) [inductive]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type)
-  · GasperBeaconChain.Core.finalized (line 270) [def]
+  · GasperBeaconChain.Core.finalized (line 312) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justified, GasperBeaconChain.Core.supermajority_link (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justified, GasperBeaconChain.Core.supermajority_link (value)
-  · GasperBeaconChain.Core.k_finalized (line 307) [def]
+  · GasperBeaconChain.Core.k_finalized (line 349) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justified, List.getD, GasperBeaconChain.Core.supermajority_link (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justified, GasperBeaconChain.Core.supermajority_link (value)
@@ -4129,23 +4295,23 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justified.below (type); GasperBeaconChain.Core.justified.rec, GasperBeaconChain.Core.justified.below.justified_genesis, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.justified.below.justified_link (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justified.below (type); GasperBeaconChain.Core.justified.rec, GasperBeaconChain.Core.justified.below.justified_genesis, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.justified.below.justified_link (value)
-  · GasperBeaconChain.Core.justified.rec (line 240) [recursor]
+  · GasperBeaconChain.Core.justified.rec (line 279) [recursor]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justified.justified_genesis, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.justified.justified_link (type)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justified.justified_genesis, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.justified.justified_link (type)
-  · GasperBeaconChain.Core.justified.casesOn (line 240) [def]
+  · GasperBeaconChain.Core.justified.casesOn (line 279) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justified.justified_genesis, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.justified.justified_link (type); GasperBeaconChain.Core.justified.rec (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justified.justified_genesis, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.justified.justified_link (type); GasperBeaconChain.Core.justified.rec (value)
-  · GasperBeaconChain.Core.justified.recOn (line 240) [def]
+  · GasperBeaconChain.Core.justified.recOn (line 279) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justified.justified_genesis, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.justified.justified_link (type); GasperBeaconChain.Core.justified.rec (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justified.justified_genesis, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.justified.justified_link (type); GasperBeaconChain.Core.justified.rec (value)
-  · GasperBeaconChain.Core.justified.justified_genesis (line 261) [ctor]
+  · GasperBeaconChain.Core.justified.justified_genesis (line 303) [ctor]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified (type)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified (type)
-  · GasperBeaconChain.Core.justified.justified_link (line 263) [ctor]
+  · GasperBeaconChain.Core.justified.justified_link (line 305) [ctor]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justification_link (type)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justification_link (type)
@@ -4616,69 +4782,6 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, GasperBeaconChain.Core.ValidatorContext, GasperBeaconChain.Core.ValidatorContext._sizeOf_inst, GasperBeaconChain.Core.ValidatorContext.mk (type)
     ← Quot.sound: Fintype, GasperBeaconChain.Core.ValidatorContext, GasperBeaconChain.Core.ValidatorContext._sizeOf_inst, GasperBeaconChain.Core.ValidatorContext.mk (type)
-info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/Committee.lean
-  GasperBeaconChain.Executable.UseCases.Committee
-  15 declarations (15 dep)
-
-  · GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective (line 12) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective._f (value)
-    ← Quot.sound: GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective._f (value)
-  · GasperBeaconChain.Executable.UseCases.nodup_finRange_cf (line 24) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective (value)
-    ← Quot.sound: GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective (value)
-  · GasperBeaconChain.Executable.UseCases.finFintypeCF (line 27) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.nodup_finRange_cf, List.mem_finRange (value)
-    ← Quot.sound: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.nodup_finRange_cf (value)
-  · GasperBeaconChain.Executable.UseCases.card_univ_cf (line 32) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset.card, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (type); Multiset.card, Multiset.coe_card, List.length_finRange (value)
-    ← Quot.sound: Finset.card, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (type)
-  · GasperBeaconChain.Executable.UseCases.wt_one_eq_card (line 35) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset, GasperBeaconChain.Core.wt, Finset.card (type); Finset.sum, Nat.instAddCommMonoid, Finset.card_eq_sum_ones (value)
-    ← Quot.sound: Finset, GasperBeaconChain.Core.wt, Finset.card (type); Finset.sum, Finset.card_eq_sum_ones (value)
-  · GasperBeaconChain.Executable.UseCases.wt_one_univ (line 39) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.wt, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
-    ← Quot.sound: GasperBeaconChain.Core.wt, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
-  · GasperBeaconChain.Executable.UseCases.lowerQuorum (line 45) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
-    ← Quot.sound: Finset (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
-  · GasperBeaconChain.Executable.UseCases.mem_lowerQuorum (line 48) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); GasperBeaconChain.Executable.UseCases.mem_lowerQuorum.match_1_1, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.map, Finset.mem_map, Finset.mem_univ (value)
-    ← Quot.sound: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); GasperBeaconChain.Executable.UseCases.mem_lowerQuorum.match_1_1, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.map, Finset.mem_map, Finset.mem_univ (value)
-  · GasperBeaconChain.Executable.UseCases.card_lowerQuorum (line 54) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset.card, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.card_map, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
-    ← Quot.sound: Finset.card, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.card_map, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
-  · GasperBeaconChain.Executable.UseCases.wt_lowerQuorum (line 58) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_lowerQuorum (value)
-    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_lowerQuorum (value)
-  · GasperBeaconChain.Executable.UseCases.offsetEmb (line 62) [def]
-    ↦ #[propext]
-    ← propext: GasperBeaconChain.Executable.UseCases.offsetEmb._proof_2 (value)
-  · GasperBeaconChain.Executable.UseCases.upperQuorum (line 66) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset (type); Finset.map, GasperBeaconChain.Executable.UseCases.offsetEmb, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
-    ← Quot.sound: Finset (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
-  · GasperBeaconChain.Executable.UseCases.mem_upperQuorum (line 69) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.upperQuorum (type); GasperBeaconChain.Executable.UseCases.mem_upperQuorum.match_1_1, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, GasperBeaconChain.Executable.UseCases.offsetEmb, Finset.map, Finset.mem_map, Nat.sub_lt_left_of_lt_add, Finset.mem_univ, Nat.add_sub_cancel' (value)
-    ← Quot.sound: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.upperQuorum (type); GasperBeaconChain.Executable.UseCases.mem_upperQuorum.match_1_1, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.map, Finset.mem_map, Finset.mem_univ (value)
-  · GasperBeaconChain.Executable.UseCases.card_upperQuorum (line 81) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset.card, GasperBeaconChain.Executable.UseCases.upperQuorum (type); Finset.map, GasperBeaconChain.Executable.UseCases.offsetEmb, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.card_map, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
-    ← Quot.sound: Finset.card, GasperBeaconChain.Executable.UseCases.upperQuorum (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.card_map, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
-  · GasperBeaconChain.Executable.UseCases.wt_upperQuorum (line 85) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.upperQuorum (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_upperQuorum (value)
-    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.upperQuorum (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_upperQuorum (value)
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/Liveness.lean
   GasperBeaconChain.Executable.UseCases.Liveness
   20 declarations (15 dep, 5 clean)
@@ -4749,6 +4852,69 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
   ✓ GasperBeaconChain.Executable.UseCases.instDecidableRelNatParentL (line 14) [def]
   ✓ GasperBeaconChain.Executable.UseCases.nth_anc_chain (line 65) [theorem]
   ✓ GasperBeaconChain.Executable.UseCases.blocks_high (line 69) [theorem]
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/Committee.lean
+  GasperBeaconChain.Executable.UseCases.Committee
+  15 declarations (15 dep)
+
+  · GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective (line 12) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective._f (value)
+    ← Quot.sound: GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective._f (value)
+  · GasperBeaconChain.Executable.UseCases.nodup_finRange_cf (line 24) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective (value)
+    ← Quot.sound: GasperBeaconChain.Executable.UseCases.nodup_ofFn_of_injective (value)
+  · GasperBeaconChain.Executable.UseCases.finFintypeCF (line 27) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.nodup_finRange_cf, List.mem_finRange (value)
+    ← Quot.sound: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.nodup_finRange_cf (value)
+  · GasperBeaconChain.Executable.UseCases.card_univ_cf (line 32) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset.card, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (type); Multiset.card, Multiset.coe_card, List.length_finRange (value)
+    ← Quot.sound: Finset.card, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (type)
+  · GasperBeaconChain.Executable.UseCases.wt_one_eq_card (line 35) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset, GasperBeaconChain.Core.wt, Finset.card (type); Finset.sum, Nat.instAddCommMonoid, Finset.card_eq_sum_ones (value)
+    ← Quot.sound: Finset, GasperBeaconChain.Core.wt, Finset.card (type); Finset.sum, Finset.card_eq_sum_ones (value)
+  · GasperBeaconChain.Executable.UseCases.wt_one_univ (line 39) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.wt, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
+    ← Quot.sound: GasperBeaconChain.Core.wt, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
+  · GasperBeaconChain.Executable.UseCases.lowerQuorum (line 45) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
+    ← Quot.sound: Finset (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
+  · GasperBeaconChain.Executable.UseCases.mem_lowerQuorum (line 48) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); GasperBeaconChain.Executable.UseCases.mem_lowerQuorum.match_1_1, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.map, Finset.mem_map, Finset.mem_univ (value)
+    ← Quot.sound: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); GasperBeaconChain.Executable.UseCases.mem_lowerQuorum.match_1_1, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.map, Finset.mem_map, Finset.mem_univ (value)
+  · GasperBeaconChain.Executable.UseCases.card_lowerQuorum (line 54) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset.card, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.card_map, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
+    ← Quot.sound: Finset.card, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.card_map, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
+  · GasperBeaconChain.Executable.UseCases.wt_lowerQuorum (line 58) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_lowerQuorum (value)
+    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.lowerQuorum (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_lowerQuorum (value)
+  · GasperBeaconChain.Executable.UseCases.offsetEmb (line 62) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.offsetEmb._proof_2 (value)
+  · GasperBeaconChain.Executable.UseCases.upperQuorum (line 66) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (type); Finset.map, GasperBeaconChain.Executable.UseCases.offsetEmb, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
+    ← Quot.sound: Finset (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
+  · GasperBeaconChain.Executable.UseCases.mem_upperQuorum (line 69) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.upperQuorum (type); GasperBeaconChain.Executable.UseCases.mem_upperQuorum.match_1_1, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, GasperBeaconChain.Executable.UseCases.offsetEmb, Finset.map, Finset.mem_map, Nat.sub_lt_left_of_lt_add, Finset.mem_univ, Nat.add_sub_cancel' (value)
+    ← Quot.sound: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.upperQuorum (type); GasperBeaconChain.Executable.UseCases.mem_upperQuorum.match_1_1, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.map, Finset.mem_map, Finset.mem_univ (value)
+  · GasperBeaconChain.Executable.UseCases.card_upperQuorum (line 81) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset.card, GasperBeaconChain.Executable.UseCases.upperQuorum (type); Finset.map, GasperBeaconChain.Executable.UseCases.offsetEmb, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.card_map, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
+    ← Quot.sound: Finset.card, GasperBeaconChain.Executable.UseCases.upperQuorum (type); Finset.map, Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, Finset.card_map, GasperBeaconChain.Executable.UseCases.card_univ_cf (value)
+  · GasperBeaconChain.Executable.UseCases.wt_upperQuorum (line 85) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.upperQuorum (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_upperQuorum (value)
+    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.upperQuorum (type); Finset.card, GasperBeaconChain.Executable.UseCases.wt_one_eq_card, GasperBeaconChain.Executable.UseCases.card_upperQuorum (value)
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/FinalizationK2.lean
   GasperBeaconChain.Executable.UseCases.FinalizationK2
   15 declarations (15 dep)
@@ -4813,6 +4979,92 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.finFintypeCF, GasperBeaconChain.Executable.UseCases.Parametric.vset, GasperBeaconChain.Executable.UseCases.Parametric.parent, GasperBeaconChain.Executable.UseCases.Parametric.genesis, GasperBeaconChain.Executable.UseCases.Parametric.stK2, Nat.instNeZeroSucc, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.k_finalized_last_justified, GasperBeaconChain.Executable.UseCases.Parametric.block1_k2_finalized (value)
     ← Quot.sound: GasperBeaconChain.Core.justified, GasperBeaconChain.Executable.UseCases.finFintypeCF, GasperBeaconChain.Executable.UseCases.Parametric.vset, GasperBeaconChain.Executable.UseCases.Parametric.stK2, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.k_finalized_last_justified, GasperBeaconChain.Executable.UseCases.Parametric.block1_k2_finalized (value)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Refinement/SlottedChain.lean
+  GasperBeaconChain.Core.Refinement.SlottedChain
+  53 declarations (14 dep, 39 clean)
+
+  · GasperBeaconChain.Core.ebbAux_of_le (line 281) [theorem]
+    ↦ #[propext]
+    ← propext: ite_cond_eq_true, eq_true, eq_self (value)
+  · GasperBeaconChain.Core.ebbAux_succ_of_gt (line 295) [theorem]
+    ↦ #[propext]
+    ← propext: ite_cond_eq_false, eq_false, eq_self (value)
+  · GasperBeaconChain.Core.ebbAux_fuel_irrel (line 310) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebbAux_fuel_irrel._f (value)
+  · GasperBeaconChain.Core.ebb_eq_ebbAux (line 343) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebbAux_fuel_irrel (value)
+  · GasperBeaconChain.Core.ebb_of_le (line 353) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebbAux_of_le (value)
+  · GasperBeaconChain.Core.ebb_of_gt (line 365) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_eq_ebbAux, GasperBeaconChain.Core.ebbAux_succ_of_gt, GasperBeaconChain.Core.ebbAux_fuel_irrel (value)
+  · GasperBeaconChain.Core.ebb_slot_le (line 384) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_of_le, GasperBeaconChain.Core.ebb_of_gt (value)
+  · GasperBeaconChain.Core.ebb_on_chain (line 406) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_of_le, GasperBeaconChain.Core.ebb_of_gt (value)
+  · GasperBeaconChain.Core.on_chain_ebb_of_le (line 425) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_of_le, GasperBeaconChain.Core.ebb_of_gt (value)
+  · GasperBeaconChain.Core.ebb_self_iff (line 454) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_slot_le, GasperBeaconChain.Core.ebb_of_le (value)
+  · GasperBeaconChain.Core.ebb_zero (line 470) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_slot_le (value)
+  · GasperBeaconChain.Core.ebb_tower (line 487) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_of_le, GasperBeaconChain.Core.ebb_of_gt (value)
+  · GasperBeaconChain.Core.ebb_idem (line 528) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_tower (value)
+  · GasperBeaconChain.Core.SlottedChainContext.mk.injEq (line ?) [theorem]
+    ↦ #[propext]
+    ← propext: Eq.propIntro (value)
+  Clean (39):
+  ✓ GasperBeaconChain.Core.SlottedChainContext.casesOn (line 65) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.noConfusion (line 65) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.recOn (line 65) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext (line 65) [inductive]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.rec (line 65) [recursor]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.mk (line 96) [ctor]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.mk.noConfusion (line 96) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.bparent (line 97) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.slot (line 98) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.bgenesis (line 99) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.C (line 100) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.slot_genesis (line 101) [theorem]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.slot_lt (line 102) [theorem]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.root_unique (line 103) [theorem]
+  ✓ GasperBeaconChain.Core.on_chain (line 111) [inductive]
+  ✓ GasperBeaconChain.Core.on_chain.casesOn (line 111) [def]
+  ✓ GasperBeaconChain.Core.on_chain.rec (line 111) [recursor]
+  ✓ GasperBeaconChain.Core.on_chain.recOn (line 111) [def]
+  ✓ GasperBeaconChain.Core.on_chain.refl (line 122) [ctor]
+  ✓ GasperBeaconChain.Core.on_chain.step (line 124) [ctor]
+  ✓ GasperBeaconChain.Core.chain_induction_aux (line 129) [theorem]
+  ✓ GasperBeaconChain.Core.chain_induction (line 150) [theorem]
+  ✓ GasperBeaconChain.Core.bparent_genesis (line 169) [theorem]
+  ✓ GasperBeaconChain.Core.eq_genesis_of_slot_le_zero (line 185) [theorem]
+  ✓ GasperBeaconChain.Core.genesis_on_chain (line 201) [theorem]
+  ✓ GasperBeaconChain.Core.exists_parent_of_not_le (line 219) [theorem]
+  ✓ GasperBeaconChain.Core.ebbAux (line 243) [def]
+  ✓ GasperBeaconChain.Core.ebb (line 261) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.ctorIdx (line ?) [def]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.noConfusionType (line ?) [def]
+  ✓ GasperBeaconChain.Core.ebbAux.eq_def (line ?) [theorem]
+  ✓ GasperBeaconChain.Core.on_chain.below (line ?) [inductive]
+  ✓ GasperBeaconChain.Core.on_chain.brecOn (line ?) [theorem]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.mk.inj (line ?) [theorem]
+  ✓ GasperBeaconChain.Core.SlottedChainContext.mk.sizeOf_spec (line ?) [theorem]
+  ✓ GasperBeaconChain.Core.on_chain.below.casesOn (line ?) [def]
+  ✓ GasperBeaconChain.Core.on_chain.below.rec (line ?) [recursor]
+  ✓ GasperBeaconChain.Core.on_chain.below.refl (line ?) [ctor]
+  ✓ GasperBeaconChain.Core.on_chain.below.step (line ?) [ctor]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Theories/AccountableSafety.lean
   GasperBeaconChain.Core.Theories.AccountableSafety
   13 declarations (13 dep)
@@ -4873,54 +5125,122 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
   GasperBeaconChain.Core.AtomicDef.Quorums
   12 declarations (12 dep)
 
-  · GasperBeaconChain.Core.quorum_1 (line 65) [def]
+  · GasperBeaconChain.Core.quorum_1 (line 66) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset (type); Finset.instHasSubset, GasperBeaconChain.Core.wt (value)
     ← Quot.sound: Finset (type); Finset.instHasSubset, GasperBeaconChain.Core.wt (value)
-  · GasperBeaconChain.Core.quorum_2 (line 85) [def]
+  · GasperBeaconChain.Core.quorum_2 (line 86) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset (type); Finset.instHasSubset, GasperBeaconChain.Core.wt (value)
     ← Quot.sound: Finset (type); Finset.instHasSubset, GasperBeaconChain.Core.wt (value)
-  · GasperBeaconChain.Core.quorum_1_decidable (line 107) [def]
+  · GasperBeaconChain.Core.quorum_1_decidable (line 108) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.quorum_1 (type); GasperBeaconChain.Core.quorum_1_decidable._aux_1 (value)
     ← Quot.sound: Finset, GasperBeaconChain.Core.quorum_1 (type); GasperBeaconChain.Core.quorum_1_decidable._aux_1 (value)
-  · GasperBeaconChain.Core.quorum_2_decidable (line 117) [def]
+  · GasperBeaconChain.Core.quorum_2_decidable (line 118) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.quorum_2 (type); GasperBeaconChain.Core.quorum_2_decidable._aux_1 (value)
     ← Quot.sound: Finset, GasperBeaconChain.Core.quorum_2 (type); GasperBeaconChain.Core.quorum_2_decidable._aux_1 (value)
-  · GasperBeaconChain.Core.q_intersection_slashed (line 127) [def]
+  · GasperBeaconChain.Core.q_intersection_slashed (line 128) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.State (type); Finset.instHasSubset, GasperBeaconChain.Core.quorum_2, Finset.instSetLike, GasperBeaconChain.Core.slashed (value)
     ← Quot.sound: Finset, GasperBeaconChain.Core.State (type); Finset.instHasSubset, GasperBeaconChain.Core.quorum_2, Finset.instSetLike, GasperBeaconChain.Core.slashed (value)
-  · GasperBeaconChain.Core.quorum_2_nonempty_property (line 161) [def]
+  · GasperBeaconChain.Core.quorum_2_nonempty_property (line 162) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset (type); GasperBeaconChain.Core.quorum_2, Finset.Nonempty (value)
     ← Quot.sound: Finset (type); GasperBeaconChain.Core.quorum_2, Finset.Nonempty (value)
-  · GasperBeaconChain.Core.QuorumContext.recOn (line 181) [def]
+  · GasperBeaconChain.Core.QuorumContext.recOn (line 182) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.quorum_2_nonempty_property, GasperBeaconChain.Core.QuorumContext.mk (type); GasperBeaconChain.Core.QuorumContext.rec (value)
     ← Quot.sound: Finset, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.quorum_2_nonempty_property, GasperBeaconChain.Core.QuorumContext.mk (type); GasperBeaconChain.Core.QuorumContext.rec (value)
-  · GasperBeaconChain.Core.QuorumContext (line 181) [inductive]
+  · GasperBeaconChain.Core.QuorumContext (line 182) [inductive]
     ↦ #[propext, Quot.sound]
     ← propext: Finset (type)
     ← Quot.sound: Finset (type)
-  · GasperBeaconChain.Core.QuorumContext.rec (line 181) [recursor]
+  · GasperBeaconChain.Core.QuorumContext.rec (line 182) [recursor]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.quorum_2_nonempty_property, GasperBeaconChain.Core.QuorumContext.mk (type)
     ← Quot.sound: Finset, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.quorum_2_nonempty_property, GasperBeaconChain.Core.QuorumContext.mk (type)
-  · GasperBeaconChain.Core.QuorumContext.casesOn (line 181) [def]
+  · GasperBeaconChain.Core.QuorumContext.casesOn (line 182) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.quorum_2_nonempty_property, GasperBeaconChain.Core.QuorumContext.mk (type); GasperBeaconChain.Core.QuorumContext.rec (value)
     ← Quot.sound: Finset, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.quorum_2_nonempty_property, GasperBeaconChain.Core.QuorumContext.mk (type); GasperBeaconChain.Core.QuorumContext.rec (value)
-  · GasperBeaconChain.Core.QuorumContext.mk (line 187) [ctor]
+  · GasperBeaconChain.Core.QuorumContext.mk (line 188) [ctor]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.quorum_2_nonempty_property, GasperBeaconChain.Core.QuorumContext (type)
     ← Quot.sound: Finset, GasperBeaconChain.Core.quorum_2_nonempty_property, GasperBeaconChain.Core.QuorumContext (type)
-  · GasperBeaconChain.Core.QuorumContext.quorum_2_nonempty (line 192) [theorem]
+  · GasperBeaconChain.Core.QuorumContext.quorum_2_nonempty (line 193) [theorem]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.quorum_2_nonempty_property (type)
     ← Quot.sound: Finset, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.quorum_2_nonempty_property (type)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Refinement/CheckpointTree.lean
+  GasperBeaconChain.Core.Refinement.CheckpointTree
+  39 declarations (11 dep, 28 clean)
+
+  · GasperBeaconChain.Core.cp_valid_of_parent (line 212) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_slot_le (value)
+  · GasperBeaconChain.Core.cp_empty_epoch (line 226) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_of_le (value)
+  · GasperBeaconChain.Core.cp_depth (line 274) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.cp_depth._f (value)
+  · GasperBeaconChain.Core.on_checkpoint_chain_of_ancestor (line 304) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ebb_of_le, GasperBeaconChain.Core.ebb_tower (value)
+  · GasperBeaconChain.Core.ancestor_of_on_checkpoint_chain_aux (line 331) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ancestor_of_on_checkpoint_chain_aux._f (value)
+  · GasperBeaconChain.Core.ancestor_of_on_checkpoint_chain (line 369) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.ancestor_of_on_checkpoint_chain_aux, Nat.add_sub_of_le (value)
+  · GasperBeaconChain.Core.cp_ancestor_iff_on_chain (line 387) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.on_checkpoint_chain_of_ancestor, GasperBeaconChain.Core.ancestor_of_on_checkpoint_chain (value)
+  · GasperBeaconChain.Core.cp_link_correspondence (line 410) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Core.cp_ancestor_iff_on_chain (value)
+  · GasperBeaconChain.Core.cp_justification_link_iff (line 436) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.justification_link_iff_ancestor, GasperBeaconChain.Core.cp_justification_link_iff.match_1_1, GasperBeaconChain.Core.cp_link_correspondence, GasperBeaconChain.Core.cp_justification_link_iff.match_1_3 (value)
+    ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.justification_link_iff_ancestor, GasperBeaconChain.Core.cp_justification_link_iff.match_1_1, GasperBeaconChain.Core.cp_justification_link_iff.match_1_3 (value)
+  · GasperBeaconChain.Core.cp_justified_height_eq (line 490) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified (type); GasperBeaconChain.Core.justified_height_eq (value)
+    ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified (type); GasperBeaconChain.Core.justified_height_eq (value)
+  · GasperBeaconChain.Core.Checkpoint.mk.injEq (line ?) [theorem]
+    ↦ #[propext]
+    ← propext: Eq.propIntro (value)
+  Clean (28):
+  ✓ GasperBeaconChain.Core.Checkpoint (line 68) [inductive]
+  ✓ GasperBeaconChain.Core.Checkpoint.rec (line 68) [recursor]
+  ✓ GasperBeaconChain.Core.Checkpoint.noConfusion (line 68) [def]
+  ✓ GasperBeaconChain.Core.Checkpoint.casesOn (line 68) [def]
+  ✓ GasperBeaconChain.Core.Checkpoint.recOn (line 68) [def]
+  ✓ GasperBeaconChain.Core.Checkpoint.mk (line 76) [ctor]
+  ✓ GasperBeaconChain.Core.Checkpoint.mk.noConfusion (line 76) [def]
+  ✓ GasperBeaconChain.Core.Checkpoint.block (line 77) [def]
+  ✓ GasperBeaconChain.Core.Checkpoint.epoch (line 78) [def]
+  ✓ GasperBeaconChain.Core.instDecidableEqCheckpoint (line 79) [def]
+  ✓ GasperBeaconChain.Core.instReprCheckpoint.repr (line 79) [def]
+  ✓ GasperBeaconChain.Core.instDecidableEqCheckpoint.decEq (line 79) [def]
+  ✓ GasperBeaconChain.Core.instReprCheckpoint (line 79) [def]
+  ✓ GasperBeaconChain.Core.cp_valid (line 81) [def]
+  ✓ GasperBeaconChain.Core.cp_parent (line 95) [def]
+  ✓ GasperBeaconChain.Core.cp_genesis (line 110) [def]
+  ✓ GasperBeaconChain.Core.on_checkpoint_chain (line 116) [def]
+  ✓ GasperBeaconChain.Core.cp_parent_decidable (line 130) [def]
+  ✓ GasperBeaconChain.Core.cp_valid_decidable (line 136) [def]
+  ✓ GasperBeaconChain.Core.cp_parent_irreflexive (line 146) [theorem]
+  ✓ GasperBeaconChain.Core.cp_at_most_one_parent (line 159) [theorem]
+  ✓ GasperBeaconChain.Core.cp_context (line 178) [def]
+  ✓ GasperBeaconChain.Core.cp_graded (line 192) [theorem]
+  ✓ GasperBeaconChain.Core.cp_valid_zero_eq_genesis (line 259) [theorem]
+  ✓ GasperBeaconChain.Core.Checkpoint.ctorIdx (line ?) [def]
+  ✓ GasperBeaconChain.Core.Checkpoint.noConfusionType (line ?) [def]
+  ✓ GasperBeaconChain.Core.Checkpoint.mk.inj (line ?) [theorem]
+  ✓ GasperBeaconChain.Core.Checkpoint.mk.sizeOf_spec (line ?) [theorem]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Theories/SlashableBound.lean
   GasperBeaconChain.Core.Theories.SlashableBound
   11 declarations (11 dep)
@@ -4969,48 +5289,6 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.k_finalized, Finset.instHasSubset, GasperBeaconChain.Core.wt, GasperBeaconChain.Core.actwt, GasperBeaconChain.Core.extwt, Finset.instInter (type); GasperBeaconChain.Core.slashable_bound.match_1_1, GasperBeaconChain.Core.q_intersection_slashed, GasperBeaconChain.Core.k_safety', GasperBeaconChain.Core.quorum_2, Finset.instSetLike, GasperBeaconChain.Core.slashed, GasperBeaconChain.Core.validator_intersection_lower_bound, GasperBeaconChain.Core.quorum_intersection_weight_lower (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.k_finalized, Finset.instHasSubset, GasperBeaconChain.Core.wt, GasperBeaconChain.Core.actwt, GasperBeaconChain.Core.extwt, Finset.instInter (type); GasperBeaconChain.Core.slashable_bound.match_1_1, GasperBeaconChain.Core.q_intersection_slashed, GasperBeaconChain.Core.k_safety', GasperBeaconChain.Core.quorum_2, Finset.instSetLike, GasperBeaconChain.Core.slashed, GasperBeaconChain.Core.validator_intersection_lower_bound, GasperBeaconChain.Core.quorum_intersection_weight_lower (value)
-info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/Model.lean
-  GasperBeaconChain.Executable.UseCases.Model
-  14 declarations (10 dep, 4 clean)
-
-  · GasperBeaconChain.Executable.UseCases.instFintypeV (line 17) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.instFintypeV._proof_1, GasperBeaconChain.Executable.UseCases.instFintypeV._proof_2 (value)
-    ← Quot.sound: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.instFintypeV._proof_1 (value)
-  · GasperBeaconChain.Executable.UseCases.instFintypeH (line 20) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.instFintypeH._proof_1, GasperBeaconChain.Executable.UseCases.instFintypeH._proof_2 (value)
-    ← Quot.sound: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.instFintypeH._proof_1 (value)
-  · GasperBeaconChain.Executable.UseCases.vset (line 25) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.instFintypeV (value)
-    ← Quot.sound: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.instFintypeV (value)
-  · GasperBeaconChain.Executable.UseCases.genesis (line 27) [def]
-    ↦ #[propext]
-    ← propext: GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
-  · GasperBeaconChain.Executable.UseCases.parent (line 29) [def]
-    ↦ #[propext]
-    ← propext: GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
-  · GasperBeaconChain.Executable.UseCases.instDecidableRelHParent (line 33) [def]
-    ↦ #[propext]
-    ← propext: GasperBeaconChain.Executable.UseCases.parent (type); GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
-  · GasperBeaconChain.Executable.UseCases.hash_ancestor_right_closed (line 39) [theorem]
-    ↦ #[propext]
-    ← propext: GasperBeaconChain.Executable.UseCases.parent, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
-  · GasperBeaconChain.Executable.UseCases.hash_ancestor_left_closed (line 61) [theorem]
-    ↦ #[propext]
-    ← propext: GasperBeaconChain.Executable.UseCases.parent, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
-  · GasperBeaconChain.Executable.UseCases.not_hash_ancestor_4_1 (line 91) [theorem]
-    ↦ #[propext]
-    ← propext: GasperBeaconChain.Executable.UseCases.parent, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.UseCases.hash_ancestor_right_closed (value)
-  · GasperBeaconChain.Executable.UseCases.not_hash_ancestor_1_4 (line 94) [theorem]
-    ↦ #[propext]
-    ← propext: GasperBeaconChain.Executable.UseCases.parent, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.UseCases.hash_ancestor_left_closed (value)
-  Clean (4):
-  ✓ GasperBeaconChain.Executable.UseCases.V (line 12) [def]
-  ✓ GasperBeaconChain.Executable.UseCases.H (line 14) [def]
-  ✓ GasperBeaconChain.Executable.UseCases.stake (line 23) [def]
-  ✓ GasperBeaconChain.Executable.UseCases.τ (line 35) [def]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/JustifiedFork.lean
   GasperBeaconChain.Executable.UseCases.JustifiedFork
   10 declarations (10 dep)
@@ -5055,6 +5333,48 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.Parametric.qTT, GasperBeaconChain.Core.slashed, GasperBeaconChain.Executable.UseCases.Parametric.stJust (type); GasperBeaconChain.Core.slashed_double_vote, GasperBeaconChain.Core.slashed_surround_vote, GasperBeaconChain.Executable.UseCases.Parametric.qTT_double (value)
     ← Quot.sound: Finset, Finset.instSetLike, GasperBeaconChain.Executable.UseCases.Parametric.qTT, GasperBeaconChain.Core.slashed, GasperBeaconChain.Executable.UseCases.Parametric.stJust (type); GasperBeaconChain.Core.slashed_double_vote, GasperBeaconChain.Core.slashed_surround_vote, GasperBeaconChain.Executable.UseCases.Parametric.qTT_double (value)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/Model.lean
+  GasperBeaconChain.Executable.UseCases.Model
+  14 declarations (10 dep, 4 clean)
+
+  · GasperBeaconChain.Executable.UseCases.instFintypeV (line 17) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.instFintypeV._proof_1, GasperBeaconChain.Executable.UseCases.instFintypeV._proof_2 (value)
+    ← Quot.sound: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.instFintypeV._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.instFintypeH (line 20) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.instFintypeH._proof_1, GasperBeaconChain.Executable.UseCases.instFintypeH._proof_2 (value)
+    ← Quot.sound: Fintype (type); Fintype.mk, Finset.mk, GasperBeaconChain.Executable.UseCases.instFintypeH._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.vset (line 25) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.instFintypeV (value)
+    ← Quot.sound: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.instFintypeV (value)
+  · GasperBeaconChain.Executable.UseCases.genesis (line 27) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.parent (line 29) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.instDecidableRelHParent (line 33) [def]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.parent (type); GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.hash_ancestor_right_closed (line 39) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.parent, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.hash_ancestor_left_closed (line 61) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.parent, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.UseCases.genesis._proof_1 (value)
+  · GasperBeaconChain.Executable.UseCases.not_hash_ancestor_4_1 (line 91) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.parent, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.UseCases.hash_ancestor_right_closed (value)
+  · GasperBeaconChain.Executable.UseCases.not_hash_ancestor_1_4 (line 94) [theorem]
+    ↦ #[propext]
+    ← propext: GasperBeaconChain.Executable.UseCases.parent, Nat.instNeZeroSucc (type); GasperBeaconChain.Executable.UseCases.hash_ancestor_left_closed (value)
+  Clean (4):
+  ✓ GasperBeaconChain.Executable.UseCases.V (line 12) [def]
+  ✓ GasperBeaconChain.Executable.UseCases.H (line 14) [def]
+  ✓ GasperBeaconChain.Executable.UseCases.stake (line 23) [def]
+  ✓ GasperBeaconChain.Executable.UseCases.τ (line 35) [def]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/SlashableBound.lean
   GasperBeaconChain.Executable.UseCases.SlashableBound
   10 declarations (10 dep)
@@ -5099,6 +5419,46 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Finset, Finset.instHasSubset, GasperBeaconChain.Executable.UseCases.vset, GasperBeaconChain.Core.wt, GasperBeaconChain.Core.actwt, GasperBeaconChain.Executable.UseCases.genesis, GasperBeaconChain.Core.extwt, Finset.instInter (type); GasperBeaconChain.Core.slashable_bound, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.parent, GasperBeaconChain.Executable.UseCases.stFork, Nat.instNeZeroSucc, GasperBeaconChain.Executable.UseCases.k_fin_b1, GasperBeaconChain.Executable.UseCases.k_fin_b4, GasperBeaconChain.Executable.UseCases.not_hash_ancestor_1_4, GasperBeaconChain.Executable.UseCases.not_hash_ancestor_4_1 (value)
     ← Quot.sound: Finset, Finset.instHasSubset, GasperBeaconChain.Executable.UseCases.vset, GasperBeaconChain.Core.wt, GasperBeaconChain.Core.actwt, GasperBeaconChain.Core.extwt, Finset.instInter (type); GasperBeaconChain.Core.slashable_bound, GasperBeaconChain.Executable.UseCases.instFintypeV, GasperBeaconChain.Executable.UseCases.stFork, GasperBeaconChain.Executable.UseCases.k_fin_b1, GasperBeaconChain.Executable.UseCases.k_fin_b4 (value)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/DynamicBound.lean
+  GasperBeaconChain.Executable.UseCases.DynamicBound
+  9 declarations (9 dep)
+
+  · GasperBeaconChain.Executable.UseCases.Parametric.V0d (line 11) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
+    ← Quot.sound: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
+  · GasperBeaconChain.Executable.UseCases.Parametric.wt_V0d (line 13) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.V0d (type); GasperBeaconChain.Executable.UseCases.wt_one_univ (value)
+    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.V0d (type); GasperBeaconChain.Executable.UseCases.wt_one_univ (value)
+  · GasperBeaconChain.Executable.UseCases.Parametric.VRd (line 15) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (type); GasperBeaconChain.Executable.UseCases.upperQuorum, GasperBeaconChain.Executable.UseCases.Parametric.VRd._proof_1 (value)
+    ← Quot.sound: Finset (type); GasperBeaconChain.Executable.UseCases.upperQuorum (value)
+  · GasperBeaconChain.Executable.UseCases.Parametric.wt_VRd (line 18) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.VRd (type); GasperBeaconChain.Executable.UseCases.wt_upperQuorum, Nat.add_sub_cancel' (value)
+    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.VRd (type); GasperBeaconChain.Executable.UseCases.wt_upperQuorum (value)
+  · GasperBeaconChain.Executable.UseCases.Parametric.qRd (line 21) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (type); GasperBeaconChain.Executable.UseCases.upperQuorum, GasperBeaconChain.Executable.UseCases.Parametric.qRd._proof_1 (value)
+    ← Quot.sound: Finset (type); GasperBeaconChain.Executable.UseCases.upperQuorum (value)
+  · GasperBeaconChain.Executable.UseCases.Parametric.wt_qRd (line 26) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.qRd (type); GasperBeaconChain.Executable.UseCases.wt_upperQuorum, Nat.add_sub_cancel' (value)
+    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.qRd (type); GasperBeaconChain.Executable.UseCases.wt_upperQuorum (value)
+  · GasperBeaconChain.Executable.UseCases.Parametric.qRd_subset_VRd (line 32) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset, Finset.instHasSubset, GasperBeaconChain.Executable.UseCases.Parametric.qRd, GasperBeaconChain.Executable.UseCases.Parametric.VRd (type); Finset.instSetLike, GasperBeaconChain.Executable.UseCases.upperQuorum, GasperBeaconChain.Executable.UseCases.Parametric.VRd._proof_1, GasperBeaconChain.Executable.UseCases.mem_upperQuorum, GasperBeaconChain.Executable.UseCases.Parametric.qRd._proof_1 (value)
+    ← Quot.sound: Finset, Finset.instHasSubset, GasperBeaconChain.Executable.UseCases.Parametric.qRd, GasperBeaconChain.Executable.UseCases.Parametric.VRd (type); Finset.instSetLike, GasperBeaconChain.Executable.UseCases.upperQuorum, GasperBeaconChain.Executable.UseCases.mem_upperQuorum (value)
+  · GasperBeaconChain.Executable.UseCases.Parametric.dyn_validator_bound (line 41) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.V0d, GasperBeaconChain.Core.actwt, GasperBeaconChain.Core.extwt, GasperBeaconChain.Executable.UseCases.Parametric.VRd, Finset, Finset.instInter (type); GasperBeaconChain.Core.validator_intersection_lower_bound (value)
+    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.V0d, GasperBeaconChain.Core.actwt, GasperBeaconChain.Core.extwt, GasperBeaconChain.Executable.UseCases.Parametric.VRd, Finset, Finset.instInter (type); GasperBeaconChain.Core.validator_intersection_lower_bound (value)
+  · GasperBeaconChain.Executable.UseCases.Parametric.dyn_quorum_bound (line 49) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.wt, Finset, Finset.instInter, GasperBeaconChain.Executable.UseCases.Parametric.V0d, GasperBeaconChain.Executable.UseCases.Parametric.VRd, GasperBeaconChain.Executable.UseCases.Parametric.qTT, GasperBeaconChain.Executable.UseCases.Parametric.qRd (type); GasperBeaconChain.Core.quorum_intersection_weight_lower, Finset.subset_univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, GasperBeaconChain.Executable.UseCases.Parametric.qRd_subset_VRd, GasperBeaconChain.Executable.UseCases.Parametric.wt_V0d, GasperBeaconChain.Executable.UseCases.Parametric.wt_qTT, GasperBeaconChain.Executable.UseCases.Parametric.wt_VRd, GasperBeaconChain.Executable.UseCases.Parametric.wt_qRd (value)
+    ← Quot.sound: GasperBeaconChain.Core.wt, Finset, Finset.instInter, GasperBeaconChain.Executable.UseCases.Parametric.V0d, GasperBeaconChain.Executable.UseCases.Parametric.VRd, GasperBeaconChain.Executable.UseCases.Parametric.qTT, GasperBeaconChain.Executable.UseCases.Parametric.qRd (type); GasperBeaconChain.Core.quorum_intersection_weight_lower, Finset.subset_univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, GasperBeaconChain.Executable.UseCases.Parametric.qRd_subset_VRd, GasperBeaconChain.Executable.UseCases.Parametric.wt_V0d, GasperBeaconChain.Executable.UseCases.Parametric.wt_qTT, GasperBeaconChain.Executable.UseCases.Parametric.wt_VRd, GasperBeaconChain.Executable.UseCases.Parametric.wt_qRd (value)
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/Justification.lean
   GasperBeaconChain.Executable.Justification
   10 declarations (9 dep, 1 clean)
@@ -5144,85 +5504,45 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
   GasperBeaconChain.Core.AtomicDef.PlausibleLiveness
   11 declarations (9 dep, 2 clean)
 
-  · GasperBeaconChain.Core.justified_source_votes (line 110) [def]
+  · GasperBeaconChain.Core.justified_source_votes (line 113) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg, GasperBeaconChain.Core.justified (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg, GasperBeaconChain.Core.justified (value)
-  · GasperBeaconChain.Core.forward_link_votes (line 130) [def]
+  · GasperBeaconChain.Core.forward_link_votes (line 133) [def]
     ↦ #[propext, Quot.sound]
     ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
     ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
-  · GasperBeaconChain.Core.good_votes (line 146) [def]
+  · GasperBeaconChain.Core.good_votes (line 149) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.quorum_2, Finset.instSetLike, GasperBeaconChain.Core.justified_source_votes, GasperBeaconChain.Core.forward_link_votes (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.quorum_2, Finset.instSetLike, GasperBeaconChain.Core.justified_source_votes, GasperBeaconChain.Core.forward_link_votes (value)
-  · GasperBeaconChain.Core.two_thirds_good (line 193) [def]
+  · GasperBeaconChain.Core.two_thirds_good (line 196) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.quorum_2, Finset.instSetLike, GasperBeaconChain.Core.slashed (value)
     ← Quot.sound: Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.quorum_2, Finset.instSetLike, GasperBeaconChain.Core.slashed (value)
-  · GasperBeaconChain.Core.highest_justified (line 216) [def]
+  · GasperBeaconChain.Core.highest_justified (line 219) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justified (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justified (value)
-  · GasperBeaconChain.Core.has_justification_link (line 238) [def]
+  · GasperBeaconChain.Core.has_justification_link (line 241) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justification_link (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justification_link (value)
-  · GasperBeaconChain.Core.maximal_justification_link (line 257) [def]
+  · GasperBeaconChain.Core.maximal_justification_link (line 260) [def]
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justification_link (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.justification_link (value)
-  · GasperBeaconChain.Core.unslashed_can_extend (line 276) [def]
+  · GasperBeaconChain.Core.unslashed_can_extend (line 279) [def]
     ↦ #[propext, Quot.sound]
     ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg, GasperBeaconChain.Core.slashed (value)
     ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg, GasperBeaconChain.Core.slashed (value)
-  · GasperBeaconChain.Core.no_new_slashed (line 314) [def]
+  · GasperBeaconChain.Core.no_new_slashed (line 317) [def]
     ↦ #[propext, Quot.sound]
     ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.slashed (value)
     ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.slashed (value)
   Clean (2):
-  ✓ GasperBeaconChain.Core.blocks_exist_high_over_coq (line 64) [def]
-  ✓ GasperBeaconChain.Core.blocks_exist_high_over (line 84) [def]
-info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/DynamicBound.lean
-  GasperBeaconChain.Executable.UseCases.DynamicBound
-  9 declarations (9 dep)
-
-  · GasperBeaconChain.Executable.UseCases.Parametric.V0d (line 11) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
-    ← Quot.sound: Finset (type); Finset.univ, GasperBeaconChain.Executable.UseCases.finFintypeCF (value)
-  · GasperBeaconChain.Executable.UseCases.Parametric.wt_V0d (line 13) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.V0d (type); GasperBeaconChain.Executable.UseCases.wt_one_univ (value)
-    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.V0d (type); GasperBeaconChain.Executable.UseCases.wt_one_univ (value)
-  · GasperBeaconChain.Executable.UseCases.Parametric.VRd (line 15) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset (type); GasperBeaconChain.Executable.UseCases.upperQuorum, GasperBeaconChain.Executable.UseCases.Parametric.VRd._proof_1 (value)
-    ← Quot.sound: Finset (type); GasperBeaconChain.Executable.UseCases.upperQuorum (value)
-  · GasperBeaconChain.Executable.UseCases.Parametric.wt_VRd (line 18) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.VRd (type); GasperBeaconChain.Executable.UseCases.wt_upperQuorum, Nat.add_sub_cancel' (value)
-    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.VRd (type); GasperBeaconChain.Executable.UseCases.wt_upperQuorum (value)
-  · GasperBeaconChain.Executable.UseCases.Parametric.qRd (line 21) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset (type); GasperBeaconChain.Executable.UseCases.upperQuorum, GasperBeaconChain.Executable.UseCases.Parametric.qRd._proof_1 (value)
-    ← Quot.sound: Finset (type); GasperBeaconChain.Executable.UseCases.upperQuorum (value)
-  · GasperBeaconChain.Executable.UseCases.Parametric.wt_qRd (line 26) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.qRd (type); GasperBeaconChain.Executable.UseCases.wt_upperQuorum, Nat.add_sub_cancel' (value)
-    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.qRd (type); GasperBeaconChain.Executable.UseCases.wt_upperQuorum (value)
-  · GasperBeaconChain.Executable.UseCases.Parametric.qRd_subset_VRd (line 32) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset, Finset.instHasSubset, GasperBeaconChain.Executable.UseCases.Parametric.qRd, GasperBeaconChain.Executable.UseCases.Parametric.VRd (type); Finset.instSetLike, GasperBeaconChain.Executable.UseCases.upperQuorum, GasperBeaconChain.Executable.UseCases.Parametric.VRd._proof_1, GasperBeaconChain.Executable.UseCases.mem_upperQuorum, GasperBeaconChain.Executable.UseCases.Parametric.qRd._proof_1 (value)
-    ← Quot.sound: Finset, Finset.instHasSubset, GasperBeaconChain.Executable.UseCases.Parametric.qRd, GasperBeaconChain.Executable.UseCases.Parametric.VRd (type); Finset.instSetLike, GasperBeaconChain.Executable.UseCases.upperQuorum, GasperBeaconChain.Executable.UseCases.mem_upperQuorum (value)
-  · GasperBeaconChain.Executable.UseCases.Parametric.dyn_validator_bound (line 41) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.V0d, GasperBeaconChain.Core.actwt, GasperBeaconChain.Core.extwt, GasperBeaconChain.Executable.UseCases.Parametric.VRd, Finset, Finset.instInter (type); GasperBeaconChain.Core.validator_intersection_lower_bound (value)
-    ← Quot.sound: GasperBeaconChain.Core.wt, GasperBeaconChain.Executable.UseCases.Parametric.V0d, GasperBeaconChain.Core.actwt, GasperBeaconChain.Core.extwt, GasperBeaconChain.Executable.UseCases.Parametric.VRd, Finset, Finset.instInter (type); GasperBeaconChain.Core.validator_intersection_lower_bound (value)
-  · GasperBeaconChain.Executable.UseCases.Parametric.dyn_quorum_bound (line 49) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.wt, Finset, Finset.instInter, GasperBeaconChain.Executable.UseCases.Parametric.V0d, GasperBeaconChain.Executable.UseCases.Parametric.VRd, GasperBeaconChain.Executable.UseCases.Parametric.qTT, GasperBeaconChain.Executable.UseCases.Parametric.qRd (type); GasperBeaconChain.Core.quorum_intersection_weight_lower, Finset.subset_univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, GasperBeaconChain.Executable.UseCases.Parametric.qRd_subset_VRd, GasperBeaconChain.Executable.UseCases.Parametric.wt_V0d, GasperBeaconChain.Executable.UseCases.Parametric.wt_qTT, GasperBeaconChain.Executable.UseCases.Parametric.wt_VRd, GasperBeaconChain.Executable.UseCases.Parametric.wt_qRd (value)
-    ← Quot.sound: GasperBeaconChain.Core.wt, Finset, Finset.instInter, GasperBeaconChain.Executable.UseCases.Parametric.V0d, GasperBeaconChain.Executable.UseCases.Parametric.VRd, GasperBeaconChain.Executable.UseCases.Parametric.qTT, GasperBeaconChain.Executable.UseCases.Parametric.qRd (type); GasperBeaconChain.Core.quorum_intersection_weight_lower, Finset.subset_univ, GasperBeaconChain.Executable.UseCases.finFintypeCF, GasperBeaconChain.Executable.UseCases.Parametric.qRd_subset_VRd, GasperBeaconChain.Executable.UseCases.Parametric.wt_V0d, GasperBeaconChain.Executable.UseCases.Parametric.wt_qTT, GasperBeaconChain.Executable.UseCases.Parametric.wt_VRd, GasperBeaconChain.Executable.UseCases.Parametric.wt_qRd (value)
+  ✓ GasperBeaconChain.Core.blocks_exist_high_over_coq (line 67) [def]
+  ✓ GasperBeaconChain.Core.blocks_exist_high_over (line 87) [def]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/UseCases/LivenessN.lean
   GasperBeaconChain.Executable.UseCases.LivenessN
   14 declarations (9 dep, 5 clean)
@@ -5337,64 +5657,6 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justification_link (type); GasperBeaconChain.Core.justified_cases.match_1_1 (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.justification_link (type); GasperBeaconChain.Core.justified_cases.match_1_1 (value)
-info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/AtomicDef/State.lean
-  GasperBeaconChain.Core.AtomicDef.State
-  33 declarations (7 dep, 26 clean)
-
-  · GasperBeaconChain.Core.State (line 91) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: Finset (value)
-    ← Quot.sound: Finset (value)
-  · GasperBeaconChain.Core.vote_msg (line 104) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.State (type); Finset.instSetLike (value)
-    ← Quot.sound: GasperBeaconChain.Core.State (type); Finset.instSetLike (value)
-  · GasperBeaconChain.Core.vote_msg_decidable (line 131) [def]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.State, GasperBeaconChain.Core.vote_msg (type); Finset.decidableMem (value)
-    ← Quot.sound: GasperBeaconChain.Core.State, GasperBeaconChain.Core.vote_msg (type); Finset.decidableMem (value)
-  · GasperBeaconChain.Core.vote_msg_of_mem (line 209) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.State, Finset.instSetLike, GasperBeaconChain.Core.vote_msg (type); GasperBeaconChain.Core.vote_msg_of_mem.match_1_1 (value)
-    ← Quot.sound: GasperBeaconChain.Core.State, Finset.instSetLike, GasperBeaconChain.Core.vote_msg (type); GasperBeaconChain.Core.vote_msg_of_mem.match_1_1 (value)
-  · GasperBeaconChain.Core.mem_of_vote_msg (line 236) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.State, GasperBeaconChain.Core.vote_msg, Finset.instSetLike (type)
-    ← Quot.sound: GasperBeaconChain.Core.State, GasperBeaconChain.Core.vote_msg, Finset.instSetLike (type)
-  · GasperBeaconChain.Core.target_height_le_of_vote_msg (line 262) [theorem]
-    ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.State, Finset.instSetLike, GasperBeaconChain.Core.vote_msg (type)
-    ← Quot.sound: GasperBeaconChain.Core.State, Finset.instSetLike, GasperBeaconChain.Core.vote_msg (type)
-  · GasperBeaconChain.Core.Vote.mk.injEq (line ?) [theorem]
-    ↦ #[propext]
-    ← propext: Eq.propIntro (value)
-  Clean (26):
-  ✓ GasperBeaconChain.Core.Vote (line 62) [inductive]
-  ✓ GasperBeaconChain.Core.Vote.casesOn (line 62) [def]
-  ✓ GasperBeaconChain.Core.instReprVote (line 89) [def]
-  ✓ GasperBeaconChain.Core.instDecidableEqVote (line 89) [def]
-  ✓ GasperBeaconChain.Core.vote_val (line 148) [def]
-  ✓ GasperBeaconChain.Core.vote_source (line 155) [def]
-  ✓ GasperBeaconChain.Core.vote_target (line 162) [def]
-  ✓ GasperBeaconChain.Core.vote_source_height (line 169) [def]
-  ✓ GasperBeaconChain.Core.vote_target_height (line 176) [def]
-  ✓ GasperBeaconChain.Core.vote_unfold (line 183) [theorem]
-  ✓ GasperBeaconChain.Core.Vote.ctorIdx (line ?) [def]
-  ✓ GasperBeaconChain.Core.Vote.rec (line 62) [recursor]
-  ✓ GasperBeaconChain.Core.Vote.noConfusion (line 62) [def]
-  ✓ GasperBeaconChain.Core.Vote.recOn (line 62) [def]
-  ✓ GasperBeaconChain.Core.Vote.mk (line 83) [ctor]
-  ✓ GasperBeaconChain.Core.Vote.noConfusionType (line ?) [def]
-  ✓ GasperBeaconChain.Core.Vote.mk.noConfusion (line 83) [def]
-  ✓ GasperBeaconChain.Core.Vote.validator (line 84) [def]
-  ✓ GasperBeaconChain.Core.Vote.source (line 85) [def]
-  ✓ GasperBeaconChain.Core.Vote.target (line 86) [def]
-  ✓ GasperBeaconChain.Core.Vote.sourceHeight (line 87) [def]
-  ✓ GasperBeaconChain.Core.Vote.targetHeight (line 88) [def]
-  ✓ GasperBeaconChain.Core.instDecidableEqVote.decEq (line 89) [def]
-  ✓ GasperBeaconChain.Core.instReprVote.repr (line 89) [def]
-  ✓ GasperBeaconChain.Core.Vote.mk.inj (line ?) [theorem]
-  ✓ GasperBeaconChain.Core.Vote.mk.sizeOf_spec (line ?) [theorem]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/Slashing.lean
   GasperBeaconChain.Executable.Slashing
   7 declarations (7 dep)
@@ -5459,6 +5721,64 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.two_thirds_good, GasperBeaconChain.Executable.IsGoodQuorumAt (type)
     ← Quot.sound: Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.two_thirds_good, GasperBeaconChain.Executable.IsGoodQuorumAt (type)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/AtomicDef/State.lean
+  GasperBeaconChain.Core.AtomicDef.State
+  33 declarations (7 dep, 26 clean)
+
+  · GasperBeaconChain.Core.State (line 115) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: Finset (value)
+    ← Quot.sound: Finset (value)
+  · GasperBeaconChain.Core.vote_msg (line 128) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State (type); Finset.instSetLike (value)
+    ← Quot.sound: GasperBeaconChain.Core.State (type); Finset.instSetLike (value)
+  · GasperBeaconChain.Core.vote_msg_decidable (line 155) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State, GasperBeaconChain.Core.vote_msg (type); Finset.decidableMem (value)
+    ← Quot.sound: GasperBeaconChain.Core.State, GasperBeaconChain.Core.vote_msg (type); Finset.decidableMem (value)
+  · GasperBeaconChain.Core.vote_msg_of_mem (line 233) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State, Finset.instSetLike, GasperBeaconChain.Core.vote_msg (type); GasperBeaconChain.Core.vote_msg_of_mem.match_1_1 (value)
+    ← Quot.sound: GasperBeaconChain.Core.State, Finset.instSetLike, GasperBeaconChain.Core.vote_msg (type); GasperBeaconChain.Core.vote_msg_of_mem.match_1_1 (value)
+  · GasperBeaconChain.Core.mem_of_vote_msg (line 260) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State, GasperBeaconChain.Core.vote_msg, Finset.instSetLike (type)
+    ← Quot.sound: GasperBeaconChain.Core.State, GasperBeaconChain.Core.vote_msg, Finset.instSetLike (type)
+  · GasperBeaconChain.Core.target_height_le_of_vote_msg (line 286) [theorem]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State, Finset.instSetLike, GasperBeaconChain.Core.vote_msg (type)
+    ← Quot.sound: GasperBeaconChain.Core.State, Finset.instSetLike, GasperBeaconChain.Core.vote_msg (type)
+  · GasperBeaconChain.Core.Vote.mk.injEq (line ?) [theorem]
+    ↦ #[propext]
+    ← propext: Eq.propIntro (value)
+  Clean (26):
+  ✓ GasperBeaconChain.Core.Vote (line 62) [inductive]
+  ✓ GasperBeaconChain.Core.Vote.casesOn (line 62) [def]
+  ✓ GasperBeaconChain.Core.instReprVote (line 113) [def]
+  ✓ GasperBeaconChain.Core.instDecidableEqVote (line 113) [def]
+  ✓ GasperBeaconChain.Core.vote_val (line 172) [def]
+  ✓ GasperBeaconChain.Core.vote_source (line 179) [def]
+  ✓ GasperBeaconChain.Core.vote_target (line 186) [def]
+  ✓ GasperBeaconChain.Core.vote_source_height (line 193) [def]
+  ✓ GasperBeaconChain.Core.vote_target_height (line 200) [def]
+  ✓ GasperBeaconChain.Core.vote_unfold (line 207) [theorem]
+  ✓ GasperBeaconChain.Core.Vote.ctorIdx (line ?) [def]
+  ✓ GasperBeaconChain.Core.Vote.rec (line 62) [recursor]
+  ✓ GasperBeaconChain.Core.Vote.noConfusion (line 62) [def]
+  ✓ GasperBeaconChain.Core.Vote.recOn (line 62) [def]
+  ✓ GasperBeaconChain.Core.Vote.mk (line 107) [ctor]
+  ✓ GasperBeaconChain.Core.Vote.noConfusionType (line ?) [def]
+  ✓ GasperBeaconChain.Core.Vote.mk.noConfusion (line 107) [def]
+  ✓ GasperBeaconChain.Core.Vote.validator (line 108) [def]
+  ✓ GasperBeaconChain.Core.Vote.source (line 109) [def]
+  ✓ GasperBeaconChain.Core.Vote.target (line 110) [def]
+  ✓ GasperBeaconChain.Core.Vote.sourceHeight (line 111) [def]
+  ✓ GasperBeaconChain.Core.Vote.targetHeight (line 112) [def]
+  ✓ GasperBeaconChain.Core.instDecidableEqVote.decEq (line 113) [def]
+  ✓ GasperBeaconChain.Core.instReprVote.repr (line 113) [def]
+  ✓ GasperBeaconChain.Core.Vote.mk.inj (line ?) [theorem]
+  ✓ GasperBeaconChain.Core.Vote.mk.sizeOf_spec (line ?) [theorem]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Executable/Quorums.lean
   GasperBeaconChain.Executable.Quorums
   5 declarations (5 dep)
@@ -5507,22 +5827,29 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.two_thirds_good, GasperBeaconChain.Core.q_intersection_slashed, GasperBeaconChain.Core.good_votes, GasperBeaconChain.Core.votes_from_target_vset_property, GasperBeaconChain.Core.highest_justified, GasperBeaconChain.Core.unslashed_can_extend, GasperBeaconChain.Core.no_new_slashed, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.plausible_liveness_construct_extension (value)
     ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.QuorumContext, GasperBeaconChain.Core.two_thirds_good, GasperBeaconChain.Core.q_intersection_slashed, GasperBeaconChain.Core.good_votes, GasperBeaconChain.Core.votes_from_target_vset_property, GasperBeaconChain.Core.highest_justified, GasperBeaconChain.Core.unslashed_can_extend, GasperBeaconChain.Core.no_new_slashed, GasperBeaconChain.Core.justified, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.plausible_liveness_construct_extension (value)
-info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/AtomicDef/Slashing.lean
-  GasperBeaconChain.Core.AtomicDef.Slashing
-  3 declarations (3 dep)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Lemmas/Grading.lean
+  GasperBeaconChain.Core.Lemmas.Grading
+  7 declarations (4 dep, 3 clean)
 
-  · GasperBeaconChain.Core.slashed_double_vote (line 56) [def]
+  · GasperBeaconChain.Core.justified_depth (line 98) [theorem]
     ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
-    ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
-  · GasperBeaconChain.Core.slashed_surround_vote (line 95) [def]
+    ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified (type); GasperBeaconChain.Core.justified.brecOn, GasperBeaconChain.Core.justified.below, GasperBeaconChain.Core.justified_depth.match_1_7, GasperBeaconChain.Core.justification_link, Nat.add_sub_of_le, GasperBeaconChain.Core.supermajority_link (value)
+    ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified (type); GasperBeaconChain.Core.justified.brecOn, GasperBeaconChain.Core.justified.below, GasperBeaconChain.Core.justified_depth.match_1_7, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.supermajority_link (value)
+  · GasperBeaconChain.Core.nth_ancestor_of_ancestor (line 200) [theorem]
+    ↦ #[propext]
+    ← propext: Nat.succ_sub (value)
+  · GasperBeaconChain.Core.justification_link_iff_ancestor (line 239) [theorem]
     ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
-    ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
-  · GasperBeaconChain.Core.slashed (line 152) [def]
+    ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.justification_link_iff_ancestor.match_1_1, GasperBeaconChain.Core.justification_link_iff_ancestor.match_1_3, GasperBeaconChain.Core.nth_ancestor_of_ancestor (value)
+    ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justification_link, GasperBeaconChain.Core.supermajority_link (type); GasperBeaconChain.Core.justification_link_iff_ancestor.match_1_1, GasperBeaconChain.Core.justification_link_iff_ancestor.match_1_3 (value)
+  · GasperBeaconChain.Core.justified_height_eq (line 287) [theorem]
     ↦ #[propext, Quot.sound]
-    ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.slashed_double_vote, GasperBeaconChain.Core.slashed_surround_vote (value)
-    ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.slashed_double_vote, GasperBeaconChain.Core.slashed_surround_vote (value)
+    ← propext: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified (type); GasperBeaconChain.Core.justified_depth (value)
+    ← Quot.sound: Fintype, Finset, GasperBeaconChain.Core.State, GasperBeaconChain.Core.justified (type); GasperBeaconChain.Core.justified_depth (value)
+  Clean (3):
+  ✓ GasperBeaconChain.Core.nth_ancestor_trans (line 75) [theorem]
+  ✓ GasperBeaconChain.Core.height_le_of_ancestor (line 151) [theorem]
+  ✓ GasperBeaconChain.Core.height_eq_of_nth_ancestor (line 176) [theorem]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Lemmas/Quorums.lean
   GasperBeaconChain.Core.Lemmas.Quorums
   3 declarations (3 dep)
@@ -5552,26 +5879,42 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
   · GasperBeaconChain.Core.list_getLastD_eq_getD_one_of_length_two (line 107) [theorem]
     ↦ #[propext]
     ← propext: List.getD (type); GasperBeaconChain.Core.list_getLastD_eq_getD_of_length_eq_succ (value)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/AtomicDef/Slashing.lean
+  GasperBeaconChain.Core.AtomicDef.Slashing
+  3 declarations (3 dep)
+
+  · GasperBeaconChain.Core.slashed_double_vote (line 56) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
+    ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
+  · GasperBeaconChain.Core.slashed_surround_vote (line 95) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
+    ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.vote_msg (value)
+  · GasperBeaconChain.Core.slashed (line 152) [def]
+    ↦ #[propext, Quot.sound]
+    ← propext: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.slashed_double_vote, GasperBeaconChain.Core.slashed_surround_vote (value)
+    ← Quot.sound: GasperBeaconChain.Core.State (type); GasperBeaconChain.Core.slashed_double_vote, GasperBeaconChain.Core.slashed_surround_vote (value)
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Lemmas/HashTree.lean
   GasperBeaconChain.Core.Lemmas.HashTree
   11 declarations (2 dep, 9 clean)
 
-  · GasperBeaconChain.Core.parent_ancestor (line 260) [theorem]
+  · GasperBeaconChain.Core.parent_ancestor (line 263) [theorem]
     ↦ #[propext]
     ← propext: GasperBeaconChain.Core.parent_ancestor.match_1_1 (value)
-  · GasperBeaconChain.Core.nth_ancestor_succ_inv (line 283) [theorem]
+  · GasperBeaconChain.Core.nth_ancestor_succ_inv (line 286) [theorem]
     ↦ #[propext]
     ← propext: GasperBeaconChain.Core.nth_ancestor_succ_inv.match_1_1 (value)
   Clean (9):
-  ✓ GasperBeaconChain.Core.hash_self_ancestor (line 68) [theorem]
-  ✓ GasperBeaconChain.Core.hash_parent_ancestor (line 85) [theorem]
-  ✓ GasperBeaconChain.Core.hash_ancestor_concat (line 104) [theorem]
-  ✓ GasperBeaconChain.Core.hash_ancestor_stepL (line 125) [theorem]
-  ✓ GasperBeaconChain.Core.hash_ancestor_stepR (line 141) [theorem]
-  ✓ GasperBeaconChain.Core.hash_nonancestor_nonequal (line 156) [theorem]
-  ✓ GasperBeaconChain.Core.hash_ancestor_conflict (line 177) [theorem]
-  ✓ GasperBeaconChain.Core.nth_ancestor_ancestor (line 225) [theorem]
-  ✓ GasperBeaconChain.Core.nth_ancestor_0_refl (line 246) [theorem]
+  ✓ GasperBeaconChain.Core.hash_self_ancestor (line 71) [theorem]
+  ✓ GasperBeaconChain.Core.hash_parent_ancestor (line 88) [theorem]
+  ✓ GasperBeaconChain.Core.hash_ancestor_concat (line 107) [theorem]
+  ✓ GasperBeaconChain.Core.hash_ancestor_stepL (line 128) [theorem]
+  ✓ GasperBeaconChain.Core.hash_ancestor_stepR (line 144) [theorem]
+  ✓ GasperBeaconChain.Core.hash_nonancestor_nonequal (line 159) [theorem]
+  ✓ GasperBeaconChain.Core.hash_ancestor_conflict (line 180) [theorem]
+  ✓ GasperBeaconChain.Core.nth_ancestor_ancestor (line 228) [theorem]
+  ✓ GasperBeaconChain.Core.nth_ancestor_0_refl (line 249) [theorem]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Lemmas/AccountableSafety.lean
   GasperBeaconChain.Core.Lemmas.AccountableSafety
   2 declarations (2 dep)
@@ -5604,38 +5947,38 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext]
     ← propext: Eq.propIntro (value)
   Clean (42):
-  ✓ GasperBeaconChain.Core.HashParent (line 71) [def]
-  ✓ GasperBeaconChain.Core.hash_parent_irreflexive (line 79) [def]
-  ✓ GasperBeaconChain.Core.hash_at_most_one_parent (line 93) [def]
+  ✓ GasperBeaconChain.Core.HashParent (line 121) [def]
+  ✓ GasperBeaconChain.Core.hash_parent_irreflexive (line 131) [def]
+  ✓ GasperBeaconChain.Core.hash_at_most_one_parent (line 150) [def]
   ✓ GasperBeaconChain.Core.HashTreeContext.ctorIdx (line ?) [def]
-  ✓ GasperBeaconChain.Core.HashTreeContext.noConfusion (line 107) [def]
-  ✓ GasperBeaconChain.Core.HashTreeContext.casesOn (line 107) [def]
-  ✓ GasperBeaconChain.Core.HashTreeContext (line 107) [inductive]
-  ✓ GasperBeaconChain.Core.HashTreeContext.recOn (line 107) [def]
-  ✓ GasperBeaconChain.Core.HashTreeContext.rec (line 107) [recursor]
-  ✓ GasperBeaconChain.Core.HashTreeContext.mk (line 157) [ctor]
+  ✓ GasperBeaconChain.Core.HashTreeContext.noConfusion (line 166) [def]
+  ✓ GasperBeaconChain.Core.HashTreeContext.casesOn (line 166) [def]
+  ✓ GasperBeaconChain.Core.HashTreeContext (line 166) [inductive]
+  ✓ GasperBeaconChain.Core.HashTreeContext.recOn (line 166) [def]
+  ✓ GasperBeaconChain.Core.HashTreeContext.rec (line 166) [recursor]
+  ✓ GasperBeaconChain.Core.HashTreeContext.mk (line 225) [ctor]
   ✓ GasperBeaconChain.Core.HashTreeContext.noConfusionType (line ?) [def]
-  ✓ GasperBeaconChain.Core.HashTreeContext.mk.noConfusion (line 157) [def]
-  ✓ GasperBeaconChain.Core.HashTreeContext.parent (line 158) [def]
-  ✓ GasperBeaconChain.Core.HashTreeContext.genesis (line 159) [def]
-  ✓ GasperBeaconChain.Core.HashTreeContext.parent_irreflexive (line 160) [theorem]
-  ✓ GasperBeaconChain.Core.HashTreeContext.at_most_one_parent (line 161) [theorem]
+  ✓ GasperBeaconChain.Core.HashTreeContext.mk.noConfusion (line 225) [def]
+  ✓ GasperBeaconChain.Core.HashTreeContext.parent (line 226) [def]
+  ✓ GasperBeaconChain.Core.HashTreeContext.genesis (line 227) [def]
+  ✓ GasperBeaconChain.Core.HashTreeContext.parent_irreflexive (line 228) [theorem]
+  ✓ GasperBeaconChain.Core.HashTreeContext.at_most_one_parent (line 229) [theorem]
   ✓ GasperBeaconChain.Core.hash_ancestor.below (line ?) [inductive]
   ✓ GasperBeaconChain.Core.hash_ancestor.brecOn (line ?) [theorem]
-  ✓ GasperBeaconChain.Core.hash_ancestor.recOn (line 163) [def]
-  ✓ GasperBeaconChain.Core.hash_ancestor.casesOn (line 163) [def]
-  ✓ GasperBeaconChain.Core.hash_ancestor (line 163) [inductive]
-  ✓ GasperBeaconChain.Core.hash_ancestor.rec (line 163) [recursor]
-  ✓ GasperBeaconChain.Core.hash_ancestor.refl (line 181) [ctor]
-  ✓ GasperBeaconChain.Core.hash_ancestor.step (line 183) [ctor]
+  ✓ GasperBeaconChain.Core.hash_ancestor.recOn (line 231) [def]
+  ✓ GasperBeaconChain.Core.hash_ancestor.casesOn (line 231) [def]
+  ✓ GasperBeaconChain.Core.hash_ancestor (line 231) [inductive]
+  ✓ GasperBeaconChain.Core.hash_ancestor.rec (line 231) [recursor]
+  ✓ GasperBeaconChain.Core.hash_ancestor.refl (line 252) [ctor]
+  ✓ GasperBeaconChain.Core.hash_ancestor.step (line 254) [ctor]
   ✓ GasperBeaconChain.Core.nth_ancestor.below (line ?) [inductive]
   ✓ GasperBeaconChain.Core.nth_ancestor.brecOn (line ?) [theorem]
-  ✓ GasperBeaconChain.Core.nth_ancestor.casesOn (line 188) [def]
-  ✓ GasperBeaconChain.Core.nth_ancestor.rec (line 188) [recursor]
-  ✓ GasperBeaconChain.Core.nth_ancestor.recOn (line 188) [def]
-  ✓ GasperBeaconChain.Core.nth_ancestor (line 188) [inductive]
-  ✓ GasperBeaconChain.Core.nth_ancestor.nth_ancestor_0 (line 207) [ctor]
-  ✓ GasperBeaconChain.Core.nth_ancestor.nth_ancestor_nth (line 209) [ctor]
+  ✓ GasperBeaconChain.Core.nth_ancestor.casesOn (line 259) [def]
+  ✓ GasperBeaconChain.Core.nth_ancestor.rec (line 259) [recursor]
+  ✓ GasperBeaconChain.Core.nth_ancestor.recOn (line 259) [def]
+  ✓ GasperBeaconChain.Core.nth_ancestor (line 259) [inductive]
+  ✓ GasperBeaconChain.Core.nth_ancestor.nth_ancestor_0 (line 283) [ctor]
+  ✓ GasperBeaconChain.Core.nth_ancestor.nth_ancestor_nth (line 285) [ctor]
   ✓ GasperBeaconChain.Core.HashTreeContext.mk.inj (line ?) [theorem]
   ✓ GasperBeaconChain.Core.HashTreeContext.mk.sizeOf_spec (line ?) [theorem]
   ✓ GasperBeaconChain.Core.hash_ancestor.below.casesOn (line ?) [def]
@@ -5654,6 +5997,12 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
     ↦ #[propext, Quot.sound]
     ← propext: Finset (type); Finset.sum, Nat.instAddCommMonoid (value)
     ← Quot.sound: Finset (type); Finset.sum (value)
+info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/AtomicDef/Grading.lean
+  GasperBeaconChain.Core.AtomicDef.Grading
+  1 declarations (1 clean)
+
+  Clean (1):
+  ✓ GasperBeaconChain.Core.height_graded (line 44) [def]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeaconChain/Core/Lemmas/StrongInductionLtn.lean
   GasperBeaconChain.Core.Lemmas.StrongInductionLtn
   2 declarations (2 clean)
@@ -5662,43 +6011,43 @@ info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: GasperBeacon
   ✓ GasperBeaconChain.Core.strong_induction_ltn (line 44) [theorem]
   ✓ GasperBeaconChain.Core.strong_induction_sub (line 73) [theorem]
 info: GasperBeaconChain/Audit/Automated/DefaultBuildAudit.lean:6:0: ════════════ Project Summary ════════════
-587 declarations, 40 modules
+730 declarations, 45 modules
 
 Axiom Profile:
   ✓ sorryAx: not used
   ✓ native compute (trustCompiler / ._native.*): not used
   ✓ Classical.choice: not used
-  · propext: 459 decl (78%)
-  · Quot.sound: 400 decl (68%)
+  · propext: 528 decl (72%)
+  · Quot.sound: 426 decl (58%)
   ✓ funext: not used
 
 Health:
   Incomplete proofs (sorryAx):     ✓ none
   Non-constructive (choice/native): ✓ none
-  Axiom-dependent:                 459 (78%)
-  Axiom-free:                      128 (22%)
+  Axiom-dependent:                 528 (72%)
+  Axiom-free:                      202 (28%)
 
 Root Causes (one-hop axiom sources):
 
   propext:
-    Finset → 256 decl
-    GasperBeaconChain.Core.State → 145 decl
-    Finset.instSetLike → 135 decl
-    Nat.instNeZeroSucc → 113 decl
-    Fintype → 87 decl
-    GasperBeaconChain.Core.justified → 70 decl
-    GasperBeaconChain.Core.supermajority_link → 68 decl
-    GasperBeaconChain.Core.wt → 63 decl
-    ... and 581 more
+    Finset → 268 decl
+    GasperBeaconChain.Core.State → 152 decl
+    Nat.instNeZeroSucc → 139 decl
+    Finset.instSetLike → 139 decl
+    Fintype → 93 decl
+    GasperBeaconChain.Core.supermajority_link → 78 decl
+    GasperBeaconChain.Core.justified → 78 decl
+    Finset.instHasSubset → 65 decl
+    ... and 654 more
 
   Quot.sound:
-    Finset → 256 decl
-    GasperBeaconChain.Core.State → 145 decl
-    Finset.instSetLike → 135 decl
-    Fintype → 87 decl
-    GasperBeaconChain.Core.justified → 70 decl
-    GasperBeaconChain.Core.supermajority_link → 68 decl
-    GasperBeaconChain.Core.wt → 63 decl
-    Finset.instHasSubset → 61 decl
-    ... and 474 more
-Build completed successfully (783 jobs).
+    Finset → 268 decl
+    GasperBeaconChain.Core.State → 152 decl
+    Finset.instSetLike → 139 decl
+    Fintype → 93 decl
+    GasperBeaconChain.Core.supermajority_link → 78 decl
+    GasperBeaconChain.Core.justified → 78 decl
+    Finset.instHasSubset → 65 decl
+    GasperBeaconChain.Executable.UseCases.instFintypeV → 65 decl
+    ... and 504 more
+Build completed successfully (788 jobs).

@@ -118,7 +118,7 @@ witness. In particular it does *not* assume:
 * {lit}`good_votes` or any forward-link well-formedness — the bare
   justification of each block already carries its supermajority
   link, which is all that is used;
-* any relation between $`b_1` and $`b_2` in the block tree (they
+* any relation between $`b_1` and $`b_2` in the checkpoint tree (they
   need not be siblings, ancestors, or comparable). Distinctness at a
   common height is the *only* structural input.
 * no quorum-overlap weight bound — the conclusion

@@ -22,7 +22,10 @@ suppressed in formulas.
 ## Block existence
 
 {lit}`blocks_exist_high_over` asserts that blocks exist at
-arbitrarily large heights above a given base block. An alternative
+arbitrarily large heights above a given base block. As everywhere in
+this development, "block" here means a node of the checkpoint tree
+({lit}`HashTree.lean`), so the hypothesis says that the checkpoint
+chain above the base keeps growing — one node per epoch. An alternative
 Coq-faithful version {lit}`blocks_exist_high_over_coq` is provided
 for reference (it is unsatisfiable, owing to the placement of the
 height guard inside the existential).
@@ -129,7 +132,7 @@ def justified_source_votes
 
 /--
 Every vote by validator $`v` constitutes a **valid forward link**
-in the block tree:
+in the checkpoint tree:
 
 $$`\forall\, s\, t\, h_s\, h_t,\;\; \sigma \ni (v, s, t, h_s, h_t) \;\implies\; h_s < h_t \;\wedge\; s \xrightarrow{h_t - h_s} t`
 

@@ -3,7 +3,8 @@ exclude = ["GasperBeaconChain.Core.All", "GasperBeaconChain.Core.DetailExplode",
 order = [
   "GasperBeaconChain.Core.AtomicDef",
   "GasperBeaconChain.Core.Lemmas",
-  "GasperBeaconChain.Core.Theories"
+  "GasperBeaconChain.Core.Theories",
+  "GasperBeaconChain.Core.Refinement"
 ]
 
 show_imports = false
@@ -26,7 +27,7 @@ description = "Lean 4 formalization of Gasper: safety, liveness, and slashable b
 title = "Validator: Validator context"
 
 [modules."GasperBeaconChain.Core.AtomicDef.HashTree"]
-title = "HashTree: Block tree"
+title = "HashTree: Checkpoint tree"
 
 [modules."GasperBeaconChain.Core.AtomicDef.State"]
 title = "State: Votes and states"
@@ -48,6 +49,9 @@ title = "Justification: Justification and finalization"
 
 [modules."GasperBeaconChain.Core.AtomicDef.PlausibleLiveness"]
 title = "PlausibleLiveness: Plausible liveness definitions"
+
+[modules."GasperBeaconChain.Core.AtomicDef.Grading"]
+title = "Grading: Height grading of the checkpoint tree"
 
 [modules."GasperBeaconChain.Core.Lemmas.ListExt"]
 title = "ListExt: List indexing"
@@ -76,6 +80,9 @@ title = "AccountableSafety: Same-height slashing"
 [modules."GasperBeaconChain.Core.Lemmas.PlausibleLiveness"]
 title = "PlausibleLiveness: Plausible liveness lemmas"
 
+[modules."GasperBeaconChain.Core.Lemmas.Grading"]
+title = "Grading: Heights are depths"
+
 [modules."GasperBeaconChain.Core.Theories.AccountableSafety"]
 title = "AccountableSafety: Accountable safety"
 
@@ -84,6 +91,12 @@ title = "PlausibleLiveness: Plausible liveness"
 
 [modules."GasperBeaconChain.Core.Theories.SlashableBound"]
 title = "SlashableBound: Slashable bound"
+
+[modules."GasperBeaconChain.Core.Refinement.SlottedChain"]
+title = "SlottedChain: Slotted chains and epoch boundary blocks"
+
+[modules."GasperBeaconChain.Core.Refinement.CheckpointTree"]
+title = "CheckpointTree: The checkpoint tree of a slotted chain"
 
 # ── Child module ordering within each namespace ─────────────────────
 [order_children]
@@ -96,7 +109,8 @@ title = "SlashableBound: Slashable bound"
   "GasperBeaconChain.Core.AtomicDef.Slashing",
   "GasperBeaconChain.Core.AtomicDef.Quorums",
   "GasperBeaconChain.Core.AtomicDef.Justification",
-  "GasperBeaconChain.Core.AtomicDef.PlausibleLiveness"
+  "GasperBeaconChain.Core.AtomicDef.PlausibleLiveness",
+  "GasperBeaconChain.Core.AtomicDef.Grading"
 ]
 "GasperBeaconChain.Core.Lemmas" = [
   "GasperBeaconChain.Core.Lemmas.ListExt",
@@ -107,12 +121,17 @@ title = "SlashableBound: Slashable bound"
   "GasperBeaconChain.Core.Lemmas.StrongInductionLtn",
   "GasperBeaconChain.Core.Lemmas.Justification",
   "GasperBeaconChain.Core.Lemmas.AccountableSafety",
-  "GasperBeaconChain.Core.Lemmas.PlausibleLiveness"
+  "GasperBeaconChain.Core.Lemmas.PlausibleLiveness",
+  "GasperBeaconChain.Core.Lemmas.Grading"
 ]
 "GasperBeaconChain.Core.Theories" = [
   "GasperBeaconChain.Core.Theories.AccountableSafety",
   "GasperBeaconChain.Core.Theories.PlausibleLiveness",
   "GasperBeaconChain.Core.Theories.SlashableBound"
+]
+"GasperBeaconChain.Core.Refinement" = [
+  "GasperBeaconChain.Core.Refinement.SlottedChain",
+  "GasperBeaconChain.Core.Refinement.CheckpointTree"
 ]
 
 # ── Force light theme on all platforms ───────────────────────────────
