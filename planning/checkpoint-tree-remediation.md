@@ -3,7 +3,7 @@
 **対象リポジトリ**: gasper-lean4
 **起案日**: 2026-08-14
 **起点**: Ethereum 財団コンセンサス専門家によるレビュー指摘(justification の計算方法が Gasper の実際と一致しない疑い)
-**ステータス**: 実施完了(2026-09-09、§10 実施記録を参照)
+**ステータス**: 実施完了(2026-09-09)・完遂確認済み(2026-09-21、§10 実施記録・§11 完遂確認を参照)
 
 ---
 
@@ -616,7 +616,42 @@ P3 により b に関するチェーン帰納法。
 6. **`{name}` 参照**: 新規宣言は既存ファイルより下流にあるため、既存ファイルからの参照は `{lit}`
    (Verso の解決対象外)。新規ファイル内では上流宣言に `{name}` を使用。
 
-### 未実施(スコープ外、§7 のとおり)
+### 未実施(2026-09-09 時点)
 
 - レビュアーへの返信送付(ドラフトは `planning/reviewer-reply.md`)。
 - リモートへの push と CI 確認(ローカルで `lake build` / `make audit` / Verso ビルドを通過)。
+  → **2026-09-21 に実施済み(§11)**。
+
+---
+
+## 11. 完遂確認(2026-09-21)
+
+§10 の成果物を、クリーンな作業ツリー(`eba2707`)上で §5 のゲート全件について再検証し、
+未実施だった push と CI 確認を行った。
+
+### ゲート再検証
+
+| ゲート | 結果 |
+|---|---|
+| `lake build` | 766 ジョブ成功、`error:` 0 件 |
+| `make audit` | exit 0。公理は `propext`(102 宣言)/ `propext, Quot.sound`(426 宣言)のみ。`sorryAx` / `Classical.choice` / `Lean.ofReduceBool` の出現なし |
+| `lake build :literate` / `lake build :literateHtml` | いずれも exit 0(`{name}` / `{lit}` 参照切れなし) |
+| AC5(既存宣言の差分ゼロ) | `main..HEAD` で変更された既存 `.lean` 全 18 ファイルについて、コメント除去後のソースを比較: 16 ファイルが完全一致、`Core/All.lean` / `Executable/UseCases/All.lean` は import 追記のみ |
+| AC7(引用定理名の実在) | `planning/reviewer-reply.md` / README で引用した宣言名(G1–G5、R1–R5、`cp_justification_link_iff`、`ebb_*`、`cp_12_justified*` 等 29 件)がすべて `theorem` / `def` として存在 |
+| AC1(「block tree」残存) | 残存 3 件はいずれも意図的対比(`Justification.lean:228`、`Lemmas/Grading.lean:22`、`README.md:74` の "slot-level block tree") |
+
+`make audit` が再生成する `log/audit.log` の差分はビルド順・所要時間の表示のみ(非決定的ノイズ)
+だったため、コミット済みの版を維持した。`make md_export` が生成する `ImpTree-*.md` は
+リポジトリ管理外なので削除した。
+
+### push と CI
+
+- `git push -u origin fix/checkpoint-tree-semantics`: `e1ed39f..eba2707`(fast-forward)。
+- Lean Action CI(`lean_action_ci.yml`、push トリガ): run 35568250288、**success**(build 3m05s)。
+  https://github.com/NyxFoundation/gasper-lean4/actions/runs/35568250288
+- `pages.yml` は `main` への push のみで起動するため、本ブランチでは未実行(main へのマージ後に自動デプロイ)。
+
+### 残る人手作業(本計画のスコープ外)
+
+- レビュアーへの返信送付(`planning/reviewer-reply.md` を送付する)。
+- `main` へのマージ(PR 作成・レビュー)。マージ後に `pages.yml` が Verso サイトを再デプロイする。
